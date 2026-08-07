@@ -2,18 +2,16 @@
 
 ## Estado do documento
 
-- **Responsável:** Por definir
-- **Última revisão:** Por definir
-- **Estado:** Rascunho
+- **Responsável funcional:** Produto e UX
+- **Última revisão:** 7 de agosto de 2026
+- **Estado:** Ativo
 
-Este documento regista decisões de produto, experiência, arquitetura ou
-processo que afetem o projeto. Uma proposta não deve ser tratada como decisão
-enquanto o seu estado não for **Aprovada**.
+Este documento regista decisões confirmadas de produto e experiência que afetam o projeto. Uma proposta só é vinculativa quando o seu estado é **Aprovada**.
 
 ## Estados
 
 - **Proposta:** em discussão e ainda não vinculativa.
-- **Aprovada:** validada pelos responsáveis aplicáveis.
+- **Aprovada:** confirmada pelos responsáveis aplicáveis.
 - **Substituída:** trocada por uma decisão posterior, que deve ser referenciada.
 - **Rejeitada:** avaliada e não adotada.
 
@@ -21,48 +19,264 @@ enquanto o seu estado não for **Aprovada**.
 
 | ID | Título | Estado | Data | Substitui |
 | --- | --- | --- | --- | --- |
-| Por definir | Por definir | Por definir | Por definir | Por definir |
+| P1 | Dashboard entre Análise do perfil e Descoberta | Aprovada | 7 de agosto de 2026 | — |
+| P2 | Dashboard como página inicial do utilizador autenticado | Aprovada | 7 de agosto de 2026 | — |
+| P3 | Ciclo de correção do perfil | Aprovada | 7 de agosto de 2026 | — |
+| P4 | Saída do plano de candidatura vazio para Descoberta | Aprovada | 7 de agosto de 2026 | — |
+| P5 | Prevenção de oportunidades duplicadas no plano | Aprovada | 7 de agosto de 2026 | — |
+| P6 | Estados de tarefa separados do estado da informação | Aprovada | 7 de agosto de 2026 | — |
 
-## Modelo de decisão
+## P1 — Dashboard entre Análise do perfil e Descoberta
 
-Copiar esta secção para cada nova decisão e atribuir-lhe um identificador
-único. Remover instruções auxiliares somente depois de preencher o registo.
+- **Estado:** Aprovada
+- **Data:** 7 de agosto de 2026
+- **Responsável funcional:** Produto e UX
 
-### DD-XXX — Por definir
+### Contexto
 
-- **Estado:** Proposta
-- **Data:** Por definir
-- **Responsáveis:** Por definir
+O Dashboard é um dos oito ecrãs confirmados do MVP, mas a jornada central inicial não indicava explicitamente a sua posição. Era necessário resolver a transição após a Análise do perfil sem introduzir outro ecrã.
 
-#### Contexto
+### Opções consideradas
 
-Por definir.
+- avançar diretamente da Análise do perfil para a Descoberta de oportunidades;
+- colocar o Dashboard depois da Análise do perfil e antes da Descoberta.
 
-Descrever o problema, as restrições e as forças que tornam a decisão necessária.
+### Escolha
 
-#### Opções consideradas
+Adotar a sequência:
 
-Por definir.
+Análise do perfil → Dashboard → Descoberta de oportunidades.
 
-Listar alternativas viáveis e os principais critérios usados na comparação.
+### Consequências
 
-#### Escolha
+- todos os oito ecrãs confirmados participam coerentemente na jornada;
+- o estudante vê o seu estado e a próxima ação antes de pesquisar oportunidades;
+- o Dashboard deve manter-se focado na jornada central;
+- não é criado nenhum ecrã adicional.
 
-Por definir.
+### Evidências e referências
 
-Registar a opção escolhida e a razão da escolha, sem ocultar incertezas.
+- docs/user-flow.md, secções “Fluxo principal”, “Dashboard” e “Pontos de decisão confirmados”.
+- Aprovação do fluxo canónico v1.0 em 7 de agosto de 2026.
 
-#### Consequências
+### Revisão
 
-Por definir.
+- **Condição de revisão:** alteração aprovada da jornada central ou remoção do Dashboard do MVP.
+- **Decisão que substitui esta:** nenhuma.
 
-Indicar benefícios, custos, riscos, compromissos e trabalho de acompanhamento.
+## P2 — Dashboard como página inicial do utilizador autenticado
 
-#### Evidências e referências
+- **Estado:** Aprovada
+- **Data:** 7 de agosto de 2026
+- **Responsável funcional:** Produto e UX
 
-Por definir.
+### Contexto
 
-#### Revisão
+Depois de concluir o onboarding e a análise inicial, o estudante precisa de um ponto de entrada estável para sessões posteriores, com acesso ao estado do perfil, ao plano e à próxima ação.
 
-- **Condição ou data de revisão:** Por definir
-- **Decisão que substitui esta:** Por definir
+### Opções consideradas
+
+- retomar sempre o último ecrã visitado;
+- criar outra página inicial;
+- usar o Dashboard confirmado como página inicial autenticada.
+
+### Escolha
+
+Depois de resolvida a autenticação, o Dashboard é a página inicial principal do utilizador que já concluiu a análise inicial.
+
+### Consequências
+
+- o Dashboard concentra resumo, próxima ação, estado do plano e acesso à Descoberta;
+- a autenticação continua a ser um estado de apoio, não um novo ecrã primário definido neste fluxo;
+- utilizadores que ainda não concluíram o perfil permanecem no percurso sequencial adequado;
+- não é acrescentada uma nova página inicial ao MVP.
+
+### Evidências e referências
+
+- docs/user-flow.md, secções “Dashboard” e “Modelo de navegação”.
+- Aprovação do fluxo canónico v1.0 em 7 de agosto de 2026.
+
+### Revisão
+
+- **Condição de revisão:** aprovação de um novo modelo de autenticação, retoma ou navegação.
+- **Decisão que substitui esta:** nenhuma.
+
+## P3 — Ciclo de correção do perfil
+
+- **Estado:** Aprovada
+- **Data:** 7 de agosto de 2026
+- **Responsável funcional:** Produto e UX
+
+### Contexto
+
+A Análise do perfil pode revelar informação incorreta ou incompleta. O estudante precisa de corrigir o perfil sem ficar bloqueado e sem criar outro ecrã.
+
+### Opções consideradas
+
+- impedir correções a partir da análise;
+- criar uma experiência adicional de edição;
+- regressar ao Onboarding existente e recalcular a análise.
+
+### Escolha
+
+Adotar o ciclo:
+
+Análise do perfil → Onboarding do estudante → Análise do perfil.
+
+### Consequências
+
+- o estudante pode corrigir dados antes de usar a análise;
+- a nova análise deve refletir os dados atualizados;
+- a incerteza continua preservada quando o estudante não conhece um valor exato;
+- o Onboarding é reutilizado e não é criado um ecrã primário adicional.
+
+### Evidências e referências
+
+- docs/user-flow.md, secções “Análise do perfil” e “Ciclos principais”.
+- Aprovação do fluxo canónico v1.0 em 7 de agosto de 2026.
+
+### Revisão
+
+- **Condição de revisão:** aprovação de um modelo de edição de perfil diferente.
+- **Decisão que substitui esta:** nenhuma.
+
+## P4 — Saída do plano de candidatura vazio para Descoberta
+
+- **Estado:** Aprovada
+- **Data:** 7 de agosto de 2026
+- **Responsável funcional:** Produto e UX
+
+### Contexto
+
+O estudante pode abrir o Plano de candidatura antes de guardar qualquer oportunidade. Um estado vazio sem ação seria um beco sem saída na jornada.
+
+### Opções consideradas
+
+- mostrar apenas uma mensagem vazia;
+- impedir o acesso ao plano vazio;
+- explicar o estado e encaminhar para Descoberta de oportunidades.
+
+### Escolha
+
+No estado vazio, mostrar:
+
+- “O teu plano ainda está vazio.”
+- “Adiciona uma oportunidade para começares a organizar os próximos passos.”
+- ação “Descobrir oportunidades”.
+
+A ação segue Plano de candidatura → Descoberta de oportunidades.
+
+### Consequências
+
+- o estado vazio torna-se recuperável;
+- o estudante regressa à jornada central;
+- não são criados conteúdo artificial, oportunidades automáticas ou novo ecrã;
+- a mesma lógica pode ser resumida no Dashboard quando ainda não existem oportunidades guardadas.
+
+### Evidências e referências
+
+- docs/user-flow.md, secção “Plano de candidatura”.
+- Aprovação do fluxo canónico v1.0 em 7 de agosto de 2026.
+
+### Revisão
+
+- **Condição de revisão:** alteração aprovada da forma como oportunidades entram no plano.
+- **Decisão que substitui esta:** nenhuma.
+
+## P5 — Prevenção de oportunidades duplicadas no plano
+
+- **Estado:** Aprovada
+- **Data:** 7 de agosto de 2026
+- **Responsável funcional:** Produto e UX
+
+### Contexto
+
+O estudante pode voltar aos detalhes de uma oportunidade já guardada. Repetir a ação de adicionar não deve criar entradas ou checklists duplicadas.
+
+### Opções consideradas
+
+- permitir duplicados;
+- bloquear a ação sem indicar o próximo passo;
+- reconhecer a oportunidade existente e encaminhar para a entrada já guardada.
+
+### Escolha
+
+Uma oportunidade só pode existir uma vez no plano do estudante. Se já estiver guardada, a ação passa conceptualmente de “Adicionar ao meu plano” para “Ver no meu plano”.
+
+### Consequências
+
+- evita dados, tarefas e prazos duplicados;
+- mantém um único ponto de verdade por oportunidade no plano;
+- a interface deve comunicar claramente o estado “já adicionada”;
+- a decisão não acrescenta funcionalidades fora do MVP.
+
+### Evidências e referências
+
+- docs/user-flow.md, secção “Detalhes da oportunidade”.
+- Aprovação do fluxo canónico v1.0 em 7 de agosto de 2026.
+
+### Revisão
+
+- **Condição de revisão:** aprovação explícita de múltiplas candidaturas independentes à mesma oportunidade.
+- **Decisão que substitui esta:** nenhuma.
+
+## P6 — Estados de tarefa separados do estado da informação
+
+- **Estado:** Aprovada
+- **Data:** 7 de agosto de 2026
+- **Responsável funcional:** Produto e UX
+
+### Contexto
+
+O plano precisa de representar tanto o progresso do estudante como a confiança na informação. Combinar os dois conceitos poderia fazer uma tarefa concluída parecer verificada ou uma informação incerta parecer uma tarefa incompleta.
+
+### Opções consideradas
+
+- usar um único estado para progresso e verificação;
+- adotar um conjunto maior de estados de tarefa;
+- manter três estados simples de tarefa e representar a verificação separadamente.
+
+### Escolha
+
+Usar os estados de tarefa:
+
+- **Por fazer**
+- **Em curso**
+- **Concluído**
+
+Representar separadamente o estado da informação, por exemplo:
+
+- **Por verificar**
+- **Ainda não confirmado**
+- **Confirmado na fonte disponível**
+
+### Consequências
+
+- o progresso continua simples e compreensível;
+- concluir uma tarefa não confirma automaticamente a informação associada;
+- incertezas, fontes e requisitos oficiais continuam visíveis;
+- qualquer regra futura para confirmar fontes ou dados exige decisão própria e não é inferida por esta decisão.
+
+### Evidências e referências
+
+- docs/user-flow.md, secções “Plano de candidatura”, “Estados globais e recuperação” e “Princípios obrigatórios”.
+- Aprovação do fluxo canónico v1.0 em 7 de agosto de 2026.
+
+### Revisão
+
+- **Condição de revisão:** testes de usabilidade demonstrarem necessidade de outro modelo ou aprovação de um fluxo de verificação.
+- **Decisão que substitui esta:** nenhuma.
+
+## Decisões ainda não tomadas
+
+P1–P6 confirmam apenas navegação e comportamento de estados necessários ao fluxo canónico v1.0. Não definem:
+
+- tecnologia ou arquitetura de implementação;
+- regras automáticas de elegibilidade;
+- fontes, cadência ou processo operacional de verificação;
+- campos finais de registo ou onboarding;
+- requisitos legais, consentimentos ou retenção de dados;
+- conteúdo final dos wireframes;
+- funcionalidades além dos oito ecrãs do MVP.
+
+Estes assuntos permanecem sujeitos a decisões e aprovações próprias.
