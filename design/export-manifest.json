@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "project": "Rumo — MVP",
+  "file": "Rumo — Product Design",
+  "designSourceOfTruth": "Penpot Cloud",
+  "decision": "P7",
+  "canonicalPages": [
+    "00 — Cover",
+    "01 — User Flows",
+    "02 — Wireframes",
+    "03 — Foundations",
+    "04 — Components",
+    "05 — Visual Designs",
+    "06 — Prototype"
+  ],
+  "backupPolicy": {
+    "penpotFile": "Attach to a GitHub Release after each approved milestone",
+    "previews": "Store lightweight PNG previews under docs/assets/design/",
+    "verification": "Re-import the exported .penpot file before completion"
+  },
+  "checkpoints": []
+}
