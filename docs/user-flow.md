@@ -2,10 +2,10 @@
 
 ## Estado do documento
 
-- **Versão:** 1.1
+- **Versão:** 1.2
 - **Data de aprovação da base do fluxo:** 7 de agosto de 2026
 - **Última revisão:** 8 de agosto de 2026
-- **Estado:** Aprovado para preparação do diagrama; wireframes ainda não autorizados
+- **Estado:** Fluxo e diagrama aprovados; wireframes v0.1 em Pending review
 - **Responsável funcional:** Produto e UX
 - **Fonte de produto:** Rumo Project Charter v1.0, de 6 de agosto de 2026
 - **Destino de design:** Figma, página “01 — User Flows”
@@ -30,7 +30,7 @@ Este documento:
 
 - confirma navegação, ações principais, transições, decisões e estados alternativos essenciais;
 - identifica a informação mínima que deve circular entre os ecrãs;
-- prepara a estrutura lógica do diagrama em Figma;
+- define a estrutura lógica representada no diagrama aprovado em Figma;
 - não define layout, hierarquia visual, componentes finais ou comportamento detalhado de wireframes;
 - não autoriza implementação.
 
@@ -597,7 +597,7 @@ Este fluxo não autoriza:
 - preenchimento de lacunas com informação inventada;
 - expansão para destinos além de Portugal, Alemanha e Espanha;
 - funcionalidades de Dashboard que não apoiem a jornada central;
-- criação de wireframes, visual design ou implementação nesta fase.
+- implementação antes da aprovação dos wireframes e visual design fora da fase autorizada.
 
 ## 16. Decisões confirmadas e pontos por definir
 
@@ -637,12 +637,12 @@ O fluxo está pronto para revisão em Figma quando:
 - os eventos analíticos iniciais estão identificados como conceitos sujeitos a validação técnica;
 - o diagrama pode ser construído sem tomar decisões de wireframe.
 
-Depois da revisão do diagrama contra este documento, a aprovação explícita da Fase 2 é necessária antes de iniciar wireframes.
+A Fase 2 foi aprovada em 8 de agosto de 2026. A partir dessa aprovação, os wireframes de baixa fidelidade dos oito ecrãs foram autorizados e avançaram para Pending review; a implementação continua não autorizada.
 
 ## 18. Referências
 
 - Rumo Project Charter v1.0, 6 de agosto de 2026.
 - docs/design-decisions.md, decisões P1–P6.
-- Destino de design: Figma, página “01 — User Flows”.
+- [Fluxo aprovado no FigJam](https://www.figma.com/board/DIXxIYHOC7CMFnwB1s4j8U).\n- [Wireframes no Figma](https://www.figma.com/design/dCYPl6m4YvlnrDSAsKWHzP).\n- [Pacote de revisão dos wireframes](./wireframes.md).
 
-Este documento v1.1 é a fonte canónica do fluxo e substitui a versão 1.0 de docs/user-flow.md. O Figma deve espelhá-lo sem acrescentar escopo.
+Este documento v1.2 é a fonte canónica do fluxo e substitui as versões anteriores de docs/user-flow.md. O Figma deve espelhá-lo sem acrescentar escopo.
