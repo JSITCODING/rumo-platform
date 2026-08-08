@@ -24,7 +24,7 @@ Cada alteração deve identificar:
 - **Requisito:** comportamento ou decisão que justifica a alteração;
 - **Issue:** uma única issue principal;
 - **Branch:** uma branch própria;
-- **Figma:** ligação ao ecrã ou fluxo quando a alteração afecta design;
+- **Penpot:** ligação ao ecrã, componente ou fluxo quando a alteração afecta design;
 - **PR:** uma pull request pequena que fecha a issue.
 
 ## Formato da issue
@@ -60,6 +60,7 @@ Tipos permitidos:
 - `fix`
 - `chore`
 - `test`
+- `research`
 
 Exemplos:
 
@@ -108,7 +109,7 @@ Antes de marcar **Pending review**:
 - executar as verificações relevantes;
 - confirmar que não existem dados sensíveis, segredos ou informação institucional apresentada como verificada;
 - adicionar screenshots para alterações visuais;
-- ligar o nó do Figma quando existir.
+- ligar a página ou o elemento do Penpot quando existir.
 
 ## Regras de merge
 
@@ -120,7 +121,7 @@ Uma PR só pode ser integrada quando:
 - todas as verificações automáticas configuradas estão concluídas com sucesso;
 - não existem conversas de revisão por resolver;
 - a branch está actualizada e sem conflitos com `main`;
-- a documentação e o Figma estão alinhados quando afectados.
+- a documentação e o Penpot estão alinhados quando afectados.
 
 Estratégia preferida: **Squash and merge**.
 
@@ -156,7 +157,21 @@ Quando uma alteração afectar o produto, a issue e a PR devem identificar:
 - componente;
 - requisito;
 - issue;
-- ligação Figma;
+- ligação Penpot;
 - decisão confirmada ou hipótese ainda em avaliação.
 
-O Figma é a fonte de verdade para design. O GitHub é a fonte de verdade para código e documentação técnica.
+O Penpot é a fonte de verdade para design activo. O Figma é apenas arquivo histórico e não recebe novas alterações. O GitHub é a fonte de verdade para decisões, documentação técnica, tokens, checkpoints e código.
+
+## Artefactos de design e checkpoints
+
+- O ficheiro activo chama-se `Rumo — Product Design` no projecto `Rumo — MVP`.
+- `design/tokens.json` é o contrato versionado entre design e futura implementação.
+- Cada marco aprovado deve actualizar `design/export-manifest.json`.
+- Previews leves podem ser guardados em `docs/assets/design/`.
+- Exportações `.penpot` devem ser anexadas a uma GitHub Release para evitar ficheiros binários grandes no histórico normal.
+- Ligações antigas do Figma devem ser rotuladas como **Arquivo — não editar**.
+- Uma alteração apenas no Penpot continua a exigir issue; a branch correspondente guarda a decisão, evidência ou checkpoint que permite revisão no GitHub.
+
+## Descoberta técnica do backend
+
+A descoberta técnica pode documentar entidades candidatas, relações, contratos propostos, permissões, riscos e questões em aberto. Não autoriza criar base de dados, migrações, API, serviços ou regras reais de elegibilidade. Usar o tipo de branch `research` e marcar hipóteses como **Por validar**.

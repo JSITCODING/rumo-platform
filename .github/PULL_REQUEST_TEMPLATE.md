@@ -16,7 +16,7 @@ Closes #
 - **Ecrã:** S01–S08 ou Transversal
 - **Componente:**
 - **Requisito:**
-- **Figma:**
+- **Penpot:**
 - **Branch:** `issue-<n>-<tipo>-<slug>`
 
 ## O que mudou
@@ -36,7 +36,7 @@ Indica explicitamente o que não foi alterado.
 - [ ] Dados demonstrativos identificados como tal
 - [ ] Sem garantias de admissão, bolsa, financiamento ou visto
 - [ ] Screenshots anexados quando existe alteração visual
-- [ ] Figma e documentação alinhados quando afectados
+- [ ] Penpot e documentação alinhados quando afectados
 
 ## Screenshots
 
