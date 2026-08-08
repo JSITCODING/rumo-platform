@@ -1,0 +1,96 @@
+name: Alteração do MVP Rumo
+description: Criar uma issue rastreável para produto, UX, design, documentação ou engenharia.
+title: "[Tipo][S00] Resumo curto"
+body:
+  - type: dropdown
+    id: status
+    attributes:
+      label: Estado actual
+      options:
+        - Não iniciado
+        - Em progresso
+        - Pending review
+        - Concluído
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: screen
+    attributes:
+      label: Ecrã afectado
+      description: Usa S01–S08 ou Transversal.
+      placeholder: "S01 — Landing page"
+    validations:
+      required: true
+
+  - type: input
+    id: component
+    attributes:
+      label: Componente
+      placeholder: "Hero, formulário, cartão de oportunidade ou documentação"
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirement
+    attributes:
+      label: Requisito
+      description: Explica o comportamento ou decisão que justifica a alteração.
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Fontes
+      description: Liga o fluxo canónico, o Figma e decisões relevantes.
+      placeholder: |
+        - docs/user-flow.md
+        - URL do Figma/FigJam
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceitação
+      description: Usa uma checklist verificável.
+      value: |
+        - [ ] 
+        - [ ] 
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Fora do âmbito
+      description: Indica o que esta issue não deve alterar.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: project_rules
+    attributes:
+      label: Regras do projecto
+      options:
+        - label: A alteração é mobile-first quando afecta interface.
+          required: true
+        - label: A copy usa português adequado ao contexto angolano.
+          required: true
+        - label: Dados fictícios serão identificados como demonstrativos ou não verificados.
+          required: true
+        - label: Não serão prometidas admissão, bolsa, financiamento ou visto.
+          required: true
+        - label: O âmbito permanece dentro dos oito ecrãs do MVP.
+          required: true
+
+  - type: input
+    id: branch
+    attributes:
+      label: Branch
+      description: Criar após a issue receber número.
+      placeholder: "issue-<n>-<tipo>-<slug>"
+    validations:
+      required: false
