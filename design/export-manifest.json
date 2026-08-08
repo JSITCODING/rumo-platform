@@ -18,5 +18,17 @@
     "previews": "Store lightweight PNG previews under docs/assets/design/",
     "verification": "Re-import the exported .penpot file before completion"
   },
-  "checkpoints": []
+  "checkpoints": [],
+  "penpotUrl": "https://design.penpot.app/#/workspace?team-id=3be9e5e1-190f-8090-8008-7396e7d47c43&file-id=81f57451-85cc-819d-8008-739706c5372c",
+  "workspaceStatus": "created",
+  "currentDesignStatus": "S01–S08 mobile concepts v0.1 — pending review",
+  "tokenImport": {
+    "status": "active",
+    "color": 38,
+    "dimensions": 36,
+    "fontFamily": 3,
+    "fontWeight": 5,
+    "number": 9,
+    "skipped": 0
+  }
 }
