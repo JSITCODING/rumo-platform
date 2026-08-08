@@ -2,15 +2,15 @@
 
 ## Estado do documento
 
-- **Versão:** 0.1
+- **Versão:** 1.0
 - **Data:** 8 de agosto de 2026
-- **Estado:** Pending review
+- **Estado:** Aprovado
 - **Âmbito:** oito ecrãs mobile-first do MVP
 - **Fonte canónica de fluxo:** [`docs/user-flow.md`](./user-flow.md)
-- **Fonte de verdade para design:** [Rumo — MVP Wireframes v1.0 no Figma](https://www.figma.com/design/dCYPl6m4YvlnrDSAsKWHzP)
-- **Fluxo aprovado:** [UF-01 — Fluxo canónico MVP no FigJam](https://www.figma.com/board/DIXxIYHOC7CMFnwB1s4j8U)
+- **Fonte de verdade para design activo:** Penpot Cloud — ver [`docs/penpot-workspace.md`](./penpot-workspace.md)
+- **Arquivo histórico — não editar:** [wireframes no Figma](https://www.figma.com/design/dCYPl6m4YvlnrDSAsKWHzP) e [fluxo no FigJam](https://www.figma.com/board/DIXxIYHOC7CMFnwB1s4j8U)
 
-> Estes wireframes são uma proposta de baixa fidelidade para revisão. Os PNGs facilitam a consulta no GitHub; o Figma continua a ser a fonte de verdade para design. Não representam implementação, visual design final ou dados institucionais verificados.
+> Estes wireframes móveis foram aprovados. Os PNGs são a referência de migração e devem entrar no Penpot como imagens bloqueadas, sem reabrir decisões de layout nesta etapa. Não representam implementação, visual design final ou dados institucionais verificados.
 
 ## Princípios aplicados
 
@@ -80,13 +80,13 @@
 
 ## Critérios de revisão
 
-- [ ] Os oito ecrãs correspondem exactamente a S01–S08 do fluxo canónico.
-- [ ] A hierarquia e as acções principais são compreensíveis em telemóvel.
-- [ ] Nenhum ecrã ou funcionalidade fora do MVP foi introduzido.
-- [ ] Estados de vazio, validação, erro e incerteza são suficientes para a jornada.
-- [ ] Copy não promete admissão, bolsa, financiamento ou visto.
-- [ ] Dados demonstrativos nunca parecem informação verificada.
-- [ ] A revisão no Figma e esta documentação permanecem alinhadas.
+- [x] Os oito ecrãs correspondem exactamente a S01–S08 do fluxo canónico.
+- [x] A hierarquia e as acções principais são compreensíveis em telemóvel.
+- [x] Nenhum ecrã ou funcionalidade fora do MVP foi introduzido.
+- [x] Estados de vazio, validação, erro e incerteza são suficientes para a jornada.
+- [x] Copy não promete admissão, bolsa, financiamento ou visto.
+- [x] Dados demonstrativos nunca parecem informação verificada.
+- [x] O pacote aprovado no GitHub é a referência de migração para o Penpot.
 
 ## Fora do âmbito
 
