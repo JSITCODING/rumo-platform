@@ -26,6 +26,7 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 | P5 | Prevenção de oportunidades duplicadas no plano | Aprovada | 7 de agosto de 2026 | — |
 | P6 | Estados de tarefa separados do estado da informação | Aprovada | 7 de agosto de 2026 | — |
 | P7 | Penpot como fonte canónica de design | Aprovada | 8 de agosto de 2026 | Regra original do Charter sobre Figma |
+| P8 | Editorial documental como linguagem visual v0.2 | Aprovada | 8 de agosto de 2026 | Aplicação visual v0.1 |
 
 ## P1 — Dashboard entre Análise do perfil e Descoberta
 
@@ -321,9 +322,48 @@ A estrutura canónica do ficheiro é:
 - **Condição de revisão:** impossibilidade operacional do Penpot Cloud, necessidade aprovada de autoalojamento ou alteração formal da governação de design.
 - **Decisão que substitui esta:** nenhuma.
 
+## P8 — Editorial documental como linguagem visual v0.2
+
+- **Estado:** Aprovada
+- **Data:** 8 de agosto de 2026
+- **Responsável funcional:** Produto, UX e Design
+
+### Contexto
+
+Os conceitos v0.1 eram elegantes, mas repetiam a fórmula serifada, cartões arredondados, chips e formas abstractas. O resultado aproximava o Rumo de um produto SaaS genérico e não exprimia suficientemente o papel de guia sério para uma candidatura.
+
+### Escolha
+
+Adoptar a linguagem **Editorial documental**: composição inspirada em dossiers, guias e cadernos de orientação, com numeração, linhas, notas marginais, fontes dos dados e indicadores de certeza.
+
+A tipografia seleccionada é Literata + IBM Plex Sans, com IBM Plex Mono para metadados. Raios ficam limitados a 4, 8 e 12 px; 999 px é reservado a pills de estado e filtro.
+
+A fotografia deve ser documental, licenciada e contextualizada. Imagens geradas por IA não representam pessoas reais.
+
+### Consequências
+
+- os conceitos v0.1 permanecem bloqueados como snapshot;
+- S01–S08 recebem versões v0.2 mobile e desktop no Penpot;
+- cartões são usados apenas para comparação, escolha ou grupos accionáveis;
+- Nota Rumo, Faixa de fonte, Próximo passo, Dossier de oportunidade e Checklist documental tornam-se componentes próprios;
+- a produção continua bloqueada até aprovação visual, protótipo e testes.
+
+### Evidências e referências
+
+- docs/design-theory.md, versão 1.1;
+- design/tokens.json;
+- docs/assets/design/v02/;
+- registo de fotografia em docs/assets/design/v02/photo-licenses.md;
+- Issue #15.
+
+### Revisão
+
+- **Condição de revisão:** testes de utilizadores demonstrarem problemas de compreensão, confiança, legibilidade ou adequação cultural.
+- **Decisão que substitui esta:** nenhuma.
+
 ## Decisões ainda não tomadas
 
-P1–P7 confirmam navegação, estados e governação de design e comportamento de estados necessários ao fluxo canónico v1.0. Não definem:
+P1–P8 confirmam navegação, estados, governação e linguagem visual necessários ao fluxo canónico v1.0. Não definem:
 
 - tecnologia ou arquitetura de implementação;
 - regras automáticas de elegibilidade;
