@@ -44,10 +44,10 @@ body:
     id: sources
     attributes:
       label: Fontes
-      description: Liga o fluxo canónico, o Figma e decisões relevantes.
+      description: Liga o fluxo canónico, o Penpot e decisões relevantes.
       placeholder: |
         - docs/user-flow.md
-        - URL do Figma/FigJam
+        - URL da página ou elemento no Penpot
     validations:
       required: true
 
