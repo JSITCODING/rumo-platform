@@ -3,7 +3,7 @@
 ## Estado do documento
 
 - **Responsável funcional:** Produto e UX
-- **Última revisão:** 7 de agosto de 2026
+- **Última revisão:** 8 de agosto de 2026
 - **Estado:** Ativo
 
 Este documento regista decisões confirmadas de produto e experiência que afetam o projeto. Uma proposta só é vinculativa quando o seu estado é **Aprovada**.
@@ -25,6 +25,7 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 | P4 | Saída do plano de candidatura vazio para Descoberta | Aprovada | 7 de agosto de 2026 | — |
 | P5 | Prevenção de oportunidades duplicadas no plano | Aprovada | 7 de agosto de 2026 | — |
 | P6 | Estados de tarefa separados do estado da informação | Aprovada | 7 de agosto de 2026 | — |
+| P7 | Penpot como fonte canónica de design | Aprovada | 8 de agosto de 2026 | Regra original do Charter sobre Figma |
 
 ## P1 — Dashboard entre Análise do perfil e Descoberta
 
@@ -267,9 +268,62 @@ Representar separadamente o estado da informação, por exemplo:
 - **Condição de revisão:** testes de usabilidade demonstrarem necessidade de outro modelo ou aprovação de um fluxo de verificação.
 - **Decisão que substitui esta:** nenhuma.
 
+## P7 — Penpot como fonte canónica de design
+
+- **Estado:** Aprovada
+- **Data:** 8 de agosto de 2026
+- **Responsável funcional:** Produto, UX e Design
+
+### Contexto
+
+O Figma foi inicialmente escolhido como fonte de verdade para design. As restrições de chamadas e colaboração passaram a bloquear a continuidade do trabalho. O projecto precisa de uma ferramenta aberta, colaborativa, exportável e capaz de suportar wireframes, foundations, componentes e protótipos sem criar dependência de formatos fechados.
+
+### Opções consideradas
+
+- manter o Figma como ferramenta activa;
+- adoptar Penpot Cloud e preservar a opção de autoalojamento;
+- autoalojar Penpot imediatamente.
+
+### Escolha
+
+Adoptar **Penpot Cloud** como fonte canónica de design. O Figma passa a arquivo histórico, sem novas alterações. O GitHub continua a ser a fonte de verdade para decisões, documentação, tokens, checkpoints e futura implementação.
+
+A estrutura canónica do ficheiro é:
+
+1. 00 — Cover
+2. 01 — User Flows
+3. 02 — Wireframes
+4. 03 — Foundations
+5. 04 — Components
+6. 05 — Visual Designs
+7. 06 — Prototype
+
+### Consequências
+
+- os oito wireframes mobile aprovados são migrados como referências bloqueadas;
+- novas foundations, componentes, telas e protótipos são criados apenas no Penpot;
+- `design/tokens.json` é o contrato aberto entre design e futura implementação;
+- cada marco aprovado recebe exportação `.penpot`, imagens de revisão e registo no manifest;
+- a exportação `.penpot` é publicada como anexo de GitHub Release, não directamente no histórico normal do repositório;
+- o autoalojamento permanece uma opção futura se privacidade, escala ou continuidade operacional o exigirem;
+- frontend e backend de produção continuam bloqueados até aprovação do design visual, protótipo e testes.
+
+### Evidências e referências
+
+- docs/project-charter-amendments.md, emenda A1.
+- docs/penpot-workspace.md.
+- docs/design-theory.md.
+- design/tokens.json.
+- Issue #14.
+
+### Revisão
+
+- **Condição de revisão:** impossibilidade operacional do Penpot Cloud, necessidade aprovada de autoalojamento ou alteração formal da governação de design.
+- **Decisão que substitui esta:** nenhuma.
+
 ## Decisões ainda não tomadas
 
-P1–P6 confirmam apenas navegação e comportamento de estados necessários ao fluxo canónico v1.0. Não definem:
+P1–P7 confirmam navegação, estados e governação de design e comportamento de estados necessários ao fluxo canónico v1.0. Não definem:
 
 - tecnologia ou arquitetura de implementação;
 - regras automáticas de elegibilidade;
