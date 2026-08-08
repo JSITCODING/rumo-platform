@@ -96,11 +96,14 @@ O MCP oficial do Penpot deve ser configurado apenas depois da criação do fiche
 
 Enquanto o MCP não estiver configurado, o trabalho é feito directamente no Penpot Cloud. O Figma não é usado como fallback.
 
-## Estado visual inicial
+## Estado visual actual
 
-- A página `05 — Visual Designs` contém conceitos vectoriais v0.1 para S01–S08.
-- Os conceitos usam a direcção Editorial Angolano Contemporâneo e permanecem **por validar**.
-- Nenhum conceito v0.1 autoriza implementação nem substitui o wireframe aprovado.
+- A página `05 — Visual Designs` preserva os conceitos vectoriais v0.1 bloqueados.
+- S01–S08 possuem versões v0.2 editáveis em 360 × 800 e 1440 × 900.
+- A página `03 — Foundations` contém foundations v0.2.
+- A página `04 — Components` contém os componentes próprios e estados alternativos.
+- Literata + IBM Plex Sans foi seleccionada no estudo tipográfico.
+- A direcção v0.2 permanece **pendente de aprovação visual** e não autoriza implementação.
 
 ## Critérios de conclusão da preparação
 
