@@ -2,14 +2,14 @@
 
 ## Estado do documento
 
-- **Versão:** 1.2
+- **Versão:** 1.3
 - **Data de aprovação da base do fluxo:** 7 de agosto de 2026
 - **Última revisão:** 8 de agosto de 2026
-- **Estado:** Fluxo e diagrama aprovados; wireframes v0.1 em Pending review
+- **Estado:** Fluxo, diagrama e wireframes móveis aprovados; migração para Penpot em curso
 - **Responsável funcional:** Produto e UX
 - **Fonte de produto:** Rumo Project Charter v1.0, de 6 de agosto de 2026
-- **Destino de design:** Figma, página “01 — User Flows”
-- **Finalidade:** definir a fonte canónica do fluxo de ponta a ponta do MVP antes do diagrama em Figma, dos wireframes e da implementação.
+- **Destino de design:** Penpot, página “01 — User Flows”
+- **Finalidade:** definir a fonte canónica do fluxo de ponta a ponta do MVP antes da representação no Penpot, do design visual e da implementação.
 
 ## 1. Escopo e limites
 
@@ -30,7 +30,7 @@ Este documento:
 
 - confirma navegação, ações principais, transições, decisões e estados alternativos essenciais;
 - identifica a informação mínima que deve circular entre os ecrãs;
-- define a estrutura lógica representada no diagrama aprovado em Figma;
+- define a estrutura lógica representada no diagrama canónico em Penpot;
 - não define layout, hierarquia visual, componentes finais ou comportamento detalhado de wireframes;
 - não autoriza implementação.
 
@@ -643,6 +643,9 @@ A Fase 2 foi aprovada em 8 de agosto de 2026. A partir dessa aprovação, os wir
 
 - Rumo Project Charter v1.0, 6 de agosto de 2026.
 - docs/design-decisions.md, decisões P1–P6.
-- [Fluxo aprovado no FigJam](https://www.figma.com/board/DIXxIYHOC7CMFnwB1s4j8U).\n- [Wireframes no Figma](https://www.figma.com/design/dCYPl6m4YvlnrDSAsKWHzP).\n- [Pacote de revisão dos wireframes](./wireframes.md).
+- [Arquivo histórico — fluxo aprovado no FigJam; não editar](https://www.figma.com/board/DIXxIYHOC7CMFnwB1s4j8U).
+- [Arquivo histórico — wireframes no Figma; não editar](https://www.figma.com/design/dCYPl6m4YvlnrDSAsKWHzP).
+- [Estrutura canónica do Penpot](./penpot-workspace.md).
+- [Pacote de revisão dos wireframes](./wireframes.md).
 
-Este documento v1.2 é a fonte canónica do fluxo e substitui as versões anteriores de docs/user-flow.md. O Figma deve espelhá-lo sem acrescentar escopo.
+Este documento v1.3 é a fonte canónica do fluxo e substitui as versões anteriores de docs/user-flow.md. O Penpot deve espelhá-lo sem acrescentar escopo.
