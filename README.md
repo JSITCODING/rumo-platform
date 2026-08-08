@@ -30,6 +30,10 @@ para ampliar o escopo ou iniciar desenvolvimento sem aprovação.
 - [Decisões de design](docs/design-decisions.md)
 - [Requisitos de dados](docs/data-requirements.md)
 - [Plano de testes](docs/testing-plan.md)
+- [Teoria de design](docs/design-theory.md)
+- [Estrutura do Penpot](docs/penpot-workspace.md)
+- [Emendas ao Project Charter](docs/project-charter-amendments.md)
+- [Tokens de design](design/tokens.json)
 
 As orientações para agentes e colaboradores automatizados estão em
 [AGENTS.md](AGENTS.md).
