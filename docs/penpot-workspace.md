@@ -6,13 +6,14 @@
 - **Equipa:** Rumo
 - **Projecto:** Rumo — MVP
 - **Ficheiro:** Rumo — Product Design
-- **Estado de criação no Cloud:** Aguardando autenticação do proprietário
+- **Estado de criação no Cloud:** Criado e activo
+- **URL canónico:** [Rumo — Product Design no Penpot](https://design.penpot.app/#/workspace?team-id=3be9e5e1-190f-8090-8008-7396e7d47c43&file-id=81f57451-85cc-819d-8008-739706c5372c)
 - **Fonte canónica de fluxo:** `docs/user-flow.md`
 - **Tokens canónicos:** `design/tokens.json`
 - **Decisão:** P7
 - **Issue:** #14
 
-Nenhum URL do Penpot deve ser inventado. Adicionar o URL real nesta página depois da criação autenticada.
+O URL acima foi verificado depois da criação autenticada. O ficheiro permanece privado à equipa até uma decisão explícita de partilha.
 
 ## Páginas
 
@@ -95,11 +96,17 @@ O MCP oficial do Penpot deve ser configurado apenas depois da criação do fiche
 
 Enquanto o MCP não estiver configurado, o trabalho é feito directamente no Penpot Cloud. O Figma não é usado como fallback.
 
+## Estado visual inicial
+
+- A página `05 — Visual Designs` contém conceitos vectoriais v0.1 para S01–S08.
+- Os conceitos usam a direcção Editorial Angolano Contemporâneo e permanecem **por validar**.
+- Nenhum conceito v0.1 autoriza implementação nem substitui o wireframe aprovado.
+
 ## Critérios de conclusão da preparação
 
-- [ ] Equipa, projecto e ficheiro criados.
-- [ ] Páginas 00–06 criadas na ordem definida.
-- [ ] URL real registado.
-- [ ] Oito wireframes móveis importados e bloqueados.
-- [ ] Tokens importados sem erros.
+- [x] Equipa, projecto e ficheiro criados.
+- [x] Páginas 00–06 criadas na ordem definida.
+- [x] URL real registado.
+- [x] Oito wireframes móveis importados e bloqueados.
+- [x] Tokens importados sem erros.
 - [ ] Primeiro checkpoint exportado e registado.
