@@ -2,17 +2,24 @@
 
 ## Estado do documento
 
-- **Versão:** 1.0
+- **Versão:** 1.1
 - **Data:** 8 de agosto de 2026
-- **Estado:** Direcção aprovada; aplicação visual por validar
+- **Estado:** Direcção v0.2 implementada no Penpot; aprovação visual pendente
 - **Âmbito:** S01–S08
 - **Issue de origem:** #14
+- **Issue de evolução:** #15
 
 ## Intenção
 
 Rumo deve parecer uma orientação séria para uma decisão de vida importante: ambiciosa, clara e humana. O carácter premium nasce da composição, da linguagem, da qualidade tipográfica e da contenção. Não nasce de efeitos decorativos, excesso de cartões ou padrões visuais genéricos.
 
 A referência cultural angolana deve surgir com respeito através das pessoas, da luz, da materialidade, do ritmo e da linguagem. Não usar símbolos nacionais como decoração automática nem reduzir Angola a clichés visuais.
+
+## Direcção v0.2 — Guia documental de candidatura
+
+A aplicação v0.2 abandona a repetição de cartões premium e adopta a linguagem de um dossier anotado: numeração, linhas editoriais, notas marginais, fontes e estados de certeza. A presença angolana surge nas pessoas, ambientes e linguagem, sem bandeiras ou padrões decorativos.
+
+Cartões são reservados para escolhas, comparação e grupos accionáveis. Pills são reservadas a filtros e estados. A mesma composição não se repete em mais de duas telas.
 
 ## Princípios
 
@@ -42,9 +49,11 @@ Texto normal deve cumprir contraste AA. Foco não depende apenas de cor. Alvos i
 
 ## Tipografia
 
-- **Display editorial:** Newsreader, para títulos principais e momentos de orientação.
-- **Interface e leitura:** Manrope, para navegação, formulários, dados e texto corrido.
-- **Fallbacks:** Georgia para display; system-ui e sans-serif para interface.
+- **Display editorial seleccionado:** Literata, para títulos principais, dossiers e momentos de orientação.
+- **Interface e leitura seleccionada:** IBM Plex Sans, para navegação, formulários, dados e texto corrido.
+- **Metadados e fontes:** IBM Plex Mono, apenas para numeração, datas, estado e proveniência.
+- **Fallbacks:** Georgia para display; Arial e sans-serif para interface.
+- **Comparação realizada:** Newsreader + Manrope, Literata + IBM Plex Sans e Domine + Archivo. Literata + IBM Plex Sans foi seleccionada por legibilidade, carácter documental e menor associação à linguagem v0.1.
 - Usar no máximo três tamanhos de título por ecrã.
 - Não usar caixa alta em parágrafos, botões ou mensagens de estado.
 - Números de custo, prazo e progresso usam algarismos tabulares quando disponível.
@@ -71,6 +80,9 @@ Os valores canónicos estão em `design/tokens.json`. Alterações exigem revis�
 - Evitar imagens encenadas de “sucesso garantido”, apertos de mão, chapéus de graduação genéricos ou aeroportos como atalho visual.
 - Identificar sempre fotografia de demonstração; não sugerir parceria com instituições representadas.
 - Não usar imagens geradas ou de stock como prova de resultados.
+- Não usar imagens geradas por IA para representar pessoas reais.
+- Registar autor, origem, licença, data, contexto confirmado, alterações e uso.
+- Começar com licenças comerciais gratuitas; qualquer compra exige aprovação explícita.
 
 ## Ilustração e grafismo
 
@@ -93,10 +105,13 @@ A biblioteca inicial deve conter:
 - botões primário, secundário, discreto e destrutivo;
 - campos de texto, select, escolha única, checkbox e ajuda contextual;
 - cabeçalho móvel, navegação inferior e cabeçalho desktop;
-- cartão de oportunidade e cartão de próxima acção;
+- Nota Rumo para contexto, conselho e incerteza;
+- Faixa de fonte com origem, data e estado de verificação;
+- Próximo passo numerado, sem contentor decorativo obrigatório;
+- Dossier de oportunidade para requisitos, custos, prazos e evidências;
+- Checklist documental com progresso separado da verificação;
 - indicador de progresso e item de checklist;
 - tags separadas para tarefa e estado da informação;
-- aviso de demonstração, incerteza e fonte oficial;
 - estados loading, vazio, erro, desactivado e sucesso.
 
 Cada componente deve cobrir padrão, hover quando aplicável, foco, pressionado, desactivado e erro.
@@ -126,7 +141,19 @@ Cada componente deve cobrir padrão, hover quando aplicável, foco, pressionado,
 - rankings opacos;
 - linguagem que culpabiliza o estudante;
 - bandeiras como sistema principal de navegação;
-- visual de banco, seguradora ou portal governamental genérico.
+- visual de banco, seguradora ou portal governamental genérico;
+- mais de dois contentores arredondados acima da dobra;
+- chips ou formas sem função informativa;
+- repetição da sequência kicker–título–subtítulo em todas as telas.
+
+## Auditoria antigenericidade
+
+- máximo de dois contentores arredondados acima da dobra;
+- pills apenas para estado ou filtro;
+- nenhum elemento decorativo sem significado;
+- a mesma composição não se repete em mais de duas telas;
+- S01–S08 mantêm silhuetas reconhecíveis em miniatura;
+- copy real, incerteza e fonte permanecem visíveis.
 
 ## Revisão visual obrigatória
 
