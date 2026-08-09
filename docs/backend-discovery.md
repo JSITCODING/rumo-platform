@@ -3,254 +3,406 @@
 ## Estado do documento
 
 - **Issue:** #17 — `[Research][Backend] Documentar descoberta técnica do MVP`
-- **Estado:** Em progresso
+- **Estado:** Em progresso — descoberta consolidada para revisão
 - **Ecrã afectado:** Transversal — S01–S08
 - **Natureza:** investigação e documentação; não autoriza implementação
 - **Piloto:** Angola
-- **Expansão prevista:** internacional, sem limitar o modelo conceptual a Angola
+- **Expansão prevista:** internacional, sem hardcode geográfico no modelo conceptual
 
 ## 1. Objectivo
 
-Reduzir a incerteza técnica do MVP antes da implementação, descrevendo apenas o domínio necessário ao fluxo aprovado. Este documento não define esquema de base de dados, endpoints, migrations, serviços, autenticação, regras reais de elegibilidade ou stack.
+Reduzir a incerteza técnica do MVP antes da implementação, descrevendo apenas o domínio necessário ao fluxo aprovado.
 
-O piloto operacional da Rumo é Angola. O modelo conceptual deve, contudo, evitar decisões que tornem impossível a expansão posterior para estudantes de outros países.
+Este documento **não** define esquema de base de dados, tabelas, migrations, endpoints, DTOs finais, serviços, autenticação, stack, regras reais de elegibilidade, algoritmos de matching ou arquitectura de produção.
+
+O piloto operacional da Rumo é Angola. O domínio deve, contudo, evitar pressupostos que impeçam futura expansão para estudantes, instituições e oportunidades de outros países.
 
 ## 2. Fontes e precedência
 
-### Fontes funcionais usadas
+### Fontes funcionais principais
 
 - `docs/user-flow.md`
 - `docs/design-decisions.md`
 - Issue #17
 
-### Fontes de apoio ainda incompletas
+### Fontes adicionais da issue
+
+- `docs/design-theory.md`
+- `docs/penpot-workspace.md`
+- `design/tokens.json`
+- Issue #14
+
+### Documentos ainda incompletos
 
 - `docs/product-brief.md`
 - `docs/mvp-scope.md`
 - `docs/data-requirements.md`
 
-Os três documentos acima permanecem em rascunho e não devem ser usados para inventar requisitos ainda não aprovados.
+Documentos incompletos não devem ser usados para inventar requisitos ainda não aprovados.
 
-## 3. Factos confirmados
+## 3. Convenções deste documento
 
-Os pontos desta secção vêm do fluxo e das decisões já aprovadas.
+### Facto
+
+Comportamento confirmado pelo fluxo aprovado, decisões já aceites ou pela própria issue.
+
+### Hipótese / recomendação
+
+Conclusão técnica destinada a reduzir risco. Não constitui decisão de implementação.
+
+### Questão em aberto
+
+Ponto que exige validação de Produto/Backend ou dados reais antes de ser fechado.
+
+## 4. Factos confirmados
 
 1. O MVP tem oito ecrãs primários, S01–S08.
 2. O utilizador principal do piloto é um estudante angolano que procura estudar no estrangeiro.
-3. Os destinos iniciais do MVP são Portugal, Alemanha e Espanha.
-4. O perfil necessário à análise inclui categorias académicas, linguísticas, financeiras, preferências de estudo, destinos e horizonte de entrada.
-5. Respostas aproximadas, autodeclaradas ou não verificadas devem preservar o seu grau de incerteza.
-6. A análise de perfil não constitui uma decisão de admissão.
-7. A descoberta apresenta oportunidades potencialmente compatíveis e deve explicar por que razão aparecem para o estudante.
-8. A plataforma não pode garantir admissão, bolsa, financiamento ou visto.
+3. Os destinos iniciais são Portugal, Alemanha e Espanha.
+4. O perfil necessário à análise inclui informação académica, linguística, financeira, preferências de estudo, destinos e horizonte de entrada.
+5. Respostas aproximadas, autodeclaradas ou não verificadas devem preservar a sua incerteza.
+6. A análise de perfil não constitui decisão de admissão.
+7. A descoberta apresenta oportunidades potencialmente compatíveis e deve explicar por que aparecem ao estudante.
+8. A Rumo não pode garantir admissão, bolsa, financiamento ou visto.
 9. Informação desconhecida não pode ser preenchida com valores inventados.
 10. Informação crítica deve manter fonte e estado de verificação visíveis.
 11. Uma oportunidade pode conter simultaneamente dados confirmados, incompletos e por verificar.
-12. Uma oportunidade só pode existir uma vez no plano do mesmo estudante.
-13. O plano contém uma checklist personalizada baseada no perfil do estudante e nos requisitos conhecidos da oportunidade.
+12. A mesma oportunidade não pode aparecer duplicada no plano do mesmo estudante.
+13. O plano contém uma checklist personalizada baseada no perfil e na informação conhecida da oportunidade.
 14. O estado da tarefa é separado do estado de verificação da informação.
 15. A Rumo não submete candidaturas em nome do estudante no MVP.
-16. O Dashboard é a entrada principal para utilizadores que já concluíram a análise inicial.
-17. Um utilizador com onboarding incompleto deve retomar o onboarding.
-18. Alterações ao perfil podem provocar uma nova análise.
-19. A implementação permanece bloqueada até aprovação do design visual, protótipo e testes.
+16. O Dashboard é a entrada principal para utilizadores que concluíram a análise inicial.
+17. Um utilizador com onboarding incompleto deve retomá-lo.
+18. Alterações ao perfil podem provocar nova análise.
+19. A implementação de produção permanece bloqueada até aprovação do design visual, protótipo e testes.
 
-## 4. Hipóteses técnicas
+## 5. Princípios conceptuais recomendados
 
-As hipóteses abaixo servem para orientar discussão. Não são requisitos aprovados nem decisões de implementação.
+### H1 — Program e Opportunity são conceitos diferentes
 
-### H1 — Separar programa de oportunidade
+`Program` representa a identidade e características relativamente persistentes de uma oferta académica.
 
-Um `Program` representa uma oferta académica relativamente estável de uma instituição. Uma `Opportunity` representa uma possibilidade concreta de candidatura associada a esse programa num contexto temporal e operacional específico.
-
-Motivo: requisitos, propinas, bolsas, prazos e disponibilidade podem variar por ciclo de candidatura, intake ou ano académico.
-
-### H2 — Proveniência ao nível da informação
-
-Fonte e verificação devem poder ser associadas a elementos individuais de informação, e não apenas à oportunidade inteira.
+`Opportunity` representa uma possibilidade concreta e contextualizada de acesso, participação, financiamento ou progressão, válida num determinado contexto temporal e com condições próprias relevantes para o estudante.
 
 Exemplo:
 
-- propina: confirmada;
-- prazo: por verificar;
-- requisito linguístico: confirmado;
-- bolsa: informação incompleta.
+```text
+Program
+Engenharia Informática — IST
 
-### H3 — Análise e compatibilidade são artefactos explicativos
+Opportunity
+Candidatura internacional 2027/2028
+```
 
-`ProfileAnalysis` e `CompatibilityAssessment` devem representar explicações derivadas de informação conhecida, mantendo as incertezas. Não devem ser equivalentes a elegibilidade, admissão ou previsão de aceitação.
+Uma `Opportunity` não deve depender obrigatoriamente de `Program`, porque bolsas, estágios e intercâmbios podem existir independentemente.
 
-### H4 — Checklist derivada, mas rastreável
+### H2 — Opportunity deve ter núcleo comum e detalhes específicos por tipo
 
-Uma `ApplicationTask` pode ser gerada a partir de um requisito conhecido, mas deve continuar distinguível desse requisito. Concluir uma tarefa não confirma automaticamente o requisito associado.
+Evitar uma entidade conceptual gigante com dezenas de campos opcionais.
 
-### H5 — Modelo preparado para expansão geográfica
+Núcleo comum candidato:
 
-O piloto é Angola, mas nacionalidade, sistema de ensino, moeda, qualificações e regras de equivalência não devem ser assumidos como constantes globais do domínio.
+- identidade;
+- natureza/tipo principal;
+- título;
+- contexto temporal;
+- público/aplicabilidade;
+- organizações e papéis;
+- períodos/prazos;
+- requisitos;
+- proveniência e estado da informação.
 
-## 5. Entidades candidatas
+Detalhes específicos candidatos:
 
-Estas entidades representam conceitos de domínio. Não correspondem obrigatoriamente a tabelas futuras.
+- admissão: programa, via, propina, vagas;
+- financiamento: cobertura, valor, condições de atribuição;
+- estágio: duração, remuneração, modalidade;
+- intercâmbio: instituições envolvidas, duração, mobilidade/créditos quando aplicável.
 
-### 5.1 StudentProfile
+A estratégia técnica de persistência destes tipos fica fora desta issue.
 
-Representa a informação do estudante necessária à análise, descoberta e planeamento.
+### H3 — Organization é conceito-base mais geral que Institution
 
-Possíveis áreas internas:
+Uma oportunidade pode envolver universidade, fundação, empresa, governo, agência ou outra entidade.
+
+O que uma organização **é** não deve ser confundido com o papel que desempenha numa oportunidade.
+
+Exemplo conceptual:
+
+```text
+Organization A -> PROVIDER
+Organization B -> FUNDER
+Organization C -> HOST
+```
+
+A taxonomia de papéis só deve ser criada a partir de casos reais do MVP.
+
+### H4 — Requirement, RequirementAssessment e ApplicationTask são conceitos distintos
+
+```text
+Requirement
+= o que a oportunidade exige
+
+RequirementAssessment
+= o que se sabe sobre a relação entre o estudante e essa exigência
+
+ApplicationTask
+= o que o estudante deve fazer a seguir
+```
+
+Concluir uma tarefa não confirma um requisito, e avaliar um requisito não altera a definição oficial desse requisito.
+
+### H5 — Source, Evidence, Verification e Freshness são conceitos distintos
+
+```text
+Source
+= origem/publicador
+
+Evidence
+= referência concreta que sustenta determinada informação
+
+Verification
+= estado do processo de revisão da informação
+
+Freshness
+= actualidade/necessidade de revisão
+```
+
+`Evidence`, `Freshness` e `InformationItem/Claim` são conceitos auxiliares candidatos; não são automaticamente entidades técnicas.
+
+### H6 — Compatibilidade não é elegibilidade
+
+`ProfileAnalysis` e `CompatibilityAssessment` devem ser artefactos explicativos, baseados apenas em informação conhecida e preservando lacunas e incertezas.
+
+Não devem representar:
+
+- decisão oficial de elegibilidade;
+- probabilidade de admissão;
+- probabilidade de bolsa;
+- probabilidade de visto;
+- garantia de financiamento.
+
+### H7 — Preservar dados académicos na representação original
+
+Qualificações, resultados e escalas devem ser preservados no contexto original.
+
+```text
+Dado académico original
+!= interpretação/equivalência
+!= reconhecimento oficial
+```
+
+Conversões ou equivalências futuras devem ser derivadas, rastreáveis e nunca substituir silenciosamente o valor original.
+
+### H8 — Evitar herança automática de requisitos no MVP
+
+Mesmo quando um requisito tem origem num programa, regulamento ou via, a oportunidade concreta deve apresentar o conjunto efectivo conhecido de requisitos aplicáveis ao seu contexto.
+
+Evitar comportamento invisível do tipo `Program -> herda automaticamente -> Opportunity` antes de existir necessidade real e regras de precedência aprovadas.
+
+### H9 — Checklist é derivada, mas não é projecção 1:1 dos requisitos
+
+Nem todo requisito gera uma tarefa e uma tarefa pode derivar de um prazo ou outra informação operacional.
+
+Checklist deve ser tratada como orientação personalizada e rastreável.
+
+### H10 — O modelo deve permitir expansão geográfica sem transformar Angola/Portugal em regras universais
+
+Não assumir como universais:
+
+- escala de notas 0–20;
+- 12.ª/13.ª classe;
+- ano académico europeu;
+- uma moeda;
+- um único modelo de admissão;
+- uma nacionalidade por utilizador;
+- uma única localização por oportunidade;
+- um único sistema de ensino secundário.
+
+## 6. Entidades candidatas do núcleo
+
+Estas são entidades conceptuais. Não correspondem obrigatoriamente a tabelas.
+
+### 6.1 StudentProfile
+
+Informação do estudante necessária à análise, descoberta e planeamento.
+
+Áreas candidatas:
 
 - situação académica;
 - histórico/resultados;
-- nível de estudo pretendido;
+- nível pretendido;
 - áreas de estudo;
-- destinos preferidos;
+- destinos;
 - capacidades linguísticas;
 - capacidade financeira aproximada;
-- necessidade ou preferência por financiamento;
+- necessidade/preferência de financiamento;
 - horizonte de entrada;
-- proveniência e nível de certeza dos dados quando aplicável.
+- origem/certeza dos dados quando relevante.
 
-### 5.2 AcademicRecord
+### 6.2 AcademicRecord
 
-Representa qualificações, resultados ou informação académica declarada pelo estudante.
+Representa percurso, qualificação, resultados ou informação académica original do estudante.
 
-Risco: qualificações angolanas não devem ser automaticamente traduzidas para equivalências estrangeiras sem uma regra e fonte aprovadas.
+Deve permitir distinguir, conceptualmente, situações como:
 
-### 5.3 LanguageCapability
+- em curso;
+- concluído;
+- resultados parciais;
+- qualificação obtida.
 
-Representa língua, nível declarado e eventual evidência ou verificação futura.
+Não assume equivalência estrangeira automática.
 
-### 5.4 StudyPreference
+### 6.3 LanguageCapability
 
-Representa nível pretendido, áreas, países/destinos e horizonte de entrada.
+Representa capacidade linguística declarada e eventual evidência.
 
-### 5.5 FinancialProfile
+`"falo inglês B2"` não equivale a `"a universidade aceita a minha evidência de inglês"`.
 
-Representa capacidade financeira aproximada e preferência/necessidade de bolsa ou outro financiamento.
+A aceitação pertence à avaliação do requisito da oportunidade.
 
-A unidade exacta de capacidade financeira ainda está por decidir.
+### 6.4 StudyPreference
 
-### 5.6 Institution
+Representa nível pretendido, áreas, destinos e horizonte de entrada.
 
-Representa universidade, instituto ou outra entidade académica responsável por programas e oportunidades.
+### 6.5 FinancialProfile
 
-### 5.7 Program
+Representa apenas a informação financeira necessária ao fluxo aprovado, preferindo granularidade aproximada quando precisão adicional não altera a experiência.
 
-Representa curso ou programa académico de uma instituição.
+`budget`, `income`, `assets` e `proof of funds` não devem ser tratados como sinónimos.
 
-### 5.8 Opportunity
+A unidade exacta de capacidade financeira permanece aberta.
 
-Representa uma possibilidade concreta apresentada na descoberta.
+### 6.6 Organization
 
-Pode agregar, quando disponíveis:
+Representa uma organização participante do domínio: instituição de ensino, fundação, empresa, organismo público ou outra organização relevante.
 
-- programa;
-- instituição;
-- país/localização;
-- nível e área;
-- custos;
-- financiamento;
-- prazos;
-- requisitos;
-- documentos;
-- fontes;
-- estados de verificação;
-- contexto temporal da candidatura.
+A classificação descritiva não determina o papel contextual da organização.
 
-### 5.9 Requirement
+### 6.7 Program
 
-Representa um requisito conhecido da oportunidade.
+Representa uma oferta académica relativamente persistente de uma organização educacional.
 
-Categorias candidatas:
+Pode conter identidade e características académicas relativamente estáveis.
 
-- académico;
-- linguístico;
-- documental;
-- financeiro;
-- prazo/calendário;
-- outro requisito oficial relevante.
+Dados voláteis por ciclo, como prazos, vagas ou condições específicas de candidatura, pertencem ao contexto da `Opportunity`.
 
-A taxonomia final ainda não está aprovada.
+### 6.8 Opportunity
 
-### 5.10 FundingOption
+Representa uma possibilidade concreta e contextualizada relevante para o percurso do estudante.
 
-Representa bolsa, apoio financeiro ou outra opção de financiamento associada à oportunidade ou programa.
+Tipos candidatos do MVP/domínio actual:
 
-### 5.11 ApplicationWindow
+- Admission;
+- Funding;
+- Internship;
+- Exchange.
 
-Representa informação temporal relevante da candidatura, incluindo prazos quando conhecidos.
+Uma `AdmissionOpportunity` pode referenciar um `Program`; outros tipos não são obrigados a fazê-lo.
 
-### 5.12 RequiredDocument
+### 6.9 Requirement
+
+Representa uma condição que deve ser satisfeita, demonstrada ou considerada para acesso, candidatura, participação ou atribuição de uma oportunidade.
+
+Não deve ser contentor genérico para qualquer informação.
+
+Um prazo, custo ou simples descrição não é automaticamente um `Requirement`.
+
+### 6.10 RequiredDocument
 
 Representa um documento ou categoria documental solicitada pela oportunidade.
 
-### 5.13 Source
+Não implica que a Rumo armazene o ficheiro do estudante.
 
-Representa a origem de uma informação.
+A relação `Requirement <-> RequiredDocument` não deve assumir cardinalidade 1:1.
+
+### 6.11 ApplicationWindow
+
+Representa períodos e datas operacionais relevantes da candidatura.
+
+O domínio não deve assumir uma única `deadline`; podem existir abertura, fecho, rondas, prioridade ou candidaturas contínuas.
+
+### 6.12 Source
+
+Representa origem/documento/página/publicador da informação.
 
 Propriedades conceptuais candidatas:
 
-- entidade responsável pela fonte;
-- URL ou referência;
+- referência/URL;
 - tipo de fonte;
-- data de consulta;
+- organização publicadora quando conhecida;
+- data de consulta (`observedAt`);
 - idioma;
-- carácter oficial ou secundário, se tal classificação vier a ser aprovada.
+- contexto/escopo.
 
-### 5.14 Verification
+A existência de uma URL não é suficiente para considerar informação confirmada.
 
-Representa o estado de confiança/verificação de uma informação.
+### 6.13 Verification
 
-Estados conceptuais já coerentes com o produto incluem:
+Representa o estado do processo de revisão de determinada informação.
 
-- por verificar;
-- ainda não confirmado;
-- confirmado na fonte disponível.
+Deve ser capaz, conceptualmente, de distinguir situações como:
 
-A taxonomia final e o processo operacional permanecem por aprovar.
+- ainda não revista;
+- confirmada na fonte disponível;
+- necessita revisão;
+- fontes divergentes.
 
-### 5.15 ProfileAnalysis
+Os estados finais e o processo operacional permanecem abertos.
 
-Representa a interpretação do perfil actual do estudante.
+### 6.14 ProfileAnalysis
+
+Interpretação global do perfil actual do estudante.
 
 Pode conter:
 
 - pontos fortes;
 - limitações;
-- informação não resolvida;
-- indicadores de preparação;
-- orientação de pesquisa.
+- lacunas;
+- informação desconhecida;
+- orientação para descoberta.
 
-Não representa uma decisão de admissão.
+Não representa decisão de admissão.
 
-### 5.16 CompatibilityAssessment
+### 6.15 CompatibilityAssessment
 
-Representa a explicação de por que razão uma oportunidade é potencialmente relevante para determinado perfil.
+Explicação da relação entre determinado perfil e determinada oportunidade.
 
 Deve preservar:
 
-- razões;
+- razões de alinhamento;
+- possíveis gaps;
+- desconhecidos;
 - limitações;
-- incertezas;
-- fontes relevantes;
-- estado de verificação.
+- contexto de verificação relevante.
 
-### 5.17 ApplicationPlan
+### 6.16 RequirementAssessment
 
-Representa o plano de candidatura do estudante no âmbito do MVP.
+Representa a interpretação da relação entre um perfil e um requisito.
 
-A hipótese inicial é existir um plano principal por estudante. A necessidade de múltiplos planos futuros permanece em aberto.
+Ausência de dados não deve ser convertida automaticamente em incumprimento.
 
-### 5.18 PlanOpportunity
+Estados exactos permanecem abertos; evitar semântica enganadora de `PASS/FAIL` enquanto não existir base suficiente.
 
-Representa a associação entre o plano do estudante e uma oportunidade guardada.
+### 6.17 ApplicationPlan
+
+Representa o contexto de planeamento de candidaturas do estudante no MVP.
+
+Não fica decidido nesta issue se haverá um ou vários planos no futuro.
+
+### 6.18 PlanOpportunity
+
+Associação entre o plano e uma oportunidade perseguida pelo estudante.
 
 Regra funcional confirmada:
 
 > A mesma oportunidade não pode aparecer duplicada no plano do mesmo estudante.
 
-### 5.19 ApplicationTask
+Estado pessoal de candidatura deve pertencer a esta relação, não à `Opportunity` global.
 
-Representa uma tarefa da checklist.
+### 6.19 ApplicationTask
+
+Representa uma acção da checklist do estudante.
 
 Estados funcionais confirmados:
 
@@ -258,9 +410,75 @@ Estados funcionais confirmados:
 - Em curso;
 - Concluído.
 
-O estado da tarefa não deve substituir o estado de verificação da informação associada.
+Pode ser sugerida a partir de requisito, prazo ou outra informação operacional conhecida.
 
-## 6. Relações candidatas
+## 7. Conceitos auxiliares que não devem ser promovidos automaticamente a entidades
+
+### Evidence
+
+Referência concreta dentro de uma fonte que sustenta determinada informação.
+
+### Freshness
+
+Actualidade da informação ou necessidade de nova revisão.
+
+`Freshness` é diferente do lifecycle da oportunidade: uma oportunidade encerrada pode estar correctamente documentada e não estar stale.
+
+### InformationItem / Claim
+
+Conceito útil para discutir granularidade de proveniência e verificação.
+
+Não fica decidido que cada campo do domínio se transforme numa entidade genérica.
+
+### OpportunityRelationship
+
+Uma oportunidade pode relacionar-se com outra, por exemplo uma bolsa que financia uma admissão.
+
+A taxonomia e implementação destas relações permanecem abertas.
+
+### FundingScope
+
+Uma bolsa pode aplicar-se a uma oportunidade, programa, organização, área, nível ou outro conjunto.
+
+Não criar motor genérico de scopes nesta fase.
+
+### SelectionCriterion
+
+Critério competitivo de selecção é semanticamente diferente de requisito mínimo, mas não entra como entidade obrigatória enquanto o fluxo não exigir esse detalhe.
+
+## 8. FundingOpportunity e informação financeira
+
+### Recomendação
+
+Uma `FundingOpportunity` deve existir quando o financiamento possui identidade e condições próprias de acesso, atribuição ou consideração suficientemente relevantes para o estudante.
+
+Nem todo dado financeiro é uma oportunidade de financiamento.
+
+Exemplos que normalmente permanecem informação financeira do contexto:
+
+- propina;
+- taxa de candidatura;
+- remuneração de estágio;
+- desconto simples;
+- custo de alojamento.
+
+Uma bolsa com candidatura própria é uma `FundingOpportunity` clara.
+
+Uma bolsa de consideração automática pode continuar a ser uma `FundingOpportunity` se tiver identidade, público e condições próprias, mesmo sem candidatura independente.
+
+### Regras conceptuais
+
+- `amount` e `coverage` não são sinónimos;
+- valores monetários devem preservar moeda original;
+- financiamento potencial nunca deve ser tratado como dinheiro garantido;
+- uma bolsa pode estar associada a várias oportunidades ou a um escopo mais amplo;
+- relação de financiamento e requisito de elegibilidade são conceitos diferentes;
+- bolsas podem ter regras de acumulação ou dependências próprias;
+- associações futuras podem precisar indicar o que efectivamente é coberto.
+
+`FundingOption` deixa de ser entidade principal por ser demasiado ambígua; o conceito é substituído por `FundingOpportunity` quando existe oportunidade independente e por informação financeira/benefício quando não existe.
+
+## 9. Relações candidatas
 
 ```text
 Student
@@ -270,20 +488,29 @@ Student
        ├── StudyPreference
        └── FinancialProfile
 
-Institution
-  └── Program[]
-       └── Opportunity[]
-            ├── Requirement[]
-            ├── FundingOption[]
-            ├── ApplicationWindow[]
-            ├── RequiredDocument[]
-            └── InformationItem[]
-                 ├── Source[]
-                 └── Verification
+Organization
+  ├── Program[]
+  └── Opportunity[] via papéis contextuais
+
+Program
+  └── AdmissionOpportunity[] quando aplicável
+
+Opportunity
+  ├── ApplicationWindow[]
+  ├── Requirement[]
+  ├── RequiredDocument[]
+  ├── organizações + papéis
+  ├── detalhes específicos do tipo
+  └── informação crítica
+       ├── Source[]
+       ├── Evidence?       (conceito auxiliar)
+       ├── Verification
+       └── Freshness?      (conceito auxiliar)
 
 StudentProfile
   ├── ProfileAnalysis
   └── CompatibilityAssessment[] ── Opportunity
+       └── RequirementAssessment[] ── Requirement
 
 Student
   └── ApplicationPlan
@@ -291,68 +518,200 @@ Student
             └── ApplicationTask[]
 ```
 
-`InformationItem` aparece como conceito auxiliar candidato para permitir proveniência e verificação granular. A necessidade de o manter como entidade explícita deve ser validada antes de implementação.
+## 10. Proveniência, verificação e actualidade
 
-## 7. Contratos conceptuais propostos
+### Princípio
 
-Os contratos desta secção são interfaces de domínio para discussão. Não são endpoints, DTOs finais ou APIs implementadas.
+Nenhuma informação institucional crítica deve perder a ligação à fonte que a sustenta.
 
-### 7.1 Analisar perfil
+Evitar um único estado global:
+
+```text
+Opportunity.verificationStatus = VERIFIED
+```
+
+Uma mesma oportunidade pode ter:
+
+```text
+Propina       -> confirmada
+Prazo         -> confirmado
+Vagas         -> por verificar
+Documento X   -> parcialmente conhecido
+Requisito Y   -> fontes divergentes
+```
+
+### Definição recomendada para “verificado”
+
+> “Verificado” significa que a Rumo encontrou e reviu evidência adequada numa fonte identificável para aquela informação e contexto. Não significa garantia de permanência, elegibilidade ou decisão oficial.
+
+### Princípios
+
+- verificação não equivale a verdade absoluta;
+- `Verification` e `Freshness` são distintos;
+- autoridade, escopo e actualidade da fonte importam;
+- conflitos entre fontes devem poder permanecer visíveis;
+- `observedAt` é operacionalmente importante;
+- validade pode depender do ciclo/contexto;
+- informação crítica alterada não deve assumir sobrescrita destrutiva como única estratégia futura;
+- um resumo agregado para UI pode ser derivado da informação granular, sem substituir os estados originais.
+
+### Riscos específicos
+
+- link rot;
+- fontes oficiais divergentes;
+- fonte oficial mas desactualizada;
+- página dinâmica sem data de publicação;
+- perda de contexto temporal;
+- considerar “oficial” como sinónimo de “correcto para este caso”.
+
+## 11. Perfil académico internacional
+
+### AcademicRecord
+
+Preservar:
+
+- sistema/contexto educacional;
+- nome original da qualificação;
+- estado da formação;
+- resultados na escala original;
+- instituição relevante;
+- data/período quando disponível.
+
+Uma nota não deve ser representada apenas como `value = 15` sem contexto de escala.
+
+### Equivalências
+
+Qualquer conversão deve ser derivada e rastreável.
+
+Nunca assumir equivalência oficial sem base apropriada.
+
+### LanguageCapability
+
+Capacidade declarada e evidência aceite por uma oportunidade são coisas diferentes.
+
+### FinancialProfile
+
+A capacidade financeira é sensível e imprecisa. A granularidade deve ser mínima e suficiente ao fluxo aprovado.
+
+Questões como orçamento anual, mensal, propina, custo total ou apoio familiar permanecem abertas.
+
+## 12. Compatibilidade e análise
+
+### ProfileAnalysis
+
+Analisa o estudante isoladamente.
+
+### CompatibilityAssessment
+
+Analisa a relação `StudentProfile <-> Opportunity`.
+
+Pode incluir:
+
+- alinhamentos;
+- possíveis gaps;
+- desconhecidos;
+- RequirementAssessments;
+- limitações da própria análise.
+
+### Princípios
+
+- não produzir probabilidade de admissão sem base metodológica real;
+- não tratar bolsa disponível como financiamento garantido;
+- não retirar automaticamente oportunidades apenas porque faltam dados do estudante;
+- ausência de evidência deve poder resultar em `unknown` e não em reprovação;
+- alterações no perfil ou na oportunidade podem tornar análises anteriores obsoletas;
+- artefactos derivados precisam ser reconhecidos como dependentes do estado da informação que lhes deu origem.
+
+## 13. ApplicationPlan e checklist
+
+### ApplicationPlan
+
+Contexto de planeamento das oportunidades perseguidas pelo estudante.
+
+### PlanOpportunity
+
+Mantém estado específico do estudante sobre determinada oportunidade.
+
+Não colocar estado pessoal como `APPLIED` na `Opportunity` global.
+
+### ApplicationTask
+
+A checklist é orientação personalizada.
+
+Não existe relação obrigatória 1:1 entre `Requirement` e `ApplicationTask`.
+
+Exemplo:
+
+```text
+Requirement
+“Ter concluído o ensino secundário”
+
+ApplicationTask
+“Obter e preparar o certificado do ensino secundário”
+```
+
+Uma alteração posterior na oportunidade pode tornar tarefas derivadas desactualizadas. O sistema futuro deve poder sinalizar necessidade de revisão sem assumir reset automático da tarefa.
+
+## 14. Contratos conceptuais propostos
+
+Estes contratos são interfaces de domínio para discussão. **Não são APIs, endpoints ou DTOs finais.**
+
+### 14.1 AnalyseProfile
 
 **Entrada conceptual**
 
 - perfil actual;
-- proveniência/certeza dos dados relevantes.
+- origem/certeza dos dados quando relevante.
 
 **Saída conceptual**
 
 - pontos fortes;
 - limitações;
-- incertezas;
-- informação a confirmar;
-- indicadores de preparação;
+- lacunas;
+- informação desconhecida;
 - orientação para descoberta.
 
-### 7.2 Descobrir oportunidades
+### 14.2 DiscoverOpportunities
 
 **Entrada conceptual**
 
-- nível pretendido;
-- áreas;
-- destinos;
+- perfil;
+- preferências;
+- filtros explícitos;
+- horizonte temporal;
 - restrições financeiras relevantes;
-- preferência de financiamento;
-- línguas;
-- horizonte de entrada;
-- filtros explícitos do utilizador.
+- línguas/destinos quando aplicáveis.
 
 **Saída conceptual**
 
-- oportunidades candidatas;
-- explicação de compatibilidade;
-- informação incompleta;
-- fontes e estados de verificação necessários para a apresentação.
+- oportunidades potencialmente relevantes;
+- resumo explicativo de compatibilidade;
+- incertezas;
+- contexto de verificação/actualidade relevante.
 
-### 7.3 Obter detalhes de oportunidade
+### 14.3 GetOpportunityDetails
 
 **Entrada conceptual**
 
-- identificador da oportunidade;
-- contexto do perfil apenas quando necessário para explicar compatibilidade.
+- identidade da oportunidade;
+- contexto de perfil apenas quando necessário à explicação.
 
 **Saída conceptual**
 
-- instituição e programa;
+- núcleo da oportunidade;
+- tipo/detalhes específicos;
+- programa quando aplicável;
+- organizações e papéis;
 - requisitos;
-- custos;
-- financiamento;
-- calendário;
 - documentos;
+- informação financeira;
+- financiamento associado quando aplicável;
+- períodos/prazos;
 - fontes;
-- verificação;
+- verificação/actualidade;
 - explicação de compatibilidade.
 
-### 7.4 Adicionar oportunidade ao plano
+### 14.4 AddOpportunityToPlan
 
 **Pré-condição conceptual**
 
@@ -361,248 +720,346 @@ Os contratos desta secção são interfaces de domínio para discussão. Não s�
 
 **Regra**
 
-- não criar duplicado se já existir associação estudante/plano/oportunidade.
+- não duplicar a mesma oportunidade no plano do mesmo estudante.
 
 **Saída conceptual**
 
-- entrada existente ou criada;
+- associação existente ou criada;
 - checklist candidata;
 - incertezas preservadas.
 
-### 7.5 Actualizar tarefa
+### 14.5 UpdateApplicationTask
 
 **Entrada conceptual**
 
-- tarefa do próprio plano;
+- tarefa pertencente ao plano do estudante;
 - novo estado permitido.
 
 **Saída conceptual**
 
 - tarefa actualizada;
-- sem alteração implícita do estado de verificação da informação.
+- nenhuma alteração implícita em `Requirement`, `Verification` ou `Opportunity`.
 
-## 8. Permissões candidatas
+## 15. Permissões candidatas
 
-As permissões abaixo são hipóteses de domínio. Não definem ainda RBAC real.
+Estas permissões são responsabilidades conceptuais, não RBAC real.
 
 ### Estudante
 
 - consultar e alterar o próprio perfil;
 - consultar oportunidades publicadas para descoberta;
-- consultar fontes e estados de verificação apresentados;
+- consultar informação de fonte/verificação apresentada;
 - gerir o próprio plano;
 - alterar estado das próprias tarefas.
 
 ### Operação de conteúdo / investigação
 
-Hipótese futura a validar:
+Hipótese futura:
 
-- criar e manter instituições, programas e oportunidades;
-- associar fontes;
-- actualizar estados de verificação;
-- registar data e contexto de revisão.
+- manter organizações, programas e oportunidades;
+- manter requisitos/documentos/informação editorial;
+- associar fontes/evidência;
+- rever informação;
+- registar contexto e data de revisão.
 
 ### Sistema
 
-Hipótese futura a validar:
+Hipótese futura:
 
 - produzir análise explicativa;
 - produzir compatibilidade explicável;
-- sugerir checklist baseada em requisitos conhecidos;
-- nunca elevar automaticamente informação incerta a confirmada.
+- sugerir checklist;
+- nunca elevar automaticamente informação incerta a confirmada sem processo aprovado.
 
-## 9. Privacidade e sensibilidade
+### Princípio transversal
 
-### Dados do estudante que exigem atenção
+Aplicar acesso mínimo necessário. Dados académicos/financeiros e inferências derivadas não devem ficar disponíveis a actores internos sem necessidade funcional.
 
-- resultados e histórico académico;
+Editar, verificar e publicar conteúdo podem vir a ser responsabilidades distintas; a segregação exacta permanece aberta.
+
+## 16. Privacidade e sensibilidade
+
+### Dados particularmente sensíveis
+
+- histórico e resultados académicos;
 - capacidade financeira;
-- dados de contacto/conta;
-- preferências e contexto de candidatura;
-- qualquer conteúdo livre que venha a ser introduzido futuramente.
+- dados de conta/contacto;
+- evidências linguísticas;
+- conteúdo livre;
+- inferências derivadas sobre limitações académicas ou financeiras.
 
-### Factos já confirmados
+### Princípios
 
 - recolher apenas informação necessária à finalidade aprovada;
-- não incluir resultados académicos, capacidade financeira ou conteúdo sensível em analytics sem aprovação explícita;
-- retenção, base aplicável, consentimento e regras de acesso ainda não foram aprovados.
+- preferir dados aproximados quando precisão adicional não melhora o fluxo;
+- não enviar resultados académicos, capacidade financeira ou conteúdo sensível para analytics genéricos sem aprovação explícita;
+- uploads documentais não devem ser assumidos sem necessidade funcional e política apropriada;
+- dado autodeclarado e dado verificado não devem ser confundidos.
 
 ### Riscos
 
-- recolha excessiva durante onboarding;
-- retenção indefinida por ausência de política;
-- exposição de informação financeira ou académica a perfis internos não necessários;
-- utilização de dados sensíveis em analytics;
-- mistura entre dado autodeclarado e dado verificado.
+- recolha excessiva no onboarding;
+- retenção indefinida;
+- acesso interno excessivo;
+- analytics com dados sensíveis;
+- exposição de inferências sensíveis;
+- futura reutilização de dados fora da finalidade original.
 
-## 10. Proveniência, qualidade e verificação
+Retenção, consentimento, base aplicável e regras finais de acesso permanecem por definir.
 
-### Princípio
+## 17. Internacionalização do domínio
 
-Nenhuma informação institucional crítica deve perder a ligação à fonte que a sustenta.
+Separar explicitamente:
 
-### Granularidade recomendada como hipótese
+- nacionalidade;
+- residência;
+- país/sistema onde estudou;
+- localização da organização;
+- destino da oportunidade;
+- localização física da oportunidade.
 
-Evitar apenas:
+Uma dimensão não deve ser inferida automaticamente da outra.
 
-```text
-Opportunity.verificationStatus = VERIFIED
-```
+O domínio deve permitir oportunidades remotas, múltiplas localizações e contextos temporais que não usem ano académico europeu.
 
-Preferir um modelo capaz de representar:
-
-```text
-Tuition       -> confirmado
-Deadline      -> por verificar
-Scholarship   -> ainda não confirmado
-LanguageReq   -> confirmado
-Documents     -> parcialmente conhecidos
-```
-
-### Dimensões de qualidade a considerar futuramente
-
-- completude;
-- validade;
-- actualidade;
-- consistência;
-- unicidade;
-- rastreabilidade.
-
-Os limiares e responsáveis ainda não estão aprovados.
-
-## 11. Riscos técnicos e de produto
+## 18. Riscos técnicos e de produto prioritários
 
 ### R1 — Compatibilidade confundida com elegibilidade
 
-Impacto: alto.
+**Impacto:** alto.
 
-Mitigação conceptual: compatibilidade deve ser explicativa e acompanhada de incertezas, nunca uma previsão de admissão.
+Mitigação conceptual: análise explicativa, nunca previsão de admissão.
 
-### R2 — Informação sem proveniência
+### R2 — Modelo global contaminado por pressupostos Angola/Portugal
 
-Impacto: alto.
+**Impacto:** alto.
 
-Mitigação conceptual: preservar fonte e data/contexto de verificação por informação crítica.
+Mitigação: preservar sistemas, moedas, qualificações e escalas no contexto original.
 
-### R3 — Verificação demasiado grosseira
+### R3 — Opportunity transformar-se em entidade genérica sem semântica
 
-Impacto: alto.
+**Impacto:** alto.
 
-Mitigação conceptual: permitir estados distintos dentro da mesma oportunidade.
+Mitigação: núcleo comum pequeno + detalhes específicos por tipo.
 
-### R4 — Requisitos mudam depois de uma oportunidade entrar no plano
+### R4 — Requirement transformar-se em contentor genérico de informação
 
-Impacto: médio/alto.
+**Impacto:** alto.
 
-Questão: decidir se a checklist é recalculada, versionada ou apenas sinalizada como potencialmente desactualizada.
+Mitigação: requisito representa condição; documentos, prazos, custos e critérios competitivos mantêm semântica própria.
 
-### R5 — Perfil alterado depois da análise
+### R5 — Verification criar falsa certeza
 
-Impacto: médio.
+**Impacto:** alto.
 
-Facto: o fluxo exige nova análise após correcção. Deve existir forma de distinguir resultado actual de resultado obsoleto.
+Mitigação: verificação granular, contexto temporal, conflito de fontes e actualidade separados.
 
-### R6 — Hardcode de Angola no modelo global
+### R6 — Perda de proveniência
 
-Impacto: alto a médio prazo.
+**Impacto:** alto.
 
-Mitigação conceptual: Angola é o piloto, não uma constante estrutural para nacionalidade, sistema educativo, moeda ou tipos de qualificação.
+Mitigação: informação institucional crítica preserva fonte/contexto de revisão.
 
-### R7 — Normalização prematura de sistemas educativos
+### R7 — Informação stale
 
-Impacto: alto.
+**Impacto:** alto.
 
-Mitigação conceptual: não inferir equivalências entre qualificações angolanas e estrangeiras até existirem regras e fontes aprovadas.
+Mitigação: separar verification/freshness e prever processo futuro de revisão.
 
-### R8 — Checklist tratada como verdade oficial
+### R8 — Checklist stale após alteração da oportunidade
 
-Impacto: alto.
+**Impacto:** médio/alto.
 
-Mitigação conceptual: checklist é orientação organizacional e deve manter referência às instruções e fontes oficiais.
+Mitigação: tarefas derivadas podem requerer revisão quando a informação de origem muda.
 
-## 12. Questões em aberto
+### R9 — Financiamento potencial tratado como garantido
 
-### Produto e domínio
+**Impacto:** alto.
 
-1. Uma `Opportunity` corresponde a um programa + intake/ciclo específico ou existe outra unidade de publicação?
-2. Um estudante terá sempre um único `ApplicationPlan` no MVP?
-3. O que significa exactamente “compatível” em termos funcionais antes de qualquer algoritmo?
-4. Que elementos da análise de perfil são apenas informativos e quais influenciam a descoberta?
-5. Que categorias exactas de requisitos serão suportadas no MVP?
+Mitigação: separar disponibilidade de bolsa, compatibilidade e financiamento efectivamente obtido.
 
-### Informação e verificação
+### R10 — Recolha excessiva de dados do estudante
 
-6. Quem pode criar ou alterar informação institucional?
-7. Quem pode marcar informação como confirmada?
-8. Uma fonte valida uma oportunidade inteira ou cada informação individualmente?
-9. Qual é a precedência entre fonte oficial, fonte governamental, agregador e informação manual?
-10. Qual é a cadência mínima de reverificação por tipo de dado?
-11. Como sinalizar informação que já foi confirmada mas ficou antiga?
+**Impacto:** alto.
 
-### Checklist e mudanças
+Mitigação: minimização e acesso mínimo necessário.
 
-12. Quando requisitos de uma oportunidade mudam, o que acontece às tarefas já existentes?
-13. O estudante pode criar, editar ou apagar tarefas manualmente no MVP?
-14. A checklist deve preservar uma fotografia dos requisitos no momento da adição ou acompanhar sempre a versão actual?
+### R11 — Equivalência académica inferida sem autoridade
 
-### Perfil
+**Impacto:** alto.
 
-15. Como representar a capacidade financeira: mensal, anual, total disponível ou intervalo?
-16. Que resultados académicos são realmente necessários para uma análise inicial útil?
-17. Como representar qualificações angolanas sem assumir equivalências não verificadas?
-18. O histórico de análises deve ser preservado ou apenas a análise actual?
+Mitigação: preservar dados originais e marcar conversões como derivadas.
 
-### Privacidade
+### R12 — Fontes oficiais contraditórias
 
-19. Qual é o período de retenção do perfil e do plano?
-20. Quais dados exigem consentimento específico ou outra base validada?
-21. Que perfis internos podem consultar dados académicos e financeiros do estudante?
+**Impacto:** alto.
 
-## 13. Decisões necessárias antes da implementação
+Mitigação: permitir estado de conflito; não escolher automaticamente sem política.
 
-A implementação não deve começar sem resolver pelo menos:
+### R13 — Rules engine prematuro
 
-1. unidade conceptual de `Opportunity`;
-2. regra funcional de compatibilidade;
-3. granularidade de fonte/verificação;
-4. modelo mínimo de perfil;
-5. unidade da capacidade financeira;
-6. política de actualização de checklist;
-7. papéis operacionais de conteúdo/verificação;
-8. regras de retenção e acesso a dados do estudante.
+**Impacto:** médio/alto.
 
-## 14. Fora do âmbito desta investigação
+Mitigação: preservar conditions/applicability sem formalizar lógica universal AND/OR nesta fase.
 
-Este documento não autoriza nem especifica:
+### R14 — Herança técnica invisível de requisitos
 
-- base de dados;
+**Impacto:** médio/alto.
+
+Mitigação: Opportunity apresenta requisitos efectivos conhecidos; origem pode ser preservada sem herança automática.
+
+### R15 — Papéis de Organization simplificados em excesso
+
+**Impacto:** médio.
+
+Mitigação: relação contextual e taxonomia mínima guiada por casos reais.
+
+### R16 — Deduplicação de catálogo
+
+**Impacto:** médio/alto.
+
+Risco: a mesma oportunidade pode surgir de várias fontes.
+
+Identidade canónica/deduplicação permanece aberta.
+
+### R17 — Link rot / desaparecimento de fontes
+
+**Impacto:** médio.
+
+Estratégia de preservação/arquivo não é definida nesta issue.
+
+### R18 — Conteúdo não publicado exposto ao estudante
+
+**Impacto:** alto.
+
+Pode ser necessário estado editorial/publicação, mas o workflow exacto fica fora desta descoberta.
+
+## 19. Questões em aberto
+
+1. Quando uma bolsa automática merece `FundingOpportunity` própria e quando é apenas benefício financeiro associado?
+2. Qual granularidade de proveniência/verificação é sustentável no MVP?
+3. Qual processo humano, automático ou híbrido permite marcar informação como confirmada?
+4. Como será definida e operacionalizada a actualidade/freshness?
+5. Que dados financeiros exactos serão pedidos no onboarding?
+6. Quais campos académicos são obrigatórios para o piloto angolano?
+7. Qual taxonomia mínima de `Requirement` é necessária?
+8. Que estados finais deve ter `RequirementAssessment` sem sugerir elegibilidade oficial?
+9. Que relações `Opportunity <-> Opportunity` entram realmente no MVP?
+10. Que papéis `Organization <-> Opportunity` são necessários nos primeiros casos reais?
+11. Que histórico de informação crítica deve ser preservado?
+12. Como tratar fontes oficiais contraditórias operacionalmente?
+13. Como deduplicar Opportunities recolhidas de várias fontes?
+14. O catálogo mantém Opportunities encerradas para histórico ou apenas as activas na descoberta?
+15. É necessário workflow editorial separado de edição, verificação e publicação no MVP?
+16. Quais dados ou artefactos derivados precisam de ser invalidados/revistos quando o perfil ou a oportunidade mudam?
+17. Como representar oportunidades com múltiplas localizações ou sem localização física sem complicar o MVP?
+
+## 20. Fora do âmbito da #17
+
+Não decidir nesta issue:
+
+- esquema PostgreSQL;
+- tabelas/foreign keys/indexes;
 - migrations;
-- ORM;
-- endpoints;
-- serviços de produção;
-- autenticação;
-- framework/backend stack;
-- algoritmo real de recomendação;
-- regras reais de elegibilidade;
-- scraping;
-- integração com universidades;
-- submissão de candidaturas;
-- pagamentos;
-- expansão efectiva para países além do âmbito aprovado do MVP.
+- Supabase/RLS;
+- REST vs GraphQL;
+- URLs de endpoints;
+- DTOs finais;
+- autenticação/JWT/provider;
+- JSONB vs normalização;
+- herança física de tabelas;
+- cron jobs;
+- scraping/ingestion pipeline;
+- modelos de IA;
+- motor real de elegibilidade;
+- algoritmo de conversão de notas;
+- pesos de matching/ranking;
+- arquitectura de produção;
+- estratégia completa de versionamento/event sourcing.
 
-## 15. Critérios da Issue #17
+## 21. Modelo conceptual mínimo consolidado
 
-- [x] Factos, hipóteses e questões em aberto estão separados.
-- [x] Entidades candidatas mapeiam apenas o fluxo aprovado.
-- [x] Contratos estão documentados como propostas, não como APIs implementadas.
-- [x] Privacidade, fontes, verificação e permissões têm riscos registados.
+```text
+Student
+└── StudentProfile
+    ├── AcademicRecord[]
+    ├── LanguageCapability[]
+    ├── StudyPreference
+    └── FinancialProfile
 
-## 16. Próximo checkpoint
+StudentProfile
+├── ProfileAnalysis
+└── CompatibilityAssessment[] ── Opportunity
+    └── RequirementAssessment[] ── Requirement
 
-Antes de fechar a issue, Produto e Backend devem rever as questões em aberto e classificar cada uma como:
+Organization
+├── Program[]
+└── Opportunity[] via papéis contextuais
 
-- decisão necessária antes da implementação;
-- decisão que pode ser adiada;
-- questão fora do MVP.
+Program
+└── AdmissionOpportunity[] quando aplicável
 
-Só depois dessa revisão este documento deve passar de investigação para referência técnica aprovada.
+Opportunity
+├── common core
+├── typed details
+├── Organization relations
+├── ApplicationWindow[]
+├── Requirement[]
+├── RequiredDocument[]
+└── provenance/verification
+
+Student
+└── ApplicationPlan
+    └── PlanOpportunity[] ── Opportunity
+        └── ApplicationTask[]
+
+Source
+Verification
+```
+
+Conceitos auxiliares, não entidades obrigatórias:
+
+```text
+Evidence
+Freshness
+InformationItem / Claim
+OpportunityRelationship
+FundingScope
+SelectionCriterion
+```
+
+## 22. Separações conceptuais críticas
+
+```text
+Program != Opportunity
+
+Requirement != RequirementAssessment != ApplicationTask
+
+Source != Evidence != Verification != Freshness
+
+ProfileAnalysis != CompatibilityAssessment
+
+Organization classification != Organization role
+
+Opportunity lifecycle != Information freshness
+
+Funding availability != Funding obtained
+
+Original academic data != Derived equivalence != Official recognition
+```
+
+## 23. Resultado da descoberta
+
+A investigação não identifica necessidade de definir arquitectura de produção antes da aprovação do produto/design.
+
+O modelo conceptual mínimo acima é suficiente para orientar futura modelação técnica sem:
+
+- prender `Opportunity` apenas a cursos;
+- esconder incerteza;
+- assumir equivalências académicas;
+- misturar estado do estudante com estado da oportunidade;
+- transformar verificação em garantia;
+- introduzir regras de elegibilidade prematuras;
+- hardcodar Angola, Portugal ou um único sistema de ensino no domínio.
+
+Antes de implementação, as questões em aberto que afectarem campos obrigatórios, regras de apresentação, processo de verificação ou permissões devem ser resolvidas no nível de produto/operacional apropriado.
