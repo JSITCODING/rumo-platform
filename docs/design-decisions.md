@@ -25,6 +25,7 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 | P4 | Saída do plano de candidatura vazio para Descoberta | Aprovada | 7 de agosto de 2026 | — |
 | P5 | Prevenção de oportunidades duplicadas no plano | Aprovada | 7 de agosto de 2026 | — |
 | P6 | Estados de tarefa separados do estado da informação | Aprovada | 7 de agosto de 2026 | — |
+| P7 | Protótipo PWA bilingue com dados sintéticos | Aprovada | 27 de setembro de 2026 | — |
 
 ## P1 — Dashboard entre Análise do perfil e Descoberta
 
@@ -265,6 +266,44 @@ Representar separadamente o estado da informação, por exemplo:
 ### Revisão
 
 - **Condição de revisão:** testes de usabilidade demonstrarem necessidade de outro modelo ou aprovação de um fluxo de verificação.
+- **Decisão que substitui esta:** nenhuma.
+
+## P7 — Protótipo PWA bilingue com dados sintéticos
+
+- **Estado:** Aprovada
+- **Data:** 27 de setembro de 2026
+- **Responsável funcional:** Produto
+
+### Contexto
+
+Os oito wireframes e o fluxo canónico foram escolhidos como base para um
+protótipo navegável destinado a testes e apresentação de portefólio.
+
+### Escolha
+
+Implementar os oito ecrãs como PWA React e TypeScript, mobile-first, com
+português e inglês completos, movimento reduzido quando solicitado pelo
+sistema e apenas dados sintéticos. Usar `confirmado`, `estimado` e `por
+verificar` como estados distintos da informação.
+
+### Consequências
+
+- não existe autenticação, backend, pagamento ou submissão real;
+- nenhum dado real de estudante ou instituição deve entrar no protótipo;
+- a publicação só ocorre depois de revisão de acessibilidade, privacidade e
+  qualidade;
+- o visual evolui os wireframes para um sistema calmo e profissional, sem
+  alterar os oito ecrãs primários nem as decisões do fluxo.
+
+### Evidências e referências
+
+- `docs/user-flow.md`
+- `docs/wireframes.md`
+- tarefa de implementação aprovada em 27 de setembro de 2026.
+
+### Revisão
+
+- **Condição de revisão:** aprovação de backend, autenticação ou regras reais de dados.
 - **Decisão que substitui esta:** nenhuma.
 
 ## Decisões ainda não tomadas
