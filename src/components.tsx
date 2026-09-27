@@ -18,11 +18,27 @@ export function Brand({ compact = false }: { compact?: boolean }) {
   const { c } = useRumo();
   return (
     <NavLink to="/" className="group inline-flex items-center gap-2.5" aria-label={c.common.brand}>
-      <span className="grid h-9 w-9 place-items-center rounded-xl bg-ink text-white shadow-lift transition-transform group-hover:-rotate-3">
-        <Compass size={20} weight="fill" aria-hidden="true" />
-      </span>
-      {!compact && <span className="text-xl font-extrabold tracking-[-0.04em] text-ink">{c.common.brand}</span>}
+      <RouteMark className="h-9 w-9 text-cobalt transition-transform group-hover:translate-x-0.5" />
+      {!compact && <span className="font-display text-2xl font-semibold tracking-[-0.045em] text-ink">{c.common.brand}</span>}
     </NavLink>
+  );
+}
+
+export function RouteMark({ className = "", animated = false }: { className?: string; animated?: boolean }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none" aria-hidden="true">
+      <circle cx="10" cy="36" r="4" fill="currentColor" />
+      <circle cx="38" cy="10" r="4" fill="currentColor" />
+      <motion.path
+        d="M10 32C11 20 19 28 23 19C27 10 31 18 36 12"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        initial={animated ? { pathLength: 0, opacity: 0.4 } : false}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+      />
+    </svg>
   );
 }
 
@@ -84,10 +100,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ children, variant = "primary", full = false, className = "", ...props }: ButtonProps) {
   const base =
-    "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt disabled:cursor-not-allowed disabled:opacity-50";
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-[0.9rem] px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt disabled:cursor-not-allowed disabled:opacity-50";
   const variants = {
     primary: "bg-ink text-white shadow-lift hover:-translate-y-0.5 hover:bg-cobaltDark",
-    secondary: "border border-line bg-white text-ink shadow-sm hover:border-ink/25 hover:bg-mist",
+    secondary: "border border-line bg-paper text-ink hover:border-ink/25 hover:bg-mist",
     quiet: "text-muted hover:bg-mist hover:text-ink"
   };
   return (
@@ -128,7 +144,7 @@ export function StatusTag({ state, children }: { state: "confirmed" | "estimated
 
 export function Notice({ title, children, tone = "neutral" }: { title: string; children: ReactNode; tone?: "neutral" | "warm" }) {
   return (
-    <aside className={`rounded-xl2 border p-5 ${tone === "warm" ? "border-amber-200 bg-cream" : "border-line bg-mist"}`}>
+    <aside className={`border-l-2 p-5 ${tone === "warm" ? "border-sun bg-cream" : "border-cobalt bg-mist"}`}>
       <div className="mb-2 flex items-center gap-2 text-sm font-extrabold text-ink">
         <ShieldCheck size={20} weight="fill" className="text-cobalt" aria-hidden="true" />
         {title}
@@ -189,7 +205,7 @@ export function NextLink({ to, children, secondary = false }: { to: string; chil
   return (
     <NavLink
       to={to}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-[0.9rem] px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
         secondary
           ? "border border-line bg-white text-ink shadow-sm hover:border-ink/25 hover:bg-mist"
           : "bg-ink text-white shadow-lift hover:-translate-y-0.5 hover:bg-cobaltDark"

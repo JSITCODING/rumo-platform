@@ -29,21 +29,21 @@ export const copy = {
       ],
       noteTitle: "Orientação, não garantia",
       note: "A Rumo não garante admissão, bolsa, financiamento ou visto.",
-      cta: "Criar a minha conta",
+      cta: "Traçar o meu rumo",
       signin: "Já tens conta?",
       enter: "Entrar"
     },
     register: {
-      eyebrow: "CRIAR CONTA",
-      title: "Começa o teu percurso.",
-      body: "Este protótipo usa apenas dados demonstrativos. Não introduzas informação pessoal real.",
+      eyebrow: "GUARDAR O TEU PERCURSO",
+      title: "A tua análise está pronta para continuar.",
+      body: "Cria uma conta demonstrativa para guardar esta análise e abrir o dashboard. Não introduzas informação pessoal real.",
       name: "Nome demonstrativo",
       email: "Email demonstrativo",
       password: "Palavra-passe demonstrativa",
       consent: "Li e aceito os termos demonstrativos de privacidade.",
       privacyTitle: "Os teus dados importam",
       privacy: "A versão de produção só recolherá dados após requisitos de privacidade, retenção e recuperação serem aprovados.",
-      cta: "Continuar com dados de demonstração",
+      cta: "Guardar e abrir o Dashboard",
       validation: "Revê os campos assinalados para continuar.",
       required: "Este campo é obrigatório."
     },
@@ -102,7 +102,7 @@ export const copy = {
       ],
       verifyTitle: "Requer verificação",
       verify: "Equivalência da qualificação e requisitos específicos de cada instituição.",
-      cta: "Continuar para o Dashboard",
+      cta: "Guardar análise e continuar",
       edit: "Corrigir o meu perfil"
     },
     dashboard: {
@@ -210,21 +210,21 @@ export const copy = {
       ],
       noteTitle: "Guidance, not a guarantee",
       note: "Rumo does not guarantee admission, scholarships, funding, or visas.",
-      cta: "Create my account",
+      cta: "Map my route",
       signin: "Already have an account?",
       enter: "Sign in"
     },
     register: {
-      eyebrow: "CREATE ACCOUNT",
-      title: "Start your journey.",
-      body: "This prototype uses demonstration data only. Do not enter real personal information.",
+      eyebrow: "SAVE YOUR ROUTE",
+      title: "Your analysis is ready to continue.",
+      body: "Create a demonstration account to save this analysis and open the dashboard. Do not enter real personal information.",
       name: "Demonstration name",
       email: "Demonstration email",
       password: "Demonstration password",
       consent: "I accept the demonstration privacy terms.",
       privacyTitle: "Your data matters",
       privacy: "A production version will only collect data after privacy, retention, and recovery requirements are approved.",
-      cta: "Continue with demonstration data",
+      cta: "Save and open Dashboard",
       validation: "Review the highlighted fields to continue.",
       required: "This field is required."
     },
@@ -275,7 +275,7 @@ export const copy = {
       ],
       verifyTitle: "Requires verification",
       verify: "Qualification equivalence and institution-specific requirements.",
-      cta: "Continue to Dashboard",
+      cta: "Save analysis and continue",
       edit: "Correct my profile"
     },
     dashboard: {

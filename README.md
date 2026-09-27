@@ -24,9 +24,9 @@ npm run check
 ## Percurso implementado
 
 1. Landing page
-2. Registo demonstrativo
-3. Onboarding em sete etapas
-4. Análise do perfil
+2. Onboarding em sete etapas
+3. Análise inicial do perfil
+4. Registo demonstrativo para guardar e continuar
 5. Dashboard
 6. Descoberta de oportunidades
 7. Detalhes da oportunidade
@@ -34,6 +34,9 @@ npm run check
 
 A interface está disponível integralmente em português e inglês. A preferência
 de idioma fica apenas no armazenamento local do navegador.
+As respostas do onboarding permanecem apenas em `sessionStorage` e desaparecem
+quando a sessão do navegador termina. Os eventos de progressão são eventos
+tipados no próprio navegador e não são enviados para qualquer fornecedor.
 
 ## Estrutura
 

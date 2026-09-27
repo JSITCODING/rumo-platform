@@ -4,7 +4,7 @@
 
 :root {
   color: #152019;
-  background: #f7f5f0;
+  background: #f5f0e7;
   font-family: "Manrope Variable", Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,16 +13,37 @@
 }
 
 * { box-sizing: border-box; }
-html { min-width: 320px; background: #f7f5f0; }
+html { min-width: 320px; background: #f5f0e7; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 button, input { font: inherit; }
 button, a, input { -webkit-tap-highlight-color: transparent; }
 
 ::selection { background: rgba(49, 88, 215, 0.2); color: #152019; }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  background-image: linear-gradient(rgba(20, 37, 31, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 37, 31, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 70%);
+}
+
 @layer components {
   .eyebrow {
-    @apply text-xs font-extrabold uppercase tracking-[0.2em] text-muted;
+    @apply inline-flex items-center gap-2 text-[0.68rem] font-extrabold uppercase tracking-[0.22em] text-muted;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-7 bg-clay;
+  }
+  .display-title {
+    @apply font-display font-semibold leading-[0.95] tracking-[-0.045em];
+  }
+  .editorial-card {
+    @apply border border-line bg-paper;
   }
 }
 

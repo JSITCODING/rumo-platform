@@ -26,6 +26,7 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 | P5 | Prevenção de oportunidades duplicadas no plano | Aprovada | 7 de agosto de 2026 | — |
 | P6 | Estados de tarefa separados do estado da informação | Aprovada | 7 de agosto de 2026 | — |
 | P7 | Protótipo PWA bilingue com dados sintéticos | Aprovada | 27 de setembro de 2026 | — |
+| P8 | Onboarding antes do registo e análise antes da barreira | Aprovada | 27 de setembro de 2026 | Fluxo inicial de P2 |
 
 ## P1 — Dashboard entre Análise do perfil e Descoberta
 
@@ -306,9 +307,40 @@ verificar` como estados distintos da informação.
 - **Condição de revisão:** aprovação de backend, autenticação ou regras reais de dados.
 - **Decisão que substitui esta:** nenhuma.
 
+## P8 — Onboarding antes do registo e análise antes da barreira
+
+- **Estado:** Aprovada
+- **Data:** 27 de setembro de 2026
+- **Responsável funcional:** Produto
+
+### Contexto
+
+O protótipo inicial pedia um registo demonstrativo antes de o estudante receber
+valor. Foi aprovada uma experiência de validação que permite concluir o perfil
+e ver uma análise inicial antes de pedir conta.
+
+### Escolha
+
+Adotar a sequência Landing → Onboarding → Análise inicial → Registo para
+guardar → Dashboard. O registo continua demonstrativo e não transmite dados.
+As respostas do perfil permanecem apenas durante a sessão do navegador.
+
+### Consequências
+
+- o estudante recebe uma análise responsável antes da barreira de registo;
+- o pedido de conta explica que serve para guardar e continuar;
+- a hipótese de maior retenção só pode ser afirmada depois de validação real;
+- eventos de progressão não incluem respostas do perfil nem dados pessoais;
+- o Dashboard continua a ser a página inicial conceptual após autenticação.
+
+### Revisão
+
+- **Condição de revisão:** evidência de validação, aprovação de autenticação real ou requisitos formais de retenção.
+- **Decisão que substitui esta:** nenhuma.
+
 ## Decisões ainda não tomadas
 
-P1–P6 confirmam apenas navegação e comportamento de estados necessários ao fluxo canónico v1.0. Não definem:
+P1–P8 confirmam apenas navegação e comportamento de estados necessários ao fluxo canónico v1.0. Não definem:
 
 - tecnologia ou arquitetura de implementação;
 - regras automáticas de elegibilidade;
