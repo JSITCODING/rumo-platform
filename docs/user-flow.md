@@ -2,9 +2,9 @@
 
 ## Estado do documento
 
-- **Versão:** 1.2
+- **Versão:** 1.3
 - **Data de aprovação da base do fluxo:** 7 de agosto de 2026
-- **Última revisão:** 8 de agosto de 2026
+- **Última revisão:** 27 de setembro de 2026
 - **Estado:** Fluxo e diagrama aprovados; wireframes v0.1 em Pending review
 - **Responsável funcional:** Produto e UX
 - **Fonte de produto:** Rumo Project Charter v1.0, de 6 de agosto de 2026
@@ -90,13 +90,13 @@ Pode apoiar a decisão ou o financiamento, mas não tem conta nem fluxo dedicado
 ## 5. Fluxo canónico de ponta a ponta
 
 S01 Landing Page  
-→ D01 Criar conta  
-→ S02 Registo  
-→ D02 Conta criada  
+→ D01 Começar análise
 → S03 Onboarding  
 → D03 Informação mínima completa  
 → S04 Análise do perfil  
 → D04 Dados corretos  
+→ S02 Registo para guardar
+→ D02 Conta demonstrativa concluída
 → S05 Dashboard  
 → D05 Descobrir oportunidades  
 → S06 Descoberta  
@@ -111,9 +111,9 @@ S01 Landing Page
 O percurso central considera-se concluído quando o estudante:
 
 1. compreende o propósito da Rumo e os seus limites;
-2. cria uma conta;
-3. fornece informação suficiente para uma análise inicial;
-4. compreende os principais pontos fortes, limitações e incertezas do perfil;
+2. fornece informação suficiente para uma análise inicial;
+3. compreende os principais pontos fortes, limitações e incertezas do perfil;
+4. conclui o registo demonstrativo para guardar e continuar;
 5. chega ao Dashboard;
 6. encontra pelo menos uma oportunidade potencialmente compatível;
 7. consulta requisitos, fontes e estado de verificação;
@@ -149,11 +149,11 @@ O percurso central considera-se concluído quando o estudante:
 - os destinos iniciais são Portugal, Alemanha e Espanha;
 - não garante admissão, bolsa, financiamento ou visto.
 
-**Ação principal:** “Criar a minha conta”.
+**Ação principal:** “Traçar o meu rumo”.
 
 **D01 — O estudante decidiu criar uma conta?**
 
-- **Sim:** S01 → S02.
+- **Sim:** S01 → S03.
 - **Não:** pode sair; é uma saída válida, não um erro.
 
 **Estados essenciais:** conteúdo disponível; falha de carregamento com nova tentativa; saída sem conversão.
@@ -162,9 +162,9 @@ O percurso central considera-se concluído quando o estudante:
 
 ### 7.2 S02 — Registo
 
-**Objetivo do estudante:** criar a conta necessária para iniciar a experiência personalizada.
+**Objetivo do estudante:** guardar a análise inicial e continuar para o Dashboard.
 
-**Entrada:** S01.
+**Entrada:** S04 depois de o estudante ver a análise inicial.
 
 O estudante fornece a informação mínima de conta que vier a ser aprovada e aceita os termos e condições de privacidade aplicáveis. Os campos finais, regras de consentimento e requisitos legais permanecem por definir fora deste fluxo.
 
@@ -172,7 +172,7 @@ O estudante fornece a informação mínima de conta que vier a ser aprovada e ac
 
 **D02 — O registo é válido e a conta foi criada?**
 
-- **Sim:** S02 → S03.
+- **Sim:** S02 → S05.
 - **Campos inválidos ou consentimento em falta:** permanecer em S02, mostrar validação clara junto dos campos afetados e preservar os dados válidos sempre que possível.
 - **Email já utilizado ou conflito equivalente:** explicar o estado e oferecer recuperação adequada dentro do estado de autenticação aprovado; não criar outro ecrã primário.
 - **Erro técnico ou perda de ligação:** explicar o ocorrido, indicar se os dados foram preservados e permitir nova tentativa.
@@ -189,7 +189,7 @@ Exemplos de copy:
 
 **Objetivo do estudante:** fornecer a informação mínima necessária para uma análise útil do perfil.
 
-**Entrada:** S02 após criação da conta; S04 quando o estudante decide corrigir dados; retoma autenticada quando o perfil ainda não está completo.
+**Entrada:** S01; S04 quando o estudante decide corrigir dados; retoma durante a mesma sessão do navegador.
 
 O onboarding usa divulgação progressiva, evita um questionário longo num único bloco e explica por que razão solicita informação importante ou potencialmente sensível.
 
@@ -264,7 +264,7 @@ A interface distingue:
 
 **D04 — O estudante considera os dados do perfil corretos?**
 
-- **Sim:** S04 → S05.
+- **Sim:** S04 → S02 → S05.
 - **Não:** S04 → S03 → S04, com nova análise após correção.
 - **Falha de processamento:** manter o perfil, explicar que não foi possível concluir a análise e permitir nova tentativa.
 - **Lacunas ou incertezas:** mostrar o que pode ser concluído responsavelmente e o que permanece por verificar; ausência de dados não equivale a inelegibilidade.
@@ -509,8 +509,8 @@ Esta secção prepara a medição do fluxo, conforme o Charter. Os nomes, propri
 
 | Momento | Evento conceptual | Finalidade |
 | --- | --- | --- |
-| S01 | CTA de criação de conta selecionado | Medir passagem para o registo |
-| S02 | Registo submetido / concluído / falhou | Identificar conclusão e fricção sem registar valores dos campos |
+| S01 | CTA para iniciar perfil selecionado | Medir passagem para o onboarding |
+| S02 | Registo alcançado / submetido / concluído | Identificar conclusão e fricção sem registar valores dos campos |
 | S03 | Onboarding iniciado / etapa concluída / análise solicitada | Compreender progressão e abandono por etapa |
 | S04 | Análise apresentada / correção de perfil selecionada / continuação selecionada | Avaliar compreensão operacional do resultado |
 | S05 | Dashboard apresentado / descoberta selecionada / plano selecionado | Identificar a próxima ação escolhida |

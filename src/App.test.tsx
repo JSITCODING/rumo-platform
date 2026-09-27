@@ -12,13 +12,13 @@ function renderAt(path: string) {
 }
 
 describe("Rumo prototype", () => {
-  it("renders the public landing page and starts the account flow", async () => {
+  it("starts onboarding before asking for an account", async () => {
     const user = userEvent.setup();
     renderAt("/");
 
     expect(screen.getByRole("heading", { name: /Encontra oportunidades/i })).toBeInTheDocument();
-    await user.click(screen.getByRole("link", { name: /Criar a minha conta/i }));
-    expect(await screen.findByRole("heading", { name: /Começa o teu percurso/i })).toBeInTheDocument();
+    await user.click(screen.getByRole("link", { name: /Traçar o meu rumo/i }));
+    expect(await screen.findByRole("heading", { name: /Onde estás no teu percurso académico/i })).toBeInTheDocument();
   });
 
   it("persists the English language preference", async () => {
@@ -36,6 +36,41 @@ describe("Rumo prototype", () => {
     expect(screen.getByText("6 / 7")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Que apoio poderás precisar/i })).toBeInTheDocument();
     expect(screen.getByText(/tratado como estimativa/i)).toBeInTheDocument();
+  });
+
+  it("keeps profile answers only in the browser session", async () => {
+    const user = userEvent.setup();
+    renderAt("/profile?step=1");
+
+    await user.click(screen.getByRole("radio", { name: /A concluir o ensino secundário/i }));
+    const stored = JSON.parse(window.sessionStorage.getItem("rumo.profile.v1") ?? "{}");
+    expect(stored.answers[0]).toBe("A concluir o ensino secundário");
+    expect(window.localStorage.getItem("rumo.profile.v1")).toBeNull();
+  });
+
+  it("gates the dashboard behind the save-account screen after analysis", async () => {
+    const user = userEvent.setup();
+    renderAt("/analysis");
+
+    await user.click(screen.getByRole("link", { name: /Guardar análise e continuar/i }));
+    expect(await screen.findByRole("heading", { name: /A tua análise está pronta para continuar/i })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /Guardar e abrir o Dashboard/i }));
+    expect(await screen.findByRole("heading", { name: /O teu percurso/i })).toBeInTheDocument();
+  });
+
+  it("emits provider-independent progress events without profile answers", () => {
+    const received: unknown[] = [];
+    const listener = (event: Event) => received.push((event as CustomEvent).detail);
+    window.addEventListener("rumo:product-event", listener);
+
+    renderAt("/analysis");
+
+    expect(received).toEqual([
+      expect.objectContaining({ name: "analysis_viewed", locale: "pt" })
+    ]);
+    expect(JSON.stringify(received)).not.toContain("answers");
+    window.removeEventListener("rumo:product-event", listener);
   });
 
   it("supports an empty plan state before an opportunity is added", () => {

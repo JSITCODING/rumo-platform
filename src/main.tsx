@@ -1,4 +1,5 @@
 import "@fontsource-variable/manrope";
+import "@fontsource-variable/newsreader";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
