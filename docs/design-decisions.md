@@ -29,6 +29,7 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 | P7 | Protótipo PWA bilingue com dados sintéticos | Parcialmente substituída | 27 de setembro de 2026 | — |
 | P8 | Onboarding antes do registo e análise antes da barreira | Aprovada | 27 de setembro de 2026 | P2 (fluxo inicial) |
 | P9 | Direção visual Personal Atlas | Aprovada | 28 de setembro de 2026 | P7 (visual) |
+| P10 | Vocabulário e codificação dos estados da informação | Proposta | 29 de setembro de 2026 | — |
 
 ## P1 — Dashboard entre Análise do perfil e Descoberta
 
@@ -231,6 +232,7 @@ Uma oportunidade só pode existir uma vez no plano do estudante. Se já estiver 
 - **Estado:** Aprovada
 - **Data:** 7 de agosto de 2026
 - **Responsável funcional:** Produto e UX
+- **Refinado por:** P10 (proposta)
 
 ### Contexto
 
@@ -279,6 +281,7 @@ Representar separadamente o estado da informação, por exemplo:
 - **Data:** 27 de setembro de 2026
 - **Responsável funcional:** Produto
 - **Substituída em parte por:** P9 (visual editorial)
+- **Refinado por:** P10 (proposta)
 
 ### Contexto
 
@@ -387,13 +390,73 @@ sombras genéricas, pílulas decorativas e secções de igual ênfase são reduz
 - **Condição de revisão:** testes visuais ou de utilização demonstrarem perda de clareza, identidade ou acessibilidade.
 - **Decisão que substitui esta:** nenhuma.
 
+## P10 — Vocabulário e codificação dos estados da informação
+
+- **Estado:** Proposta
+- **Data:** 29 de setembro de 2026
+- **Responsável funcional:** Produto e UX
+
+### Contexto
+
+P6 separa o estado da tarefa do estado da informação, mas usa os exemplos
+“Por verificar”, “Ainda não confirmado” e “Confirmado na fonte disponível”.
+P7 introduz o conjunto `confirmado`, `estimado` e `por verificar`. É necessário
+propor um vocabulário único e uma codificação que não dependa apenas da cor.
+
+### Opções consideradas
+
+- manter os dois vocabulários em paralelo;
+- comunicar os estados apenas por cor;
+- adotar um conjunto canónico com linha, marcador e rótulo distintos.
+
+### Escolha proposta
+
+Adotar `confirmado`, `estimado` e `por verificar` como conjunto canónico.
+
+| P6 | P10 proposto | Estado do mapeamento |
+| --- | --- | --- |
+| Por verificar | por verificar | a confirmar pelo Produto e UX |
+| Ainda não confirmado | estimado | a confirmar pelo Produto e UX |
+| Confirmado na fonte disponível | confirmado | a confirmar pelo Produto e UX |
+
+Cada estado usa simultaneamente linha, preenchimento do marcador e rótulo:
+
+| Estado | Linha | Marcador | Rótulo |
+| --- | --- | --- | --- |
+| confirmado | sólida | preenchido | sempre visível |
+| estimado | tracejada | meio preenchido | sempre visível |
+| por verificar | pontilhada | vazio | sempre visível |
+
+A codificação deve permanecer distinguível em escala de cinzentos. Os estados
+de tarefa **Por fazer**, **Em curso** e **Concluído** permanecem separados.
+Concluir uma tarefa nunca altera o estado da informação associada.
+
+### Consequências propostas
+
+- os ecrãs partilham um vocabulário único sem ocultar incerteza;
+- linha, marcador e texto evitam uma distinção baseada apenas na cor;
+- a proposta não define como uma fonte passa a ser considerada confirmada;
+- P6 continua vinculativa quanto à separação entre tarefa e informação.
+
+### Evidências e referências
+
+- P6 — Estados de tarefa separados do estado da informação.
+- P7 — Protótipo PWA bilingue com dados sintéticos.
+- `docs/personal-atlas-direction.md`, secção “Testes de qualidade”.
+
+### Revisão
+
+- **Condição de revisão:** aprovação ou alteração do vocabulário e do mapeamento pelo Produto e UX, ou testes de acessibilidade demonstrarem ambiguidade.
+- **Decisão que substitui esta:** nenhuma.
+
 ## Decisões ainda não tomadas
 
-P1–P9 confirmam apenas navegação, comportamento de estados e direção visual necessários ao fluxo canónico v1.0. Não definem:
+P1–P9 confirmam apenas navegação, comportamento de estados e direção visual necessários ao fluxo canónico v1.0. P10 permanece uma proposta. Não definem:
 
 - tecnologia ou arquitetura de implementação;
 - regras automáticas de elegibilidade;
 - fontes, cadência ou processo operacional de verificação;
+- regras para confirmar fontes ou alterar o estado da informação;
 - campos finais de registo ou onboarding;
 - requisitos legais, consentimentos ou retenção de dados;
 - conteúdo final dos wireframes;
