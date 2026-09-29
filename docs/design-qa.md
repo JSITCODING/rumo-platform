@@ -45,8 +45,8 @@ evidence states, next action, primary action, and persistent navigation together
 ## Intentional differences from the reference
 
 The implementation uses a simpler dotted route instead of the reference's curved
-map path and does not reproduce its skyline. These are intentional P3 differences,
+map path and does not reproduce its skyline. These are intentional S3 differences,
 not release blockers: the production direction prioritizes task clarity and the
 existing route mark over decorative fidelity.
 
-No P0, P1, or P2 visual issues remain in this review.
+No S0, S1, or S2 visual issues remain in this review.
