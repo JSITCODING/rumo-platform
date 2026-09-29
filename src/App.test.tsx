@@ -96,4 +96,17 @@ describe("Rumo prototype", () => {
     expect(screen.getByRole("heading", { name: /O teu plano ainda está vazio/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Descobrir oportunidades/i })).toHaveAttribute("href", "/discover");
   });
+
+  it("renders distinct non-colour encodings for every information state", () => {
+    const { container } = renderAt("/dashboard");
+    const states = ["confirmed", "estimated", "to_verify"] as const;
+    const fills = states.map((state) => container.querySelector(`[data-info-marker="${state}"]`)?.getAttribute("data-marker-fill"));
+    const dashes = states.map((state) => container.querySelector(`[data-info-line="${state}"] line`)?.getAttribute("stroke-dasharray"));
+
+    expect(new Set(fills).size).toBe(3);
+    expect(new Set(dashes).size).toBe(3);
+    expect(screen.getAllByText("Confirmado").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Estimado").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Por verificar").length).toBeGreaterThan(0);
+  });
 });

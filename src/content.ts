@@ -15,7 +15,12 @@ export const copy = {
       profile: "Perfil",
       verified: "Confirmado",
       estimated: "Estimado",
-      unverified: "Por verificar"
+      unverified: "Por verificar",
+      infoStates: {
+        confirmed: "Confirmado",
+        estimated: "Estimado",
+        to_verify: "Por verificar"
+      }
     },
     landing: {
       destinationsLabel: "Destinos iniciais",
@@ -209,7 +214,12 @@ export const copy = {
       profile: "Profile",
       verified: "Confirmed",
       estimated: "Estimated",
-      unverified: "Verify"
+      unverified: "Verify",
+      infoStates: {
+        confirmed: "Confirmed",
+        estimated: "Estimated",
+        to_verify: "To verify"
+      }
     },
     landing: {
       destinationsLabel: "Initial destinations",

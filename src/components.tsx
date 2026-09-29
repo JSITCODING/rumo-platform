@@ -11,6 +11,7 @@ import {
 import { motion, useReducedMotion } from "motion/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { INFO_STATE_SURFACE, INFO_STATE_TOKENS, type InfoState } from "./info-state";
 import { useRumo } from "./state";
 
 export function Brand({ compact = false }: { compact?: boolean }) {
@@ -127,16 +128,47 @@ export function PageTransition({ children, className = "" }: { children: ReactNo
   );
 }
 
-export function StatusTag({ state, children }: { state: "confirmed" | "estimated" | "unverified"; children: ReactNode }) {
-  const styles = {
-    confirmed: "border-emerald-700/25 bg-emerald-50 text-emerald-900",
-    estimated: "border-clay/25 bg-orange-50 text-orange-900",
-    unverified: "border-ink/15 bg-transparent text-muted"
-  };
+export function StateMarker({ state, className = "" }: { state: InfoState; className?: string }) {
+  const { c } = useRumo();
+  const token = INFO_STATE_TOKENS[state];
+  const label = c.common.infoStates[state];
   return (
-    <span className={`inline-flex min-h-7 items-center gap-1.5 rounded-sm border px-2.5 text-[0.68rem] font-extrabold uppercase tracking-[0.08em] ${styles[state]}`}>
-      {state === "confirmed" ? <Check size={14} weight="bold" aria-hidden="true" /> : null}
-      {children}
+    <span
+      className={`inline-flex min-h-7 items-center gap-2 text-[0.68rem] font-extrabold uppercase tracking-[0.08em] text-ink ${className}`}
+      data-info-marker={state}
+      data-marker-fill={token.markerFill}
+      aria-label={label}
+    >
+      <svg viewBox="0 0 16 16" className="h-4 w-4 shrink-0" aria-hidden="true">
+        <circle cx="8" cy="8" r="6" fill={state === "confirmed" ? token.stroke : INFO_STATE_SURFACE} stroke={token.stroke} strokeWidth="2" />
+        {state === "estimated" ? <path d="M8 2a6 6 0 0 0 0 12Z" fill={token.stroke} /> : null}
+      </svg>
+      <span>{label}</span>
+    </span>
+  );
+}
+
+export function StateLine({ state, className = "" }: { state: InfoState; className?: string }) {
+  const { c } = useRumo();
+  const token = INFO_STATE_TOKENS[state];
+  const label = c.common.infoStates[state];
+  return (
+    <span className={`block min-w-0 text-center ${className}`} data-info-line={state} aria-label={label}>
+      <svg viewBox="0 0 100 10" preserveAspectRatio="none" className="h-2.5 w-full" aria-hidden="true">
+        <line
+          x1="0"
+          y1="5"
+          x2="100"
+          y2="5"
+          stroke={token.stroke}
+          strokeWidth="2"
+          strokeDasharray={token.lineDasharray}
+          strokeLinecap="round"
+        />
+      </svg>
+      <span className="mt-1 block truncate text-[0.5rem] font-extrabold uppercase tracking-[0.08em] text-muted sm:text-[0.6rem]">
+        {label}
+      </span>
     </span>
   );
 }

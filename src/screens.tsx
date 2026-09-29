@@ -23,8 +23,10 @@ import {
   PageTransition,
   PublicHeader,
   RouteMark,
-  StatusTag
+  StateLine,
+  StateMarker
 } from "./components";
+import type { InfoState } from "./info-state";
 import { useRumo } from "./state";
 import { trackRumoEvent, type RumoEventName } from "./analytics";
 
@@ -54,7 +56,7 @@ export function LandingScreen() {
               <p className="mt-7 max-w-2xl text-lg leading-8 text-muted sm:text-xl">{c.landing.body}</p>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-y border-line py-4" aria-label={c.landing.destinationsLabel}>
                 {(["Portugal", "Alemanha", "Espanha"] as const).map((destination) => (
-                  <span key={destination} className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.16em] text-muted before:h-1.5 before:w-1.5 before:rounded-full before:bg-clay">
+                  <span key={destination} className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.16em] text-muted before:h-1.5 before:w-1.5 before:rounded-full before:bg-cobalt">
                     {destination === "Alemanha" && c.common.language === "Language" ? "Germany" : destination === "Espanha" && c.common.language === "Language" ? "Spain" : destination}
                   </span>
                 ))}
@@ -81,7 +83,7 @@ export function LandingScreen() {
                     transition={{ duration: 0.2, delay: index * 0.05 }}
                     className="grid grid-cols-[auto_1fr] gap-4 py-5"
                   >
-                    <span className="font-display text-2xl font-semibold text-clay">{number}</span>
+                    <span className="font-display text-2xl font-semibold text-cobalt">{number}</span>
                     <div>
                       <h3 className="font-extrabold tracking-[-0.02em]">{title}</h3>
                       <p className="mt-1 text-sm leading-6 text-muted">{body}</p>
@@ -89,7 +91,7 @@ export function LandingScreen() {
                   </motion.li>
                 ))}
               </ol>
-              <div className="mt-6 border-l-2 border-clay bg-cream/55 p-5">
+              <div className="mt-6 border-l-2 border-cobalt bg-cream/55 p-5">
                 <strong className="block text-sm text-ink">{c.landing.noteTitle}</strong>
                 <p className="mt-1 text-sm leading-6 text-muted">{c.landing.note}</p>
               </div>
@@ -129,7 +131,7 @@ export function RegisterScreen() {
             </div>
           </div>
 
-          <form onSubmit={submit} className="editorial-card rounded-[1.2rem] border-t-2 border-t-clay p-5 sm:p-8" noValidate>
+          <form onSubmit={submit} className="editorial-card rounded-[1.2rem] border-t-2 border-t-cobalt p-5 sm:p-8" noValidate>
             <div className="space-y-5">
               <Field
                 label={c.register.name}
@@ -275,7 +277,7 @@ export function OnboardingScreen() {
 
         {isFinancial ? (
           <div className="mt-5 space-y-5">
-            <label className="flex cursor-pointer items-start gap-3 rounded-md border-l-2 border-clay bg-paper p-4 text-sm font-bold leading-6">
+            <label className="flex cursor-pointer items-start gap-3 rounded-md border-l-2 border-cobalt bg-paper p-4 text-sm font-bold leading-6">
               <input type="checkbox" checked={funding} onChange={(event) => changeFunding(event.target.checked)} className="mt-0.5 h-5 w-5 rounded accent-cobalt" />
               {c.onboarding.funding}
             </label>
@@ -299,6 +301,7 @@ export function OnboardingScreen() {
 
 export function AnalysisScreen() {
   const { c } = useRumo();
+  const analysisStates: InfoState[] = ["confirmed", "estimated", "to_verify"];
   useScreenEvent("analysis_viewed");
   return (
     <AppShell>
@@ -309,14 +312,14 @@ export function AnalysisScreen() {
         <p className="mt-5 max-w-2xl text-base leading-7 text-muted sm:text-lg">{c.analysis.body}</p>
 
         <div className="mt-9 overflow-hidden rounded-[1.2rem] border border-line bg-paper">
-          {c.analysis.cards.map(([label, title, body, state], index) => (
+          {c.analysis.cards.map(([label, title, body], index) => (
             <article key={label} className="grid gap-3 border-b border-line p-5 last:border-b-0 sm:grid-cols-[8rem_1fr_auto] sm:items-start sm:gap-6 sm:p-6">
               <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-muted">0{index + 1} · {label}</p>
               <div>
                 <h2 className="text-lg font-extrabold tracking-[-0.025em]">{title}</h2>
                 <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
               </div>
-              <StatusTag state="estimated">{state}</StatusTag>
+              <StateMarker state={analysisStates[index]} />
             </article>
           ))}
         </div>
@@ -358,15 +361,15 @@ export function DashboardScreen() {
             <p className="max-w-[7.5rem] text-right text-[0.56rem] font-extrabold uppercase leading-[0.85rem] tracking-[0.2em] text-muted sm:max-w-[10rem] sm:text-[0.68rem] sm:leading-5 sm:tracking-[0.22em]">{c.dashboard.routeKicker}</p>
           </div>
 
-          <div role="img" className="mt-3 grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:mt-8 sm:gap-3" aria-label={c.dashboard.routeTitle}>
+          <div role="group" className="mt-3 grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:mt-8 sm:gap-3" aria-label={c.dashboard.routeTitle}>
             <div className="text-center">
               <span className="mx-auto block h-4 w-4 rounded-full bg-clay sm:h-8 sm:w-8 sm:ring-8 sm:ring-clay/10" />
               <strong className="mt-1 block font-display text-sm sm:mt-3 sm:text-xl">{c.dashboard.routeOrigin}</strong>
             </div>
-            <div className="relative h-8 sm:h-14" aria-hidden="true">
-              <div className="absolute inset-x-0 top-1/2 border-t-2 border-dashed border-cobalt" />
-              <span className="absolute left-[28%] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-cobalt ring-2 ring-paper sm:h-4 sm:w-4 sm:ring-4" />
-              <span className="absolute left-[62%] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-cobalt bg-paper ring-2 ring-paper sm:h-4 sm:w-4 sm:ring-4" />
+            <div className="grid grid-cols-3 items-start gap-1 sm:gap-2">
+              <StateLine state="confirmed" />
+              <StateLine state="estimated" />
+              <StateLine state="to_verify" />
             </div>
             <div className="text-center">
               <GraduationCap size={26} weight="fill" className="mx-auto text-ink sm:h-[35px] sm:w-[35px]" aria-hidden="true" />
@@ -375,17 +378,18 @@ export function DashboardScreen() {
           </div>
 
           <ol className="mt-3 divide-y divide-line border-y border-line sm:mt-8">
-            {c.dashboard.routeSteps.map(([title, note], index) => (
-              <li key={title} className="grid grid-cols-[auto_1fr] gap-3 py-1.5 sm:gap-4 sm:py-4">
-                <span className={`mt-0.5 grid h-5 w-5 place-items-center rounded-full border-2 sm:h-6 sm:w-6 ${index === 0 ? "border-cobalt bg-cobalt text-white" : index === 1 ? "border-cobalt bg-paper text-cobalt" : "border-line bg-paper text-muted"}`}>
-                  {index === 0 ? <Check size={11} weight="bold" aria-hidden="true" /> : <span className="h-1 w-1 rounded-full bg-current sm:h-1.5 sm:w-1.5" />}
-                </span>
+            {c.dashboard.routeSteps.map(([title, note], index) => {
+              const state: InfoState = index === 0 ? "confirmed" : index === 1 ? "estimated" : "to_verify";
+              return (
+              <li key={title} className="grid grid-cols-[1fr_auto] gap-3 py-1.5 sm:gap-4 sm:py-4">
                 <div>
                   <h3 className="text-sm font-extrabold leading-5 tracking-[-0.02em] sm:text-base">{title}</h3>
                   <p className="text-sm leading-5 text-muted sm:mt-0.5 sm:leading-6">{note}</p>
                 </div>
+                <StateMarker state={state} className="self-start" />
               </li>
-            ))}
+              );
+            })}
           </ol>
 
           <div className="mt-3 grid grid-cols-[auto_1fr] gap-3 rounded-md border border-emerald-800/15 bg-emerald-50/70 p-3 sm:mt-6 sm:gap-4 sm:rounded-lg sm:p-5">
@@ -456,7 +460,7 @@ export function DiscoveryScreen() {
 
         {results.length ? (
           <div className="mt-6 overflow-hidden rounded-[1.2rem] border border-line bg-paper">
-            {results.map(([eyebrow, title, institution, matchTitle, match, state], index) => (
+            {results.map(([eyebrow, title, institution, matchTitle, match], index) => (
               <article key={title} className={`grid gap-4 border-b border-line p-5 last:border-b-0 sm:grid-cols-[2.2rem_1fr_auto] sm:items-start sm:p-6 ${index === 0 ? "bg-cobalt/[0.035]" : ""}`}>
                 <span className={`grid h-8 w-8 place-items-center rounded-full border text-xs font-extrabold ${index === 0 ? "border-cobalt bg-cobalt text-white" : "border-line text-muted"}`}>0{index + 1}</span>
                 <div>
@@ -469,7 +473,7 @@ export function DiscoveryScreen() {
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-3 sm:flex-col sm:items-end">
-                  <StatusTag state={index === 0 ? "estimated" : "unverified"}>{state}</StatusTag>
+                  <StateMarker state={index === 0 ? "estimated" : "to_verify"} />
                   <NextLink to={`/opportunity/${index + 1}`} secondary>{c.discovery.view}</NextLink>
                 </div>
               </article>
@@ -514,11 +518,11 @@ export function DetailsScreen() {
         </div>
 
         <dl className="mt-5 divide-y divide-line overflow-hidden rounded-[1.2rem] border border-line bg-paper">
-          {c.details.requirements.map(([label, value]) => (
+          {c.details.requirements.map(([label, value], index) => (
             <div key={label} className="grid gap-2 p-5 sm:grid-cols-[0.7fr_1.3fr] sm:items-center sm:gap-6">
               <dt className="font-extrabold">{label}</dt>
               <dd className="flex items-center justify-between gap-3 text-sm leading-6 text-muted sm:text-base">
-                {value}<StatusTag state="unverified">{c.common.unverified}</StatusTag>
+                {value}<StateMarker state={index === 2 ? "estimated" : "to_verify"} />
               </dd>
             </div>
           ))}
@@ -541,7 +545,7 @@ export function PlanScreen() {
       </header>
       <PageTransition className="px-5 pb-10 sm:px-8">
         {!inPlan ? (
-          <div className="editorial-card mx-auto mt-16 max-w-xl rounded-[1.2rem] border-t-2 border-t-clay p-8 text-center">
+          <div className="editorial-card mx-auto mt-16 max-w-xl rounded-[1.2rem] border-t-2 border-t-cobalt p-8 text-center">
             <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-mist text-cobalt"><ClipboardTextIcon /></span>
             <h2 className="font-display mt-6 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">{c.applicationPlan.emptyTitle}</h2>
             <p className="mt-3 text-sm leading-6 text-muted">{c.applicationPlan.emptyBody}</p>
@@ -568,6 +572,7 @@ export function PlanScreen() {
             <ol className="mt-5 divide-y divide-line overflow-hidden rounded-[1.2rem] border border-line bg-paper">
               {c.applicationPlan.taskList.map(([title, state], index) => {
                 const done = index === 0 || (index === 1 && activeTask);
+                const infoState: InfoState = index === 0 ? "estimated" : "to_verify";
                 return (
                   <li key={title} className={`grid grid-cols-[auto_1fr] gap-4 p-5 ${index === 1 && !activeTask ? "bg-cobalt/[0.035]" : ""}`}>
                     <span className={`mt-0.5 grid h-7 w-7 place-items-center rounded-full border ${done ? "border-cobalt bg-cobalt text-white" : "border-line bg-paper text-muted"}`}>
@@ -575,7 +580,10 @@ export function PlanScreen() {
                     </span>
                     <div>
                       <p className="font-extrabold">{title}</p>
-                      <p className="mt-1 text-sm text-muted">{index === 1 && activeTask ? "Em curso · Por verificar" : state}</p>
+                      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <p className="text-sm text-muted">{index === 1 && activeTask ? "Em curso" : state}</p>
+                        <StateMarker state={infoState} />
+                      </div>
                     </div>
                   </li>
                 );
