@@ -1,16 +1,10 @@
-<p align="center">
-  <img src="docs/brand/rumo-social-preview.svg" alt="Rumo — clareza para o caminho" width="100%" />
-</p>
+# Rumo
 
-<p align="center">
-  <strong>Protótipo público · Mobile-first · Português e inglês · Dados sintéticos</strong>
-</p>
+**Clareza para o caminho.**
+
+Protótipo público · Mobile-first · Português e inglês · Dados sintéticos
 
 Rumo ajuda estudantes angolanos a transformar a incerteza de estudar fora num percurso compreensível. O protótipo organiza análise, oportunidades e próximos passos sem prometer admissão nem esconder o que ainda precisa de confirmação.
-
-<p align="center">
-  <img src="docs/qa/img/rumo-dashboard-final.webp" alt="Dashboard Personal Atlas da Rumo com o percurso de Dandara" width="360" />
-</p>
 
 ## O que demonstra
 
