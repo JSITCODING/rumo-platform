@@ -313,7 +313,7 @@ export function AnalysisScreen() {
 
         <div className="mt-9 overflow-hidden rounded-[1.2rem] border border-line bg-paper">
           {c.analysis.cards.map(([label, title, body], index) => (
-            <article key={label} className="grid gap-3 border-b border-line p-5 last:border-b-0 sm:grid-cols-[8rem_1fr_auto] sm:items-start sm:gap-6 sm:p-6">
+            <article key={label} className={`grid gap-3 border-b border-line last:border-b-0 sm:grid-cols-[8rem_1fr_auto] sm:items-start sm:gap-6 ${index === 0 ? "border-l-[3px] border-l-cobalt bg-mist p-6" : "p-4 sm:p-5"}`}>
               <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-muted">0{index + 1} · {label}</p>
               <div>
                 <h2 className="text-lg font-extrabold tracking-[-0.025em]">{title}</h2>
@@ -519,7 +519,7 @@ export function DetailsScreen() {
 
         <dl className="mt-5 divide-y divide-line overflow-hidden rounded-[1.2rem] border border-line bg-paper">
           {c.details.requirements.map(([label, value], index) => (
-            <div key={label} className="grid gap-2 p-5 sm:grid-cols-[0.7fr_1.3fr] sm:items-center sm:gap-6">
+            <div key={label} className={`grid gap-2 sm:grid-cols-[0.7fr_1.3fr] sm:items-center sm:gap-6 ${index === 0 ? "border-l-[3px] border-l-cobalt bg-mist p-6" : "p-4 sm:p-5"}`}>
               <dt className="font-extrabold">{label}</dt>
               <dd className="flex items-center justify-between gap-3 text-sm leading-6 text-muted sm:text-base">
                 {value}<StateMarker state={index === 2 ? "estimated" : "to_verify"} />

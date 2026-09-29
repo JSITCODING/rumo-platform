@@ -166,7 +166,7 @@ export function StateLine({ state, className = "" }: { state: InfoState; classNa
           strokeLinecap="round"
         />
       </svg>
-      <span className="mt-1 block truncate text-[0.5rem] font-extrabold uppercase tracking-[0.08em] text-muted sm:text-[0.6rem]">
+      <span className="mt-1 block text-[0.48rem] font-extrabold uppercase leading-[0.65rem] tracking-[0.06em] text-muted sm:text-[0.6rem] sm:leading-4">
         {label}
       </span>
     </span>

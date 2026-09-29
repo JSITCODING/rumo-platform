@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/vitest";
-import { afterEach } from "vitest";
+import { afterEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 
 function memoryStorage() {
@@ -19,6 +19,10 @@ Object.defineProperty(window, "localStorage", {
 Object.defineProperty(window, "sessionStorage", {
   configurable: true,
   value: memoryStorage()
+});
+Object.defineProperty(window, "scrollTo", {
+  configurable: true,
+  value: vi.fn()
 });
 
 afterEach(() => {
