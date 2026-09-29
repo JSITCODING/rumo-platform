@@ -10,7 +10,9 @@
     "postbuild": "node scripts/prepare-pages.mjs",
     "preview": "vite preview",
     "test": "vitest run",
-    "check": "npm run test && npm run build"
+    "contrast": "node --experimental-strip-types scripts/contrast.ts --check",
+    "contrast:update": "node --experimental-strip-types scripts/contrast.ts --write",
+    "check": "npm run contrast && npm run test && npm run build"
   },
   "dependencies": {
     "@fontsource-variable/manrope": "^5.2.8",

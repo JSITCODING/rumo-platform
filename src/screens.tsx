@@ -166,7 +166,7 @@ export function RegisterScreen() {
                 {c.register.consent}
               </label>
               {attempted && !valid ? (
-                <p role="alert" className="rounded-md bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+                <p role="alert" className="rounded-md bg-dangerSurface px-4 py-3 text-sm font-bold text-danger">
                   {c.register.validation}
                 </p>
               ) : null}
@@ -197,7 +197,7 @@ function Field({ label, value, onChange, error, type = "text", autoComplete }: {
         autoComplete={autoComplete}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className={`min-h-14 w-full rounded-md border bg-paper px-4 text-base text-ink outline-none transition focus:border-cobalt focus:ring-4 focus:ring-cobalt/10 ${error ? "border-red-400" : "border-line"}`}
+        className={`min-h-14 w-full rounded-md border bg-paper px-4 text-base text-ink outline-none transition focus:border-cobalt focus:ring-4 focus:ring-cobalt/10 ${error ? "border-danger" : "border-line"}`}
       />
       {error ? <p id={`${id}-error`} className="mt-2 text-sm font-bold text-red-700">{error}</p> : null}
     </div>
@@ -392,8 +392,8 @@ export function DashboardScreen() {
             })}
           </ol>
 
-          <div className="mt-3 grid grid-cols-[auto_1fr] gap-3 rounded-md border border-emerald-800/15 bg-emerald-50/70 p-3 sm:mt-6 sm:gap-4 sm:rounded-lg sm:p-5">
-            <span className="grid h-7 w-7 place-items-center rounded-full border border-emerald-800 text-emerald-900 sm:h-9 sm:w-9"><Check size={16} weight="bold" aria-hidden="true" /></span>
+          <div className="mt-3 grid grid-cols-[auto_1fr] gap-3 rounded-md border border-success/30 bg-successSurface p-3 sm:mt-6 sm:gap-4 sm:rounded-lg sm:p-5">
+            <span className="grid h-7 w-7 place-items-center rounded-full border border-success text-success sm:h-9 sm:w-9"><Check size={16} weight="bold" aria-hidden="true" /></span>
             <div><h3 className="text-sm font-extrabold leading-5 sm:text-base">{c.dashboard.profileReadyTitle}</h3><p className="text-sm leading-5 text-muted sm:mt-1 sm:leading-6">{c.dashboard.readyNote}</p></div>
           </div>
 
@@ -591,7 +591,7 @@ export function PlanScreen() {
             </ol>
             <div className="mt-5"><Notice title={c.applicationPlan.noteTitle}>{c.applicationPlan.note}</Notice></div>
             <Button full className="mt-7" onClick={startTask} disabled={activeTask}>{activeTask ? c.applicationPlan.toast : c.applicationPlan.cta}</Button>
-            {activeTask ? <p role="status" className="mt-3 text-center text-sm font-bold text-emerald-800">{c.applicationPlan.toast}</p> : null}
+            {activeTask ? <p role="status" className="mt-3 text-center text-sm font-bold text-success">{c.applicationPlan.toast}</p> : null}
           </div>
         )}
       </PageTransition>

@@ -1,20 +1,22 @@
+import { DESIGN_COLORS } from "./design-tokens.ts";
+
 export type InfoState = "confirmed" | "estimated" | "to_verify";
 
-export const INFO_STATE_SURFACE = "#fffdf8";
+export const INFO_STATE_SURFACE = DESIGN_COLORS.paper;
 
 export const INFO_STATE_TOKENS = {
   confirmed: {
-    stroke: "#183d99",
+    stroke: DESIGN_COLORS.cobaltDark,
     lineDasharray: "none",
     markerFill: "full"
   },
   estimated: {
-    stroke: "#2755c7",
+    stroke: DESIGN_COLORS.cobalt,
     lineDasharray: "8 5",
     markerFill: "half"
   },
   to_verify: {
-    stroke: "#647069",
+    stroke: DESIGN_COLORS.muted,
     lineDasharray: "2 5",
     markerFill: "empty"
   }
