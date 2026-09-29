@@ -14,8 +14,8 @@ export default {
         xl2: "1.25rem"
       },
       fontFamily: {
-        display: ["Newsreader Variable", "Newsreader", "Georgia", "serif"],
-        sans: ["Manrope Variable", "Manrope", "ui-sans-serif", "system-ui", "sans-serif"]
+        display: ["Newsreader Variable", "Newsreader Fallback", "Georgia", "serif"],
+        sans: ["Manrope Variable", "Manrope Fallback", "ui-sans-serif", "system-ui", "sans-serif"]
       }
     }
   },

@@ -15,8 +15,6 @@
     "check": "npm run contrast && npm run test && npm run build"
   },
   "dependencies": {
-    "@fontsource-variable/manrope": "^5.2.8",
-    "@fontsource-variable/newsreader": "^5.3.0",
     "@phosphor-icons/react": "^2.1.10",
     "motion": "12.23.24",
     "react": "^18.3.1",
