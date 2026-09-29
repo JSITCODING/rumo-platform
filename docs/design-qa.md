@@ -6,9 +6,15 @@
 - **Reviewed:** 29 September 2026
 - **Reference:** selected Personal Atlas option 1 concept
 - **Reference size:** 853 × 1844 px, normalized to 390 × 844 px for comparison
-- **Implementation capture:** final dashboard review artifact (kept outside the repository)
+- **Implementation capture:** final dashboard review artifact stored in `docs/qa/img/`
 - **Viewport:** 390 × 844 CSS px at 1× density
-- **State:** English dashboard, synthetic Dandara profile
+- **State:** Portuguese dashboard, synthetic Dandara profile
+
+## Visual comparison
+
+| Approved reference | Final implementation |
+| --- | --- |
+| ![Personal Atlas option 1 reference showing Dandara's route from Luanda to study abroad](qa/img/personal-atlas-reference.webp) | ![Final Rumo dashboard in Portuguese showing Dandara's evidence route and next action](qa/img/rumo-dashboard-final.webp) |
 
 ## Comparison record
 

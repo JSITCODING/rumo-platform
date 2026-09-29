@@ -387,6 +387,7 @@ sombras genéricas, pílulas decorativas e secções de igual ênfase são reduz
 ### Evidências e referências
 
 - `docs/personal-atlas-direction.md`
+- comparação visual lado a lado: [referência aprovada e Dashboard final](design-qa.md#visual-comparison);
 - referência visual Personal Atlas aprovada em 28 de setembro de 2026;
 - princípios de propósito, simplicidade, hierarquia e redução de informação concorrente fornecidos para esta revisão.
 

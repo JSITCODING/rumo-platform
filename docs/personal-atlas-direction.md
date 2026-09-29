@@ -61,6 +61,7 @@ em tamanho pequeno, sem palavra, mapa literal ou bandeiras. Validar contraste,
 Contar uma sequência: ponto de partida, leitura da análise, comparação com
 evidência e plano acionável. Cada imagem deve ter uma mensagem e usar apenas
 dados sintéticos. Produzir depois de o produto ter superfícies estáveis.
+Rotular claramente como demonstração com dados sintéticos; não sugerir resultados reais de admissão.
 
 ### Filme
 
@@ -68,6 +69,7 @@ Mostrar possibilidades dispersas a organizarem-se em torno de Dandara até
 formarem uma rota. Provar análise, estados de evidência e próximo passo sem
 narrar onboarding, registo ou navegação. Atualizar o storyboard apenas depois
 da aprovação visual da interface.
+Rotular claramente como demonstração com dados sintéticos; não sugerir resultados reais de admissão.
 
 ## Testes de qualidade
 
