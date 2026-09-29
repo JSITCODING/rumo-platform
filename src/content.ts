@@ -18,6 +18,7 @@ export const copy = {
       unverified: "Por verificar"
     },
     landing: {
+      destinationsLabel: "Destinos iniciais",
       eyebrow: "ESTUDAR FORA, COM CLAREZA",
       title: "Encontra oportunidades que fazem sentido para ti.",
       body: "Compara requisitos, percebe a compatibilidade com o teu perfil e organiza cada candidatura passo a passo.",
@@ -106,8 +107,18 @@ export const copy = {
       edit: "Corrigir o meu perfil"
     },
     dashboard: {
-      hello: "OLÁ, ANA",
-      title: "O teu percurso",
+      hello: "Boa tarde, Dandara",
+      title: "Lugares diferentes. Um futuro mais claro.",
+      routeTitle: "O teu rumo",
+      routeKicker: "DE LUANDA PARA NOVAS POSSIBILIDADES",
+      routeOrigin: "Luanda",
+      routeDestination: "Estudar fora",
+      routeSteps: [
+        ["Perfil", "Concluído"],
+        ["Verificar alguns detalhes", "Alguma informação ainda precisa de confirmação"],
+        ["Explorar oportunidades", "Próximo passo"]
+      ],
+      profileReadyTitle: "O teu perfil está pronto",
       ready: "Perfil analisado",
       readyState: "Pronto para pesquisar",
       readyNote: "Algumas informações ainda requerem verificação.",
@@ -117,7 +128,8 @@ export const copy = {
       cta: "Descobrir oportunidades",
       emptyTitle: "O teu plano ainda está vazio",
       emptyBody: "Adiciona uma oportunidade para começares a organizar os próximos passos.",
-      openPlan: "Abrir plano"
+      openPlan: "Abrir plano",
+      roots: "AS MESMAS RAÍZES. HORIZONTES MAIS LONGE."
     },
     discovery: {
       title: "Oportunidades",
@@ -138,6 +150,7 @@ export const copy = {
     details: {
       title: "Detalhes",
       share: "Partilhar",
+      shared: "Ligação copiada nesta demonstração.",
       eyebrow: "DADOS DEMONSTRATIVOS · NÃO VERIFICADOS",
       program: "Engenharia Informática",
       institution: "Instituição demonstrativa A · Portugal · Licenciatura",
@@ -199,6 +212,7 @@ export const copy = {
       unverified: "Verify"
     },
     landing: {
+      destinationsLabel: "Initial destinations",
       eyebrow: "STUDY ABROAD, WITH CLARITY",
       title: "Find opportunities that make sense for you.",
       body: "Compare requirements, understand how an opportunity fits your profile, and organise each application step by step.",
@@ -279,8 +293,18 @@ export const copy = {
       edit: "Correct my profile"
     },
     dashboard: {
-      hello: "HELLO, ANA",
-      title: "Your journey",
+      hello: "Good evening, Dandara",
+      title: "Different places. A brighter you.",
+      routeTitle: "Your route",
+      routeKicker: "FROM LUANDA TO NEW POSSIBILITIES",
+      routeOrigin: "Luanda",
+      routeDestination: "Study abroad",
+      routeSteps: [
+        ["Profile", "Completed"],
+        ["Verify a few details", "Some information still needs verification"],
+        ["Explore opportunities", "Next step"]
+      ],
+      profileReadyTitle: "Your profile is ready",
       ready: "Profile analysed",
       readyState: "Ready to explore",
       readyNote: "Some information still needs verification.",
@@ -290,7 +314,8 @@ export const copy = {
       cta: "Discover opportunities",
       emptyTitle: "Your plan is still empty",
       emptyBody: "Add an opportunity to begin organising your next steps.",
-      openPlan: "Open plan"
+      openPlan: "Open plan",
+      roots: "SAME ROOTS. FURTHER HORIZONS."
     },
     discovery: {
       title: "Opportunities",
@@ -311,6 +336,7 @@ export const copy = {
     details: {
       title: "Details",
       share: "Share",
+      shared: "Link copied in this demonstration.",
       eyebrow: "DEMONSTRATION DATA · NOT VERIFIED",
       program: "Computer Engineering",
       institution: "Demonstration institution A · Portugal · Bachelor's",

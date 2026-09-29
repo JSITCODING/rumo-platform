@@ -61,6 +61,7 @@ tipados no próprio navegador e não são enviados para qualquer fornecedor.
 - [Escopo do MVP](docs/mvp-scope.md)
 - [Fluxos de utilização](docs/user-flow.md)
 - [Decisões de design](docs/design-decisions.md)
+- [Direção visual Personal Atlas](docs/personal-atlas-direction.md)
 - [Requisitos de dados](docs/data-requirements.md)
 - [Plano de testes](docs/testing-plan.md)
 - [Guião bilingue de validação](docs/research-survey.md)

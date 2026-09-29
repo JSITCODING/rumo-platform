@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { copy, type Locale } from "./content";
 
 export type ProfileDraft = {
@@ -48,9 +48,12 @@ export function RumoProvider({ children }: { children: ReactNode }) {
   const [activeTask, setActiveTask] = useState(false);
   const [profile, updateProfile] = useState<ProfileDraft>(initialProfile);
 
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   const setLocale = (next: Locale) => {
     window.localStorage?.setItem?.("rumo.locale", next);
-    document.documentElement.lang = next;
     updateLocale(next);
   };
 

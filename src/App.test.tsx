@@ -30,6 +30,16 @@ describe("Rumo prototype", () => {
     expect(window.localStorage.getItem("rumo.locale")).toBe("en");
   });
 
+  it("restores the document language on a direct English visit", () => {
+    window.localStorage.setItem("rumo.locale", "en");
+    document.documentElement.lang = "pt";
+
+    renderAt("/dashboard");
+
+    expect(screen.getByRole("heading", { name: /Good (morning|afternoon|evening), Dandara/i })).toBeInTheDocument();
+    expect(document.documentElement.lang).toBe("en");
+  });
+
   it("shows all seven onboarding stages without collecting real data", () => {
     renderAt("/profile?step=6");
 
@@ -56,7 +66,14 @@ describe("Rumo prototype", () => {
     expect(await screen.findByRole("heading", { name: /A tua análise está pronta para continuar/i })).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /Guardar e abrir o Dashboard/i }));
-    expect(await screen.findByRole("heading", { name: /O teu percurso/i })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: /Boa tarde, Dandara/i })).toBeInTheDocument();
+  });
+
+  it("uses a synthetic Dandara identity on the save screen", () => {
+    renderAt("/register");
+
+    expect(screen.getByDisplayValue("Dandara")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("dandara.demo@rumo.example")).toBeInTheDocument();
   });
 
   it("emits provider-independent progress events without profile answers", () => {

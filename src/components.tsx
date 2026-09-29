@@ -6,8 +6,7 @@ import {
   Compass,
   FunnelSimple,
   House,
-  ShieldCheck,
-  Translate
+  ShieldCheck
 } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -45,15 +44,14 @@ export function RouteMark({ className = "", animated = false }: { className?: st
 export function LocaleToggle() {
   const { locale, setLocale, c } = useRumo();
   return (
-    <div className="inline-flex items-center gap-1 rounded-full border border-line bg-white p-1 shadow-sm" aria-label={c.common.language}>
-      <Translate size={16} className="ml-2 text-muted" aria-hidden="true" />
+    <div className="inline-flex items-center gap-1" role="group" aria-label={c.common.language}>
       {(["pt", "en"] as const).map((option) => (
         <button
           key={option}
           type="button"
           onClick={() => setLocale(option)}
-          className={`min-h-9 min-w-10 rounded-full px-2.5 text-xs font-extrabold uppercase tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
-            locale === option ? "bg-ink text-white" : "text-muted hover:text-ink"
+          className={`relative min-h-11 min-w-11 px-2 text-sm font-extrabold uppercase tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt after:absolute after:inset-x-2 after:-bottom-0.5 after:h-0.5 after:origin-center after:bg-cobalt after:transition-transform ${
+            locale === option ? "text-ink after:scale-x-100" : "text-muted after:scale-x-0 hover:text-ink"
           }`}
           aria-pressed={locale === option}
         >
@@ -81,7 +79,8 @@ export function BackHeader({ title, action }: { title: string; action?: ReactNod
       <button
         type="button"
         onClick={() => navigate(-1)}
-        className="inline-flex min-h-11 items-center gap-1.5 justify-self-start rounded-xl px-1 font-bold text-muted transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt"
+        aria-label={c.common.back}
+        className="inline-flex min-h-11 min-w-11 items-center gap-1.5 justify-self-start px-1 font-bold text-muted transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt"
       >
         <ArrowLeft size={20} aria-hidden="true" />
         <span className="hidden xs:inline">{c.common.back}</span>
@@ -100,10 +99,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ children, variant = "primary", full = false, className = "", ...props }: ButtonProps) {
   const base =
-    "inline-flex min-h-12 items-center justify-center gap-2 rounded-[0.9rem] px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt disabled:cursor-not-allowed disabled:opacity-50";
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt disabled:cursor-not-allowed disabled:opacity-50";
   const variants = {
-    primary: "bg-ink text-white shadow-lift hover:-translate-y-0.5 hover:bg-cobaltDark",
-    secondary: "border border-line bg-paper text-ink hover:border-ink/25 hover:bg-mist",
+    primary: "bg-cobalt text-white hover:bg-cobaltDark",
+    secondary: "border border-line bg-transparent text-ink hover:border-ink/30 hover:bg-paper",
     quiet: "text-muted hover:bg-mist hover:text-ink"
   };
   return (
@@ -130,12 +129,12 @@ export function PageTransition({ children, className = "" }: { children: ReactNo
 
 export function StatusTag({ state, children }: { state: "confirmed" | "estimated" | "unverified"; children: ReactNode }) {
   const styles = {
-    confirmed: "border-emerald-200 bg-emerald-50 text-emerald-800",
-    estimated: "border-amber-200 bg-amber-50 text-amber-800",
-    unverified: "border-slate-200 bg-slate-100 text-slate-700"
+    confirmed: "border-emerald-700/25 bg-emerald-50 text-emerald-900",
+    estimated: "border-clay/25 bg-orange-50 text-orange-900",
+    unverified: "border-ink/15 bg-transparent text-muted"
   };
   return (
-    <span className={`inline-flex min-h-8 items-center gap-1.5 rounded-full border px-3 text-xs font-extrabold ${styles[state]}`}>
+    <span className={`inline-flex min-h-7 items-center gap-1.5 rounded-sm border px-2.5 text-[0.68rem] font-extrabold uppercase tracking-[0.08em] ${styles[state]}`}>
       {state === "confirmed" ? <Check size={14} weight="bold" aria-hidden="true" /> : null}
       {children}
     </span>
@@ -157,7 +156,7 @@ export function Notice({ title, children, tone = "neutral" }: { title: string; c
 export function AppShell({ children, active }: { children: ReactNode; active?: "home" | "discover" | "plan" }) {
   return (
     <div className="min-h-dvh bg-canvas text-ink">
-      <div className="mx-auto min-h-dvh max-w-5xl bg-canvas pb-24 sm:px-5 lg:px-8">
+      <div className="mx-auto min-h-dvh max-w-5xl bg-canvas pb-24">
         {children}
       </div>
       {active ? <BottomNav active={active} /> : null}
@@ -175,8 +174,8 @@ function BottomNav({ active }: { active: "home" | "discover" | "plan" }) {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl"
-      aria-label="Primary"
+      className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-paper/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl"
+      aria-label={c.common.language === "Language" ? "Primary navigation" : "Navegação principal"}
     >
       <div className="mx-auto grid max-w-lg grid-cols-3 gap-2">
         {links.map((link) => {
@@ -186,8 +185,8 @@ function BottomNav({ active }: { active: "home" | "discover" | "plan" }) {
             <NavLink
               key={link.id}
               to={link.to}
-              className={`flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl text-xs font-extrabold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
-                selected ? "bg-mist text-ink" : "text-muted hover:text-ink"
+              className={`relative flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-extrabold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt after:absolute after:inset-x-6 after:-bottom-1 after:h-0.5 after:bg-cobalt ${
+                selected ? "text-ink after:scale-x-100" : "text-muted after:scale-x-0 hover:text-ink"
               }`}
               aria-current={selected ? "page" : undefined}
             >
@@ -205,10 +204,10 @@ export function NextLink({ to, children, secondary = false }: { to: string; chil
   return (
     <NavLink
       to={to}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-[0.9rem] px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
         secondary
-          ? "border border-line bg-white text-ink shadow-sm hover:border-ink/25 hover:bg-mist"
-          : "bg-ink text-white shadow-lift hover:-translate-y-0.5 hover:bg-cobaltDark"
+          ? "border border-line bg-transparent text-ink hover:border-ink/30 hover:bg-paper"
+          : "bg-cobalt text-white hover:bg-cobaltDark"
       }`}
     >
       {children}
@@ -222,7 +221,7 @@ export function FilterButton({ children, active = false, onClick }: { children: 
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
+      className={`inline-flex min-h-11 items-center gap-2 rounded-md border px-4 text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
         active ? "border-cobalt bg-cobalt text-white" : "border-line bg-white text-muted hover:border-ink/20 hover:text-ink"
       }`}
     >

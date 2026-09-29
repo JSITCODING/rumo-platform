@@ -3,7 +3,7 @@
 ## Estado do documento
 
 - **Responsável funcional:** Produto e UX
-- **Última revisão:** 7 de agosto de 2026
+- **Última revisão:** 28 de setembro de 2026
 - **Estado:** Ativo
 
 Este documento regista decisões confirmadas de produto e experiência que afetam o projeto. Uma proposta só é vinculativa quando o seu estado é **Aprovada**.
@@ -27,6 +27,7 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 | P6 | Estados de tarefa separados do estado da informação | Aprovada | 7 de agosto de 2026 | — |
 | P7 | Protótipo PWA bilingue com dados sintéticos | Aprovada | 27 de setembro de 2026 | — |
 | P8 | Onboarding antes do registo e análise antes da barreira | Aprovada | 27 de setembro de 2026 | Fluxo inicial de P2 |
+| P9 | Direção visual Personal Atlas | Aprovada | 28 de setembro de 2026 | Visual editorial inicial de P7 |
 
 ## P1 — Dashboard entre Análise do perfil e Descoberta
 
@@ -338,9 +339,53 @@ As respostas do perfil permanecem apenas durante a sessão do navegador.
 - **Condição de revisão:** evidência de validação, aprovação de autenticação real ou requisitos formais de retenção.
 - **Decisão que substitui esta:** nenhuma.
 
+## P9 — Direção visual Personal Atlas
+
+- **Estado:** Aprovada
+- **Data:** 28 de setembro de 2026
+- **Responsável funcional:** Produto e UX
+
+### Contexto
+
+O primeiro protótipo de alta fidelidade preservava o fluxo, mas distribuía
+demasiada informação por cartões com peso visual semelhante. A direção
+Personal Atlas foi escolhida para dar ao produto uma identidade reconhecível
+através do percurso do estudante, sem aumentar a densidade ou sugerir certezas
+que os dados demonstrativos não suportam.
+
+### Escolha
+
+Usar Dandara como identidade integralmente sintética e organizar cada ecrã em
+torno de uma única tarefa. O sistema visual usa papel quente, tinta escura,
+azul Atlântico e terracota restrita; Newsreader para títulos; Manrope para a
+interface; e posição, linha e marcadores de percurso como gramática de marca.
+
+O Dashboard torna o percurso visível desde Luanda até ao próximo passo, com
+estados de informação ainda separados do progresso. Cartões repetidos,
+sombras genéricas, pílulas decorativas e secções de igual ênfase são reduzidos.
+
+### Consequências
+
+- o Dashboard torna-se a expressão de referência da identidade Personal Atlas;
+- os restantes ecrãs usam listas, folhas de evidência e checklists apropriadas à tarefa;
+- a ilustração de Luanda é omitida até existir um ativo público, original e necessário;
+- a identidade não altera o fluxo value-first, os oito ecrãs ou os limites de dados;
+- ícone, imagens de loja e filme serão derivados desta direção depois de a interface estabilizar.
+
+### Evidências e referências
+
+- `docs/personal-atlas-direction.md`
+- referência visual Personal Atlas aprovada em 28 de setembro de 2026;
+- princípios de propósito, simplicidade, hierarquia e redução de informação concorrente fornecidos para esta revisão.
+
+### Revisão
+
+- **Condição de revisão:** testes visuais ou de utilização demonstrarem perda de clareza, identidade ou acessibilidade.
+- **Decisão que substitui esta:** nenhuma.
+
 ## Decisões ainda não tomadas
 
-P1–P8 confirmam apenas navegação e comportamento de estados necessários ao fluxo canónico v1.0. Não definem:
+P1–P9 confirmam apenas navegação, comportamento de estados e direção visual necessários ao fluxo canónico v1.0. Não definem:
 
 - tecnologia ou arquitetura de implementação;
 - regras automáticas de elegibilidade;

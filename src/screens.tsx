@@ -1,14 +1,12 @@
 import {
   ArrowRight,
-  BookOpenText,
   Check,
   CheckCircle,
   Circle,
   GraduationCap,
   MagnifyingGlass,
   MapPin,
-  ShareNetwork,
-  Wallet
+  ShareNetwork
 } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
@@ -46,15 +44,15 @@ export function LandingScreen() {
     <div className="min-h-dvh bg-canvas text-ink">
       <div className="mx-auto max-w-7xl">
         <PublicHeader />
-        <PageTransition className="px-5 pb-16 pt-8 sm:px-8 sm:pt-14 lg:pb-24">
-          <section className="grid items-start gap-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:gap-20">
+        <PageTransition className="px-5 pb-16 pt-10 sm:px-8 sm:pt-16 lg:pb-24">
+          <section className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)] lg:gap-24">
             <div className="max-w-3xl">
               <p className="eyebrow">{c.landing.eyebrow}</p>
-              <h1 className="display-title mt-5 max-w-3xl text-[clamp(3.5rem,8vw,7.2rem)] text-ink">
+              <h1 className="display-title mt-5 max-w-3xl text-[clamp(3.35rem,7vw,6.6rem)] text-ink">
                 {c.landing.title}
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-muted sm:text-xl">{c.landing.body}</p>
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-y border-line py-4" aria-label="Initial destinations">
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-y border-line py-4" aria-label={c.landing.destinationsLabel}>
                 {(["Portugal", "Alemanha", "Espanha"] as const).map((destination) => (
                   <span key={destination} className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.16em] text-muted before:h-1.5 before:w-1.5 before:rounded-full before:bg-clay">
                     {destination === "Alemanha" && c.common.language === "Language" ? "Germany" : destination === "Espanha" && c.common.language === "Language" ? "Spain" : destination}
@@ -63,14 +61,13 @@ export function LandingScreen() {
               </div>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <NextLink to="/profile">{c.landing.cta}</NextLink>
-                <NavLink to="/dashboard" className="inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-sm font-extrabold text-muted hover:bg-mist hover:text-ink">
+                <NavLink to="/dashboard" className="inline-flex min-h-12 items-center justify-center rounded-md px-5 text-sm font-extrabold text-muted hover:bg-paper hover:text-ink">
                   {c.landing.signin} <span className="ml-1 underline underline-offset-4">{c.landing.enter}</span>
                 </NavLink>
               </div>
             </div>
 
-            <div className="editorial-card relative overflow-hidden p-5 sm:p-8">
-              <div className="absolute right-0 top-0 h-24 w-24 border-b border-l border-line bg-cream/60" aria-hidden="true" />
+            <div className="editorial-card relative overflow-hidden rounded-[1.2rem] p-5 sm:p-8">
               <div className="mb-7 flex items-center justify-between gap-4">
                 <h2 className="font-display text-3xl font-semibold tracking-[-0.035em]">{c.landing.stepsTitle}</h2>
                 <RouteMark className="relative h-11 w-11 text-cobalt" />
@@ -92,9 +89,9 @@ export function LandingScreen() {
                   </motion.li>
                 ))}
               </ol>
-              <div className="mt-6 border-l-2 border-sun bg-ink p-5 text-white">
-                <strong className="block text-sm">{c.landing.noteTitle}</strong>
-                <p className="mt-1 text-sm leading-6 text-white/70">{c.landing.note}</p>
+              <div className="mt-6 border-l-2 border-clay bg-cream/55 p-5">
+                <strong className="block text-sm text-ink">{c.landing.noteTitle}</strong>
+                <p className="mt-1 text-sm leading-6 text-muted">{c.landing.note}</p>
               </div>
             </div>
           </section>
@@ -108,7 +105,7 @@ export function RegisterScreen() {
   const { c } = useRumo();
   const navigate = useNavigate();
   useScreenEvent("signup_reached");
-  const [values, setValues] = useState({ name: "Estudante Demo", email: "demo@rumo.example", password: "demonstracao", consent: true });
+  const [values, setValues] = useState({ name: "Dandara", email: "dandara.demo@rumo.example", password: "demonstracao", consent: true });
   const [attempted, setAttempted] = useState(false);
   const valid = values.name.trim().length > 1 && /^\S+@\S+\.\S+$/.test(values.email) && values.password.length >= 8 && values.consent;
 
@@ -132,7 +129,7 @@ export function RegisterScreen() {
             </div>
           </div>
 
-          <form onSubmit={submit} className="editorial-card border-t-4 border-t-clay p-5 sm:p-8" noValidate>
+          <form onSubmit={submit} className="editorial-card rounded-[1.2rem] border-t-2 border-t-clay p-5 sm:p-8" noValidate>
             <div className="space-y-5">
               <Field
                 label={c.register.name}
@@ -157,7 +154,7 @@ export function RegisterScreen() {
                 onChange={(value) => setValues({ ...values, password: value })}
                 autoComplete="new-password"
               />
-              <label className="flex cursor-pointer items-start gap-3 rounded-2xl p-2 text-sm font-semibold leading-6 text-ink hover:bg-mist">
+              <label className="flex cursor-pointer items-start gap-3 rounded-md p-2 text-sm font-semibold leading-6 text-ink hover:bg-mist">
                 <input
                   type="checkbox"
                   checked={values.consent}
@@ -167,7 +164,7 @@ export function RegisterScreen() {
                 {c.register.consent}
               </label>
               {attempted && !valid ? (
-                <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+                <p role="alert" className="rounded-md bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
                   {c.register.validation}
                 </p>
               ) : null}
@@ -198,7 +195,7 @@ function Field({ label, value, onChange, error, type = "text", autoComplete }: {
         autoComplete={autoComplete}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className={`min-h-14 w-full rounded-2xl border bg-white px-4 text-base text-ink outline-none transition focus:border-cobalt focus:ring-4 focus:ring-cobalt/10 ${error ? "border-red-400" : "border-line"}`}
+        className={`min-h-14 w-full rounded-md border bg-paper px-4 text-base text-ink outline-none transition focus:border-cobalt focus:ring-4 focus:ring-cobalt/10 ${error ? "border-red-400" : "border-line"}`}
       />
       {error ? <p id={`${id}-error`} className="mt-2 text-sm font-bold text-red-700">{error}</p> : null}
     </div>
@@ -242,25 +239,25 @@ export function OnboardingScreen() {
   return (
     <AppShell>
       <BackHeader title={c.onboarding.title} />
-      <PageTransition className="mx-auto max-w-3xl px-5 pb-16 sm:px-8">
+      <PageTransition className="mx-auto max-w-3xl px-5 pb-16 pt-3 sm:px-8 sm:pt-8">
         <div className="mb-8 flex items-center gap-4">
-          <div className="h-2 flex-1 overflow-hidden rounded-full bg-line" aria-hidden="true">
-            <motion.div className="h-full rounded-full bg-cobalt" animate={{ width: `${((step + 1) / 7) * 100}%` }} />
+          <div className="h-1 flex-1 overflow-hidden bg-line" aria-hidden="true">
+            <motion.div className="h-full bg-cobalt" animate={{ width: `${((step + 1) / 7) * 100}%` }} />
           </div>
           <span className="text-sm font-extrabold text-muted">{step + 1} / 7</span>
         </div>
 
         <p className="eyebrow">{c.onboarding.labels[step]}</p>
-        <h1 className="display-title mt-4 text-5xl sm:text-6xl">{c.onboarding.questions[step]}</h1>
+        <h1 className="display-title mt-4 max-w-2xl text-4xl sm:text-5xl">{c.onboarding.questions[step]}</h1>
         <p className="mt-4 max-w-2xl text-base leading-7 text-muted sm:text-lg">{c.onboarding.descriptions[step]}</p>
 
-        <fieldset className="mt-8 grid gap-3 sm:grid-cols-2">
+        <fieldset className="mt-8 overflow-hidden rounded-[1.2rem] border border-line bg-paper">
           <legend className="sr-only">{c.onboarding.questions[step]}</legend>
           {c.onboarding.options[step].map((option) => (
             <label
               key={option}
-              className={`flex min-h-16 cursor-pointer items-center gap-3 border-l-2 p-4 transition ${
-                selected === option ? "border-cobalt bg-mist" : "border-line bg-paper hover:border-ink/30"
+              className={`flex min-h-16 cursor-pointer items-center gap-3 border-b border-line p-4 transition last:border-b-0 ${
+                selected === option ? "bg-mist text-ink" : "bg-paper hover:bg-canvas"
               }`}
             >
               <input
@@ -278,7 +275,7 @@ export function OnboardingScreen() {
 
         {isFinancial ? (
           <div className="mt-5 space-y-5">
-            <label className="flex cursor-pointer items-start gap-3 border-l-2 border-clay bg-paper p-4 text-sm font-bold leading-6">
+            <label className="flex cursor-pointer items-start gap-3 rounded-md border-l-2 border-clay bg-paper p-4 text-sm font-bold leading-6">
               <input type="checkbox" checked={funding} onChange={(event) => changeFunding(event.target.checked)} className="mt-0.5 h-5 w-5 rounded accent-cobalt" />
               {c.onboarding.funding}
             </label>
@@ -303,32 +300,25 @@ export function OnboardingScreen() {
 export function AnalysisScreen() {
   const { c } = useRumo();
   useScreenEvent("analysis_viewed");
-  const icons = [GraduationCap, Wallet, BookOpenText];
   return (
     <AppShell>
       <BackHeader title={c.analysis.title} />
       <PageTransition className="mx-auto max-w-4xl px-5 pb-16 sm:px-8">
         <p className="eyebrow">{c.analysis.eyebrow}</p>
-        <h1 className="display-title mt-4 text-6xl sm:text-7xl">{c.analysis.heading}</h1>
+        <h1 className="display-title mt-4 text-5xl sm:text-6xl">{c.analysis.heading}</h1>
         <p className="mt-5 max-w-2xl text-base leading-7 text-muted sm:text-lg">{c.analysis.body}</p>
 
-        <div className="mt-9 grid gap-4 md:grid-cols-3">
-          {c.analysis.cards.map(([label, title, body, state], index) => {
-            const Icon = icons[index];
-            return (
-              <article key={label} className={`editorial-card border-t-4 p-5 ${index === 0 ? "border-t-cobalt" : index === 1 ? "border-t-clay" : "border-t-sun"}`}>
-                <div className="flex items-start justify-between gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-2xl bg-mist text-ink">
-                    <Icon size={21} weight="fill" aria-hidden="true" />
-                  </span>
-                  <StatusTag state="estimated">{state}</StatusTag>
-                </div>
-                <p className="mt-6 text-sm font-bold text-muted">{label}</p>
-                <h2 className="mt-1 text-xl font-extrabold tracking-[-0.03em]">{title}</h2>
-                <p className="mt-3 text-sm leading-6 text-muted">{body}</p>
-              </article>
-            );
-          })}
+        <div className="mt-9 overflow-hidden rounded-[1.2rem] border border-line bg-paper">
+          {c.analysis.cards.map(([label, title, body, state], index) => (
+            <article key={label} className="grid gap-3 border-b border-line p-5 last:border-b-0 sm:grid-cols-[8rem_1fr_auto] sm:items-start sm:gap-6 sm:p-6">
+              <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-muted">0{index + 1} · {label}</p>
+              <div>
+                <h2 className="text-lg font-extrabold tracking-[-0.025em]">{title}</h2>
+                <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
+              </div>
+              <StatusTag state="estimated">{state}</StatusTag>
+            </article>
+          ))}
         </div>
 
         <div className="mt-4">
@@ -336,7 +326,7 @@ export function AnalysisScreen() {
         </div>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <NextLink to="/register">{c.analysis.cta}</NextLink>
-          <NavLink to="/profile?step=1" className="inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-sm font-extrabold text-muted hover:bg-mist hover:text-ink">
+          <NavLink to="/profile?step=1" className="inline-flex min-h-12 items-center justify-center rounded-md px-5 text-sm font-extrabold text-muted hover:bg-paper hover:text-ink">
             {c.analysis.edit}
           </NavLink>
         </div>
@@ -350,46 +340,73 @@ export function DashboardScreen() {
   useScreenEvent("dashboard_reached");
   return (
     <AppShell active="home">
-      <header className="flex items-center justify-between px-5 py-5 sm:px-8 sm:py-7">
+      <header className="flex items-center justify-between gap-3 px-5 py-3 sm:px-8 sm:py-6">
         <Brand />
-        <div className="flex items-center gap-2"><LocaleToggle /></div>
+        <div className="flex items-center gap-3">
+          <LocaleToggle />
+          <span role="img" className="grid h-10 w-10 place-items-center rounded-full bg-ink font-display text-xl font-semibold text-paper sm:h-12 sm:w-12 sm:text-2xl" aria-label="Dandara">D</span>
+        </div>
       </header>
       <PageTransition className="px-5 pb-10 sm:px-8">
-        <p className="eyebrow">{c.dashboard.hello}</p>
-        <h1 className="display-title mt-3 text-6xl sm:text-7xl">{c.dashboard.title}</h1>
+        <span className="mb-2 block h-px w-6 bg-clay sm:mb-5 sm:h-0.5 sm:w-12" aria-hidden="true" />
+        <h1 className="display-title whitespace-nowrap text-[1.65rem] leading-none sm:whitespace-normal sm:text-5xl lg:text-[4.7rem]">{c.dashboard.hello}</h1>
+        <p className="mt-1 text-sm leading-5 text-muted sm:mt-2 sm:text-xl">{c.dashboard.title}</p>
 
-        <section className="mt-8 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
-          <article className="editorial-card border-t-4 border-t-sun p-5 sm:p-6">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="font-extrabold">{c.dashboard.ready}</h2>
-              <StatusTag state="confirmed">{c.dashboard.readyState}</StatusTag>
-            </div>
-            <div className="mt-5 h-2 overflow-hidden rounded-full bg-line">
-              <div className="h-full w-3/4 rounded-full bg-cobalt" />
-            </div>
-            <p className="mt-4 text-sm leading-6 text-muted">{c.dashboard.readyNote}</p>
-          </article>
+        <section className="mt-4 rounded-[0.75rem] border border-line bg-paper p-4 sm:mt-8 sm:rounded-[1.2rem] sm:p-8">
+          <div className="flex items-start justify-between gap-3 sm:gap-5">
+            <h2 className="font-display text-3xl font-semibold tracking-[-0.04em] sm:text-5xl">{c.dashboard.routeTitle}</h2>
+            <p className="max-w-[7.5rem] text-right text-[0.56rem] font-extrabold uppercase leading-[0.85rem] tracking-[0.2em] text-muted sm:max-w-[10rem] sm:text-[0.68rem] sm:leading-5 sm:tracking-[0.22em]">{c.dashboard.routeKicker}</p>
+          </div>
 
-          <article className="relative overflow-hidden bg-ink p-6 text-white shadow-lift sm:p-8">
-            <RouteMark className="absolute -right-7 -top-7 h-36 w-36 text-white/5" />
-            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-white/55">{c.dashboard.next}</p>
-            <h2 className="font-display mt-4 max-w-xl text-4xl font-semibold leading-[1.02] tracking-[-0.04em] sm:text-5xl">{c.dashboard.discoverTitle}</h2>
-            <p className="mt-4 max-w-xl text-sm leading-6 text-white/65 sm:text-base">{c.dashboard.discoverBody}</p>
-            <NavLink to="/discover" className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-white px-5 text-sm font-extrabold text-ink transition hover:-translate-y-0.5 hover:bg-canvas focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-              {c.dashboard.cta}<ArrowRight size={18} aria-hidden="true" />
+          <div role="img" className="mt-3 grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:mt-8 sm:gap-3" aria-label={c.dashboard.routeTitle}>
+            <div className="text-center">
+              <span className="mx-auto block h-4 w-4 rounded-full bg-clay sm:h-8 sm:w-8 sm:ring-8 sm:ring-clay/10" />
+              <strong className="mt-1 block font-display text-sm sm:mt-3 sm:text-xl">{c.dashboard.routeOrigin}</strong>
+            </div>
+            <div className="relative h-8 sm:h-14" aria-hidden="true">
+              <div className="absolute inset-x-0 top-1/2 border-t-2 border-dashed border-cobalt" />
+              <span className="absolute left-[28%] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-cobalt ring-2 ring-paper sm:h-4 sm:w-4 sm:ring-4" />
+              <span className="absolute left-[62%] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-cobalt bg-paper ring-2 ring-paper sm:h-4 sm:w-4 sm:ring-4" />
+            </div>
+            <div className="text-center">
+              <GraduationCap size={26} weight="fill" className="mx-auto text-ink sm:h-[35px] sm:w-[35px]" aria-hidden="true" />
+              <strong className="mt-1 block max-w-16 text-xs leading-4 sm:mt-2 sm:max-w-20 sm:text-sm sm:leading-5">{c.dashboard.routeDestination}</strong>
+            </div>
+          </div>
+
+          <ol className="mt-3 divide-y divide-line border-y border-line sm:mt-8">
+            {c.dashboard.routeSteps.map(([title, note], index) => (
+              <li key={title} className="grid grid-cols-[auto_1fr] gap-3 py-1.5 sm:gap-4 sm:py-4">
+                <span className={`mt-0.5 grid h-5 w-5 place-items-center rounded-full border-2 sm:h-6 sm:w-6 ${index === 0 ? "border-cobalt bg-cobalt text-white" : index === 1 ? "border-cobalt bg-paper text-cobalt" : "border-line bg-paper text-muted"}`}>
+                  {index === 0 ? <Check size={11} weight="bold" aria-hidden="true" /> : <span className="h-1 w-1 rounded-full bg-current sm:h-1.5 sm:w-1.5" />}
+                </span>
+                <div>
+                  <h3 className="text-sm font-extrabold leading-5 tracking-[-0.02em] sm:text-base">{title}</h3>
+                  <p className="text-sm leading-5 text-muted sm:mt-0.5 sm:leading-6">{note}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-3 grid grid-cols-[auto_1fr] gap-3 rounded-md border border-emerald-800/15 bg-emerald-50/70 p-3 sm:mt-6 sm:gap-4 sm:rounded-lg sm:p-5">
+            <span className="grid h-7 w-7 place-items-center rounded-full border border-emerald-800 text-emerald-900 sm:h-9 sm:w-9"><Check size={16} weight="bold" aria-hidden="true" /></span>
+            <div><h3 className="text-sm font-extrabold leading-5 sm:text-base">{c.dashboard.profileReadyTitle}</h3><p className="text-sm leading-5 text-muted sm:mt-1 sm:leading-6">{c.dashboard.readyNote}</p></div>
+          </div>
+
+          <div className="mt-3 border-t border-line pt-3 sm:mt-7 sm:pt-7">
+            <p className="text-[0.58rem] font-extrabold uppercase tracking-[0.2em] text-muted sm:text-[0.68rem]">{c.dashboard.next}</p>
+            <h2 className="font-display mt-1 text-2xl font-semibold leading-tight tracking-[-0.035em] sm:mt-3 sm:text-4xl">{c.dashboard.discoverTitle}</h2>
+            <p className="mt-1 max-w-2xl text-sm leading-5 text-muted sm:mt-3 sm:text-base sm:leading-6">{c.dashboard.discoverBody}</p>
+            <NavLink to="/discover" className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-cobalt px-5 text-sm font-extrabold text-white transition hover:bg-cobaltDark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt sm:mt-6 sm:min-h-14">
+              {c.dashboard.cta}<ArrowRight size={19} aria-hidden="true" />
             </NavLink>
-          </article>
-        </section>
-
-        <section className="editorial-card mt-4 p-5 sm:p-6">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-xl font-extrabold tracking-[-0.03em]">{inPlan ? c.applicationPlan.program : c.dashboard.emptyTitle}</h2>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-muted">{inPlan ? c.applicationPlan.progressNote : c.dashboard.emptyBody}</p>
-            </div>
-            <NextLink to="/plan" secondary>{c.dashboard.openPlan}</NextLink>
           </div>
         </section>
+
+        <div className="mt-4 flex flex-col gap-3 border-t border-line py-3 sm:mt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-6">
+          <p className="max-w-xs text-[0.68rem] font-extrabold uppercase leading-5 tracking-[0.22em] text-muted">{c.dashboard.roots}</p>
+          <div className="hidden sm:block"><NextLink to="/plan" secondary>{inPlan ? c.dashboard.openPlan : c.dashboard.emptyTitle}</NextLink></div>
+        </div>
       </PageTransition>
     </AppShell>
   );
@@ -422,7 +439,7 @@ export function DiscoveryScreen() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={c.discovery.placeholder}
-            className="min-h-14 w-full rounded-2xl border border-line bg-white pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-muted/65 focus:border-cobalt focus:ring-4 focus:ring-cobalt/10"
+            className="min-h-14 w-full rounded-md border border-line bg-paper pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-muted/65 focus:border-cobalt focus:ring-4 focus:ring-cobalt/10"
           />
         </div>
         <div className="mt-4 flex flex-wrap gap-2" aria-label={c.discovery.filters}>
@@ -432,23 +449,26 @@ export function DiscoveryScreen() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="font-display text-5xl font-semibold tracking-[-0.04em] sm:text-6xl">{c.discovery.results}</h2>
+          <h2 className="font-display text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">{c.discovery.results}</h2>
           <span className="text-xs font-extrabold uppercase tracking-[0.16em] text-muted">{c.common.demo}</span>
         </div>
         <p className="mt-3 text-sm leading-6 text-muted">{c.discovery.resultNote}</p>
 
         {results.length ? (
-          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+          <div className="mt-6 overflow-hidden rounded-[1.2rem] border border-line bg-paper">
             {results.map(([eyebrow, title, institution, matchTitle, match, state], index) => (
-              <article key={title} className={`editorial-card flex flex-col border-t-4 p-5 sm:p-6 ${index === 0 ? "border-t-cobalt" : index === 1 ? "border-t-clay" : "border-t-sun"}`}>
-                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-muted">{eyebrow}</p>
-                <h3 className="font-display mt-3 text-3xl font-semibold leading-tight tracking-[-0.035em]">{title}</h3>
-                <p className="mt-2 text-sm text-muted">{institution}</p>
-                <div className="mt-5 border-l-2 border-cobalt bg-mist p-4">
-                  <strong className="text-sm">{matchTitle}</strong>
-                  <p className="mt-1 text-sm leading-6 text-muted">{match}</p>
+              <article key={title} className={`grid gap-4 border-b border-line p-5 last:border-b-0 sm:grid-cols-[2.2rem_1fr_auto] sm:items-start sm:p-6 ${index === 0 ? "bg-cobalt/[0.035]" : ""}`}>
+                <span className={`grid h-8 w-8 place-items-center rounded-full border text-xs font-extrabold ${index === 0 ? "border-cobalt bg-cobalt text-white" : "border-line text-muted"}`}>0{index + 1}</span>
+                <div>
+                  <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-muted">{eyebrow}</p>
+                  <h3 className="font-display mt-2 text-2xl font-semibold leading-tight tracking-[-0.03em] sm:text-3xl">{title}</h3>
+                  <p className="mt-1 text-sm text-muted">{institution}</p>
+                  <div className="mt-4 border-l-2 border-cobalt pl-4">
+                    <strong className="text-sm">{matchTitle}</strong>
+                    <p className="mt-1 text-sm leading-6 text-muted">{match}</p>
+                  </div>
                 </div>
-                <div className="mt-auto flex items-center justify-between gap-3 pt-5">
+                <div className="flex items-center justify-between gap-3 sm:flex-col sm:items-end">
                   <StatusTag state={index === 0 ? "estimated" : "unverified"}>{state}</StatusTag>
                   <NextLink to={`/opportunity/${index + 1}`} secondary>{c.discovery.view}</NextLink>
                 </div>
@@ -456,7 +476,7 @@ export function DiscoveryScreen() {
             ))}
           </div>
         ) : (
-          <div className="mt-6 border border-dashed border-line bg-paper p-8 text-center">
+          <div className="mt-6 rounded-[1.2rem] border border-dashed border-line bg-paper p-8 text-center">
             <p className="font-extrabold">{c.discovery.empty}</p>
             <Button variant="secondary" className="mt-5" onClick={() => { setQuery(""); setCountry(null); }}>{c.discovery.reset}</Button>
           </div>
@@ -476,7 +496,7 @@ export function DetailsScreen() {
       <BackHeader
         title={c.details.title}
         action={
-          <button type="button" onClick={() => setShared(true)} className="inline-flex min-h-11 items-center gap-2 rounded-xl px-2 text-sm font-extrabold text-muted hover:bg-mist hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-cobalt">
+          <button type="button" onClick={() => setShared(true)} aria-label={shared ? c.details.shared : c.details.share} className="inline-flex min-h-11 min-w-11 items-center gap-2 rounded-md px-2 text-sm font-extrabold text-muted hover:bg-mist hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-cobalt">
             {shared ? <Check size={19} weight="bold" aria-hidden="true" /> : <ShareNetwork size={19} aria-hidden="true" />}
             <span className="hidden sm:inline">{shared ? c.common.verified : c.details.share}</span>
           </button>
@@ -484,16 +504,16 @@ export function DetailsScreen() {
       />
       <PageTransition className="mx-auto max-w-4xl px-5 pb-16 sm:px-8">
         <p className="eyebrow">{c.details.eyebrow}</p>
-        <h1 className="display-title mt-4 text-6xl sm:text-7xl">{c.details.program}</h1>
+        <h1 className="display-title mt-4 text-5xl sm:text-6xl">{c.details.program}</h1>
         <p className="mt-4 flex items-center gap-2 text-base leading-7 text-muted sm:text-lg"><MapPin size={20} aria-hidden="true" />{c.details.institution}</p>
-        {shared ? <p role="status" className="mt-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-800">Link copied in this demonstration.</p> : null}
+        {shared ? <p role="status" className="mt-4 rounded-md bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-800">{c.details.shared}</p> : null}
 
-        <div className="mt-8 border-l-4 border-sun bg-ink p-6 text-white shadow-lift">
+        <div className="mt-8 rounded-[1.2rem] border border-line bg-paper p-6">
           <div className="flex items-center gap-2 text-sm font-extrabold"><RouteMark className="h-6 w-6 text-sun" />{c.details.matchTitle}</div>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70 sm:text-base">{c.details.match}</p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">{c.details.match}</p>
         </div>
 
-        <dl className="mt-5 divide-y divide-line overflow-hidden border border-line bg-paper">
+        <dl className="mt-5 divide-y divide-line overflow-hidden rounded-[1.2rem] border border-line bg-paper">
           {c.details.requirements.map(([label, value]) => (
             <div key={label} className="grid gap-2 p-5 sm:grid-cols-[0.7fr_1.3fr] sm:items-center sm:gap-6">
               <dt className="font-extrabold">{label}</dt>
@@ -521,9 +541,9 @@ export function PlanScreen() {
       </header>
       <PageTransition className="px-5 pb-10 sm:px-8">
         {!inPlan ? (
-          <div className="editorial-card mx-auto mt-16 max-w-xl border-t-4 border-t-clay p-8 text-center">
-            <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mist text-cobalt"><ClipboardTextIcon /></span>
-            <h2 className="font-display mt-6 text-4xl font-semibold tracking-[-0.04em]">{c.applicationPlan.emptyTitle}</h2>
+          <div className="editorial-card mx-auto mt-16 max-w-xl rounded-[1.2rem] border-t-2 border-t-clay p-8 text-center">
+            <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-mist text-cobalt"><ClipboardTextIcon /></span>
+            <h2 className="font-display mt-6 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">{c.applicationPlan.emptyTitle}</h2>
             <p className="mt-3 text-sm leading-6 text-muted">{c.applicationPlan.emptyBody}</p>
             <div className="mt-7"><NextLink to="/discover">{c.applicationPlan.emptyCta}</NextLink></div>
           </div>
@@ -533,24 +553,24 @@ export function PlanScreen() {
               <p className="eyebrow">{c.applicationPlan.eyebrow}</p>
               <span className="text-sm font-bold text-muted">{c.applicationPlan.count}</span>
             </div>
-            <h2 className="display-title mt-4 text-6xl sm:text-7xl">{c.applicationPlan.program}</h2>
+            <h2 className="display-title mt-4 text-5xl sm:text-6xl">{c.applicationPlan.program}</h2>
             <p className="mt-3 text-base text-muted sm:text-lg">{c.applicationPlan.institution}</p>
 
-            <section className="editorial-card mt-8 border-t-4 border-t-cobalt p-5 sm:p-6">
+            <section className="editorial-card mt-8 rounded-[1.2rem] border-t-2 border-t-cobalt p-5 sm:p-6">
               <div className="flex items-center justify-between gap-3">
                 <h3 className="font-extrabold">{c.applicationPlan.progress}</h3>
                 <span className="text-sm font-bold text-muted">{completed} / 6 {c.applicationPlan.tasks}</span>
               </div>
-              <div className="mt-4 h-2 overflow-hidden rounded-full bg-line"><motion.div className="h-full rounded-full bg-cobalt" animate={{ width: `${(completed / 6) * 100}%` }} /></div>
+              <div className="mt-4 h-1 overflow-hidden bg-line"><motion.div className="h-full bg-cobalt" animate={{ width: `${(completed / 6) * 100}%` }} /></div>
               <p className="mt-4 text-sm leading-6 text-muted">{c.applicationPlan.progressNote}</p>
             </section>
 
-            <ol className="mt-5 divide-y divide-line overflow-hidden border border-line bg-paper">
+            <ol className="mt-5 divide-y divide-line overflow-hidden rounded-[1.2rem] border border-line bg-paper">
               {c.applicationPlan.taskList.map(([title, state], index) => {
                 const done = index === 0 || (index === 1 && activeTask);
                 return (
                   <li key={title} className={`grid grid-cols-[auto_1fr] gap-4 p-5 ${index === 1 && !activeTask ? "bg-cobalt/[0.035]" : ""}`}>
-                    <span className={`mt-0.5 grid h-7 w-7 place-items-center rounded-lg border ${done ? "border-cobalt bg-cobalt text-white" : "border-line bg-white text-muted"}`}>
+                    <span className={`mt-0.5 grid h-7 w-7 place-items-center rounded-full border ${done ? "border-cobalt bg-cobalt text-white" : "border-line bg-paper text-muted"}`}>
                       {done ? <Check size={16} weight="bold" aria-hidden="true" /> : <Circle size={12} aria-hidden="true" />}
                     </span>
                     <div>
