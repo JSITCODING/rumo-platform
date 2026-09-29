@@ -3,7 +3,7 @@
 ## Estado do documento
 
 - **Responsável funcional:** Produto e UX
-- **Última revisão:** 28 de setembro de 2026
+- **Última revisão:** 29 de setembro de 2026
 - **Estado:** Ativo
 
 Este documento regista decisões confirmadas de produto e experiência que afetam o projeto. Uma proposta só é vinculativa quando o seu estado é **Aprovada**.
@@ -12,6 +12,7 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 
 - **Proposta:** em discussão e ainda não vinculativa.
 - **Aprovada:** confirmada pelos responsáveis aplicáveis.
+- **Parcialmente substituída:** substituída em parte; as partes não afetadas continuam vinculativas.
 - **Substituída:** trocada por uma decisão posterior, que deve ser referenciada.
 - **Rejeitada:** avaliada e não adotada.
 
@@ -20,14 +21,14 @@ Este documento regista decisões confirmadas de produto e experiência que afeta
 | ID | Título | Estado | Data | Substitui |
 | --- | --- | --- | --- | --- |
 | P1 | Dashboard entre Análise do perfil e Descoberta | Aprovada | 7 de agosto de 2026 | — |
-| P2 | Dashboard como página inicial do utilizador autenticado | Aprovada | 7 de agosto de 2026 | — |
+| P2 | Dashboard como página inicial do utilizador autenticado | Parcialmente substituída | 7 de agosto de 2026 | — |
 | P3 | Ciclo de correção do perfil | Aprovada | 7 de agosto de 2026 | — |
 | P4 | Saída do plano de candidatura vazio para Descoberta | Aprovada | 7 de agosto de 2026 | — |
 | P5 | Prevenção de oportunidades duplicadas no plano | Aprovada | 7 de agosto de 2026 | — |
 | P6 | Estados de tarefa separados do estado da informação | Aprovada | 7 de agosto de 2026 | — |
-| P7 | Protótipo PWA bilingue com dados sintéticos | Aprovada | 27 de setembro de 2026 | — |
-| P8 | Onboarding antes do registo e análise antes da barreira | Aprovada | 27 de setembro de 2026 | Fluxo inicial de P2 |
-| P9 | Direção visual Personal Atlas | Aprovada | 28 de setembro de 2026 | Visual editorial inicial de P7 |
+| P7 | Protótipo PWA bilingue com dados sintéticos | Parcialmente substituída | 27 de setembro de 2026 | — |
+| P8 | Onboarding antes do registo e análise antes da barreira | Aprovada | 27 de setembro de 2026 | P2 (fluxo inicial) |
+| P9 | Direção visual Personal Atlas | Aprovada | 28 de setembro de 2026 | P7 (visual) |
 
 ## P1 — Dashboard entre Análise do perfil e Descoberta
 
@@ -55,6 +56,7 @@ Análise do perfil → Dashboard → Descoberta de oportunidades.
 - todos os oito ecrãs confirmados participam coerentemente na jornada;
 - o estudante vê o seu estado e a próxima ação antes de pesquisar oportunidades;
 - o Dashboard deve manter-se focado na jornada central;
+- P8 insere o registo para guardar entre Análise e Dashboard;
 - não é criado nenhum ecrã adicional.
 
 ### Evidências e referências
@@ -69,9 +71,10 @@ Análise do perfil → Dashboard → Descoberta de oportunidades.
 
 ## P2 — Dashboard como página inicial do utilizador autenticado
 
-- **Estado:** Aprovada
+- **Estado:** Parcialmente substituída
 - **Data:** 7 de agosto de 2026
 - **Responsável funcional:** Produto e UX
+- **Substituída em parte por:** P8 (fluxo inicial)
 
 ### Contexto
 
@@ -272,9 +275,10 @@ Representar separadamente o estado da informação, por exemplo:
 
 ## P7 — Protótipo PWA bilingue com dados sintéticos
 
-- **Estado:** Aprovada
+- **Estado:** Parcialmente substituída
 - **Data:** 27 de setembro de 2026
 - **Responsável funcional:** Produto
+- **Substituída em parte por:** P9 (visual editorial)
 
 ### Contexto
 
