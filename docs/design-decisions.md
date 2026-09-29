@@ -69,6 +69,7 @@ Análise do perfil → Dashboard → Descoberta de oportunidades.
 
 - **Condição de revisão:** alteração aprovada da jornada central ou remoção do Dashboard do MVP.
 - **Decisão que substitui esta:** nenhuma.
+- **Métrica relacionada:** `docs/validation-plan.md`.
 
 ## P2 — Dashboard como página inicial do utilizador autenticado
 
@@ -274,6 +275,7 @@ Representar separadamente o estado da informação, por exemplo:
 
 - **Condição de revisão:** testes de usabilidade demonstrarem necessidade de outro modelo ou aprovação de um fluxo de verificação.
 - **Decisão que substitui esta:** nenhuma.
+- **Métrica relacionada:** `docs/validation-plan.md`.
 
 ## P7 — Protótipo PWA bilingue com dados sintéticos
 
@@ -314,6 +316,7 @@ verificar` como estados distintos da informação.
 
 - **Condição de revisão:** aprovação de backend, autenticação ou regras reais de dados.
 - **Decisão que substitui esta:** nenhuma.
+- **Métrica relacionada:** `docs/validation-plan.md`.
 
 ## P8 — Onboarding antes do registo e análise antes da barreira
 
@@ -339,12 +342,14 @@ As respostas do perfil permanecem apenas durante a sessão do navegador.
 - o pedido de conta explica que serve para guardar e continuar;
 - a hipótese de maior retenção só pode ser afirmada depois de validação real;
 - eventos de progressão não incluem respostas do perfil nem dados pessoais;
+- perda da sessão do navegador antes do registo elimina as respostas; risco aceite no protótipo;
 - o Dashboard continua a ser a página inicial conceptual após autenticação.
 
 ### Revisão
 
 - **Condição de revisão:** evidência de validação, aprovação de autenticação real ou requisitos formais de retenção.
 - **Decisão que substitui esta:** nenhuma.
+- **Métrica relacionada:** `docs/validation-plan.md`.
 
 ## P9 — Direção visual Personal Atlas
 
@@ -389,6 +394,7 @@ sombras genéricas, pílulas decorativas e secções de igual ênfase são reduz
 
 - **Condição de revisão:** testes visuais ou de utilização demonstrarem perda de clareza, identidade ou acessibilidade.
 - **Decisão que substitui esta:** nenhuma.
+- **Métrica relacionada:** `docs/validation-plan.md`.
 
 ## P10 — Vocabulário e codificação dos estados da informação
 

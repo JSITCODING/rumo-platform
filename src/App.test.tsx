@@ -76,7 +76,7 @@ describe("Rumo prototype", () => {
     expect(screen.getByDisplayValue("dandara.demo@rumo.example")).toBeInTheDocument();
   });
 
-  it("emits provider-independent progress events without profile answers", () => {
+  it("emits progress events without profile answers or personal data", () => {
     const received: unknown[] = [];
     const listener = (event: Event) => received.push((event as CustomEvent).detail);
     window.addEventListener("rumo:product-event", listener);
@@ -86,7 +86,13 @@ describe("Rumo prototype", () => {
     expect(received).toEqual([
       expect.objectContaining({ name: "analysis_viewed", locale: "pt" })
     ]);
-    expect(JSON.stringify(received)).not.toContain("answers");
+    expect(Object.keys(received[0] as Record<string, unknown>).sort()).toEqual([
+      "locale",
+      "name",
+      "occurredAt",
+      "path"
+    ]);
+    expect(JSON.stringify(received)).not.toMatch(/answers|Dandara|rumo\.example/i);
     window.removeEventListener("rumo:product-event", listener);
   });
 
