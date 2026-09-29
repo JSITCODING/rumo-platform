@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Rumo — clareza para o caminho</title>
+  <desc id="desc">Identidade Personal Atlas com uma rota de Luanda para novas possibilidades.</desc>
+  <rect width="1280" height="640" fill="#f5f0e7"/>
+  <rect x="56" y="56" width="1168" height="528" rx="36" fill="#fffdf8" stroke="#7f837d" stroke-opacity=".32"/>
+
+  <g transform="translate(104 104)" fill="none" stroke="#2755c7" stroke-linecap="round">
+    <circle cx="16" cy="68" r="12" fill="#2755c7" stroke="none"/>
+    <circle cx="116" cy="0" r="12" fill="#2755c7" stroke="none"/>
+    <path d="M16 54C22 10 58 42 72 15C84-8 98 20 108 8" stroke-width="12"/>
+  </g>
+
+  <text x="104" y="278" fill="#14251f" font-family="Newsreader, Georgia, serif" font-size="112" font-weight="600" letter-spacing="-5">Rumo</text>
+  <text x="110" y="342" fill="#5d655f" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="1.5">CLAREZA PARA O CAMINHO</text>
+  <text x="110" y="410" fill="#14251f" font-family="Manrope, Arial, sans-serif" font-size="30">Da incerteza a um próximo passo responsável.</text>
+
+  <g transform="translate(728 166)">
+    <path d="M0 166C74 34 142 210 232 92C286 22 332 54 392 0" fill="none" stroke="#2755c7" stroke-width="8" stroke-linecap="round"/>
+    <path d="M232 92C286 22 332 54 392 0" fill="none" stroke="#2755c7" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 22"/>
+    <circle cx="0" cy="166" r="20" fill="#b95332"/>
+    <circle cx="112" cy="115" r="16" fill="#2755c7"/>
+    <circle cx="232" cy="92" r="16" fill="#fffdf8" stroke="#2755c7" stroke-width="6"/>
+    <circle cx="392" cy="0" r="18" fill="#fffdf8" stroke="#14251f" stroke-width="6"/>
+    <text x="-25" y="220" fill="#14251f" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">LUANDA</text>
+    <text x="300" y="52" text-anchor="middle" fill="#14251f" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800">POSSIBILIDADES</text>
+  </g>
+
+  <text x="110" y="532" fill="#5d655f" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="2">BILINGUE  ·  MOBILE-FIRST  ·  DADOS SINTÉTICOS</text>
+</svg>

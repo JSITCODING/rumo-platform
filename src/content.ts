@@ -15,9 +15,15 @@ export const copy = {
       profile: "Perfil",
       verified: "Confirmado",
       estimated: "Estimado",
-      unverified: "Por verificar"
+      unverified: "Por verificar",
+      infoStates: {
+        confirmed: "Confirmado",
+        estimated: "Estimado",
+        to_verify: "Por verificar"
+      }
     },
     landing: {
+      destinationsLabel: "Destinos iniciais",
       eyebrow: "ESTUDAR FORA, COM CLAREZA",
       title: "Encontra oportunidades que fazem sentido para ti.",
       body: "Compara requisitos, percebe a compatibilidade com o teu perfil e organiza cada candidatura passo a passo.",
@@ -29,21 +35,21 @@ export const copy = {
       ],
       noteTitle: "Orientação, não garantia",
       note: "A Rumo não garante admissão, bolsa, financiamento ou visto.",
-      cta: "Criar a minha conta",
+      cta: "Traçar o meu rumo",
       signin: "Já tens conta?",
       enter: "Entrar"
     },
     register: {
-      eyebrow: "CRIAR CONTA",
-      title: "Começa o teu percurso.",
-      body: "Este protótipo usa apenas dados demonstrativos. Não introduzas informação pessoal real.",
+      eyebrow: "GUARDAR O TEU PERCURSO",
+      title: "A tua análise está pronta para continuar.",
+      body: "Cria uma conta demonstrativa para guardar esta análise e abrir o dashboard. Não introduzas informação pessoal real.",
       name: "Nome demonstrativo",
       email: "Email demonstrativo",
       password: "Palavra-passe demonstrativa",
       consent: "Li e aceito os termos demonstrativos de privacidade.",
       privacyTitle: "Os teus dados importam",
       privacy: "A versão de produção só recolherá dados após requisitos de privacidade, retenção e recuperação serem aprovados.",
-      cta: "Continuar com dados de demonstração",
+      cta: "Guardar e abrir o Dashboard",
       validation: "Revê os campos assinalados para continuar.",
       required: "Este campo é obrigatório."
     },
@@ -102,12 +108,22 @@ export const copy = {
       ],
       verifyTitle: "Requer verificação",
       verify: "Equivalência da qualificação e requisitos específicos de cada instituição.",
-      cta: "Continuar para o Dashboard",
+      cta: "Guardar análise e continuar",
       edit: "Corrigir o meu perfil"
     },
     dashboard: {
-      hello: "OLÁ, ANA",
-      title: "O teu percurso",
+      hello: "Boa tarde, Dandara",
+      title: "Lugares diferentes. Um futuro mais claro.",
+      routeTitle: "O teu rumo",
+      routeKicker: "DE LUANDA PARA NOVAS POSSIBILIDADES",
+      routeOrigin: "Luanda",
+      routeDestination: "Estudar fora",
+      routeSteps: [
+        ["Perfil", "Concluído"],
+        ["Verificar alguns detalhes", "Alguma informação ainda precisa de confirmação"],
+        ["Explorar oportunidades", "Próximo passo"]
+      ],
+      profileReadyTitle: "O teu perfil está pronto",
       ready: "Perfil analisado",
       readyState: "Pronto para pesquisar",
       readyNote: "Algumas informações ainda requerem verificação.",
@@ -117,7 +133,8 @@ export const copy = {
       cta: "Descobrir oportunidades",
       emptyTitle: "O teu plano ainda está vazio",
       emptyBody: "Adiciona uma oportunidade para começares a organizar os próximos passos.",
-      openPlan: "Abrir plano"
+      openPlan: "Abrir plano",
+      roots: "AS MESMAS RAÍZES. HORIZONTES MAIS LONGE."
     },
     discovery: {
       title: "Oportunidades",
@@ -138,6 +155,7 @@ export const copy = {
     details: {
       title: "Detalhes",
       share: "Partilhar",
+      shared: "Ligação copiada nesta demonstração.",
       eyebrow: "DADOS DEMONSTRATIVOS · NÃO VERIFICADOS",
       program: "Engenharia Informática",
       institution: "Instituição demonstrativa A · Portugal · Licenciatura",
@@ -196,9 +214,15 @@ export const copy = {
       profile: "Profile",
       verified: "Confirmed",
       estimated: "Estimated",
-      unverified: "Verify"
+      unverified: "Verify",
+      infoStates: {
+        confirmed: "Confirmed",
+        estimated: "Estimated",
+        to_verify: "To verify"
+      }
     },
     landing: {
+      destinationsLabel: "Initial destinations",
       eyebrow: "STUDY ABROAD, WITH CLARITY",
       title: "Find opportunities that make sense for you.",
       body: "Compare requirements, understand how an opportunity fits your profile, and organise each application step by step.",
@@ -210,21 +234,21 @@ export const copy = {
       ],
       noteTitle: "Guidance, not a guarantee",
       note: "Rumo does not guarantee admission, scholarships, funding, or visas.",
-      cta: "Create my account",
+      cta: "Map my route",
       signin: "Already have an account?",
       enter: "Sign in"
     },
     register: {
-      eyebrow: "CREATE ACCOUNT",
-      title: "Start your journey.",
-      body: "This prototype uses demonstration data only. Do not enter real personal information.",
+      eyebrow: "SAVE YOUR ROUTE",
+      title: "Your analysis is ready to continue.",
+      body: "Create a demonstration account to save this analysis and open the dashboard. Do not enter real personal information.",
       name: "Demonstration name",
       email: "Demonstration email",
       password: "Demonstration password",
       consent: "I accept the demonstration privacy terms.",
       privacyTitle: "Your data matters",
       privacy: "A production version will only collect data after privacy, retention, and recovery requirements are approved.",
-      cta: "Continue with demonstration data",
+      cta: "Save and open Dashboard",
       validation: "Review the highlighted fields to continue.",
       required: "This field is required."
     },
@@ -275,12 +299,22 @@ export const copy = {
       ],
       verifyTitle: "Requires verification",
       verify: "Qualification equivalence and institution-specific requirements.",
-      cta: "Continue to Dashboard",
+      cta: "Save analysis and continue",
       edit: "Correct my profile"
     },
     dashboard: {
-      hello: "HELLO, ANA",
-      title: "Your journey",
+      hello: "Good evening, Dandara",
+      title: "Different places. A brighter you.",
+      routeTitle: "Your route",
+      routeKicker: "FROM LUANDA TO NEW POSSIBILITIES",
+      routeOrigin: "Luanda",
+      routeDestination: "Study abroad",
+      routeSteps: [
+        ["Profile", "Completed"],
+        ["Verify a few details", "Some information still needs verification"],
+        ["Explore opportunities", "Next step"]
+      ],
+      profileReadyTitle: "Your profile is ready",
       ready: "Profile analysed",
       readyState: "Ready to explore",
       readyNote: "Some information still needs verification.",
@@ -290,7 +324,8 @@ export const copy = {
       cta: "Discover opportunities",
       emptyTitle: "Your plan is still empty",
       emptyBody: "Add an opportunity to begin organising your next steps.",
-      openPlan: "Open plan"
+      openPlan: "Open plan",
+      roots: "SAME ROOTS. FURTHER HORIZONS."
     },
     discovery: {
       title: "Opportunities",
@@ -311,6 +346,7 @@ export const copy = {
     details: {
       title: "Details",
       share: "Share",
+      shared: "Link copied in this demonstration.",
       eyebrow: "DEMONSTRATION DATA · NOT VERIFIED",
       program: "Computer Engineering",
       institution: "Demonstration institution A · Portugal · Bachelor's",

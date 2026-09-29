@@ -6,38 +6,53 @@ import {
   Compass,
   FunnelSimple,
   House,
-  ShieldCheck,
-  Translate
+  ShieldCheck
 } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { INFO_STATE_SURFACE, INFO_STATE_TOKENS, type InfoState } from "./info-state";
 import { useRumo } from "./state";
 
 export function Brand({ compact = false }: { compact?: boolean }) {
   const { c } = useRumo();
   return (
     <NavLink to="/" className="group inline-flex items-center gap-2.5" aria-label={c.common.brand}>
-      <span className="grid h-9 w-9 place-items-center rounded-xl bg-ink text-white shadow-lift transition-transform group-hover:-rotate-3">
-        <Compass size={20} weight="fill" aria-hidden="true" />
-      </span>
-      {!compact && <span className="text-xl font-extrabold tracking-[-0.04em] text-ink">{c.common.brand}</span>}
+      <RouteMark className="h-9 w-9 text-cobalt transition-transform group-hover:translate-x-0.5" />
+      {!compact && <span className="font-display text-2xl font-semibold tracking-[-0.045em] text-ink">{c.common.brand}</span>}
     </NavLink>
+  );
+}
+
+export function RouteMark({ className = "", animated = false }: { className?: string; animated?: boolean }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none" aria-hidden="true">
+      <circle cx="10" cy="36" r="4" fill="currentColor" />
+      <circle cx="38" cy="10" r="4" fill="currentColor" />
+      <motion.path
+        d="M10 32C11 20 19 28 23 19C27 10 31 18 36 12"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        initial={animated ? { pathLength: 0, opacity: 0.4 } : false}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+      />
+    </svg>
   );
 }
 
 export function LocaleToggle() {
   const { locale, setLocale, c } = useRumo();
   return (
-    <div className="inline-flex items-center gap-1 rounded-full border border-line bg-white p-1 shadow-sm" aria-label={c.common.language}>
-      <Translate size={16} className="ml-2 text-muted" aria-hidden="true" />
+    <div className="inline-flex items-center gap-1" role="group" aria-label={c.common.language}>
       {(["pt", "en"] as const).map((option) => (
         <button
           key={option}
           type="button"
           onClick={() => setLocale(option)}
-          className={`min-h-9 min-w-10 rounded-full px-2.5 text-xs font-extrabold uppercase tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
-            locale === option ? "bg-ink text-white" : "text-muted hover:text-ink"
+          className={`relative min-h-11 min-w-11 px-2 text-sm font-extrabold uppercase tracking-[0.12em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt after:absolute after:inset-x-2 after:-bottom-0.5 after:h-0.5 after:origin-center after:bg-cobalt after:transition-transform ${
+            locale === option ? "text-ink after:scale-x-100" : "text-muted after:scale-x-0 hover:text-ink"
           }`}
           aria-pressed={locale === option}
         >
@@ -65,7 +80,8 @@ export function BackHeader({ title, action }: { title: string; action?: ReactNod
       <button
         type="button"
         onClick={() => navigate(-1)}
-        className="inline-flex min-h-11 items-center gap-1.5 justify-self-start rounded-xl px-1 font-bold text-muted transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt"
+        aria-label={c.common.back}
+        className="inline-flex min-h-11 min-w-11 items-center gap-1.5 justify-self-start px-1 font-bold text-muted transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt"
       >
         <ArrowLeft size={20} aria-hidden="true" />
         <span className="hidden xs:inline">{c.common.back}</span>
@@ -84,10 +100,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ children, variant = "primary", full = false, className = "", ...props }: ButtonProps) {
   const base =
-    "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt disabled:cursor-not-allowed disabled:opacity-50";
+    "inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt disabled:cursor-not-allowed disabled:opacity-50";
   const variants = {
-    primary: "bg-ink text-white shadow-lift hover:-translate-y-0.5 hover:bg-cobaltDark",
-    secondary: "border border-line bg-white text-ink shadow-sm hover:border-ink/25 hover:bg-mist",
+    primary: "bg-cobalt text-white hover:bg-cobaltDark",
+    secondary: "border border-line bg-transparent text-ink hover:border-ink/30 hover:bg-paper",
     quiet: "text-muted hover:bg-mist hover:text-ink"
   };
   return (
@@ -112,23 +128,54 @@ export function PageTransition({ children, className = "" }: { children: ReactNo
   );
 }
 
-export function StatusTag({ state, children }: { state: "confirmed" | "estimated" | "unverified"; children: ReactNode }) {
-  const styles = {
-    confirmed: "border-emerald-200 bg-emerald-50 text-emerald-800",
-    estimated: "border-amber-200 bg-amber-50 text-amber-800",
-    unverified: "border-slate-200 bg-slate-100 text-slate-700"
-  };
+export function StateMarker({ state, className = "" }: { state: InfoState; className?: string }) {
+  const { c } = useRumo();
+  const token = INFO_STATE_TOKENS[state];
+  const label = c.common.infoStates[state];
   return (
-    <span className={`inline-flex min-h-8 items-center gap-1.5 rounded-full border px-3 text-xs font-extrabold ${styles[state]}`}>
-      {state === "confirmed" ? <Check size={14} weight="bold" aria-hidden="true" /> : null}
-      {children}
+    <span
+      className={`inline-flex min-h-7 items-center gap-2 text-[0.68rem] font-extrabold uppercase tracking-[0.08em] text-ink ${className}`}
+      data-info-marker={state}
+      data-marker-fill={token.markerFill}
+      aria-label={label}
+    >
+      <svg viewBox="0 0 16 16" className="h-4 w-4 shrink-0" aria-hidden="true">
+        <circle cx="8" cy="8" r="6" fill={state === "confirmed" ? token.stroke : INFO_STATE_SURFACE} stroke={token.stroke} strokeWidth="2" />
+        {state === "estimated" ? <path d="M8 2a6 6 0 0 0 0 12Z" fill={token.stroke} /> : null}
+      </svg>
+      <span>{label}</span>
+    </span>
+  );
+}
+
+export function StateLine({ state, className = "" }: { state: InfoState; className?: string }) {
+  const { c } = useRumo();
+  const token = INFO_STATE_TOKENS[state];
+  const label = c.common.infoStates[state];
+  return (
+    <span className={`block min-w-0 text-center ${className}`} data-info-line={state} aria-label={label}>
+      <svg viewBox="0 0 100 10" preserveAspectRatio="none" className="h-2.5 w-full" aria-hidden="true">
+        <line
+          x1="0"
+          y1="5"
+          x2="100"
+          y2="5"
+          stroke={token.stroke}
+          strokeWidth="2"
+          strokeDasharray={token.lineDasharray}
+          strokeLinecap="round"
+        />
+      </svg>
+      <span className="mt-1 block text-[0.48rem] font-extrabold uppercase leading-[0.65rem] tracking-[0.06em] text-muted sm:text-[0.6rem] sm:leading-4">
+        {label}
+      </span>
     </span>
   );
 }
 
 export function Notice({ title, children, tone = "neutral" }: { title: string; children: ReactNode; tone?: "neutral" | "warm" }) {
   return (
-    <aside className={`rounded-xl2 border p-5 ${tone === "warm" ? "border-amber-200 bg-cream" : "border-line bg-mist"}`}>
+    <aside className={`border-l-2 p-5 ${tone === "warm" ? "border-sun bg-cream" : "border-cobalt bg-mist"}`}>
       <div className="mb-2 flex items-center gap-2 text-sm font-extrabold text-ink">
         <ShieldCheck size={20} weight="fill" className="text-cobalt" aria-hidden="true" />
         {title}
@@ -141,7 +188,7 @@ export function Notice({ title, children, tone = "neutral" }: { title: string; c
 export function AppShell({ children, active }: { children: ReactNode; active?: "home" | "discover" | "plan" }) {
   return (
     <div className="min-h-dvh bg-canvas text-ink">
-      <div className="mx-auto min-h-dvh max-w-5xl bg-canvas pb-24 sm:px-5 lg:px-8">
+      <div className="mx-auto min-h-dvh max-w-5xl bg-canvas pb-24">
         {children}
       </div>
       {active ? <BottomNav active={active} /> : null}
@@ -159,8 +206,8 @@ function BottomNav({ active }: { active: "home" | "discover" | "plan" }) {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl"
-      aria-label="Primary"
+      className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-paper/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl"
+      aria-label={c.common.language === "Language" ? "Primary navigation" : "Navegação principal"}
     >
       <div className="mx-auto grid max-w-lg grid-cols-3 gap-2">
         {links.map((link) => {
@@ -170,8 +217,8 @@ function BottomNav({ active }: { active: "home" | "discover" | "plan" }) {
             <NavLink
               key={link.id}
               to={link.to}
-              className={`flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl text-xs font-extrabold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
-                selected ? "bg-mist text-ink" : "text-muted hover:text-ink"
+              className={`relative flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-extrabold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt after:absolute after:inset-x-6 after:-bottom-1 after:h-0.5 after:bg-cobalt ${
+                selected ? "text-ink after:scale-x-100" : "text-muted after:scale-x-0 hover:text-ink"
               }`}
               aria-current={selected ? "page" : undefined}
             >
@@ -189,10 +236,10 @@ export function NextLink({ to, children, secondary = false }: { to: string; chil
   return (
     <NavLink
       to={to}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-extrabold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
         secondary
-          ? "border border-line bg-white text-ink shadow-sm hover:border-ink/25 hover:bg-mist"
-          : "bg-ink text-white shadow-lift hover:-translate-y-0.5 hover:bg-cobaltDark"
+          ? "border border-line bg-transparent text-ink hover:border-ink/30 hover:bg-paper"
+          : "bg-cobalt text-white hover:bg-cobaltDark"
       }`}
     >
       {children}
@@ -206,7 +253,7 @@ export function FilterButton({ children, active = false, onClick }: { children: 
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
+      className={`inline-flex min-h-11 items-center gap-2 rounded-md border px-4 text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cobalt ${
         active ? "border-cobalt bg-cobalt text-white" : "border-line bg-white text-muted hover:border-ink/20 hover:text-ink"
       }`}
     >

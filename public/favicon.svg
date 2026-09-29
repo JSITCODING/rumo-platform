@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Rumo compass">
-  <rect width="256" height="256" rx="56" fill="#152019"/>
-  <path fill="#ffffff" d="M128 36a92 92 0 1 0 92 92 92.1 92.1 0 0 0-92-92Zm45.6 51.1-28.3 56.6a3.6 3.6 0 0 1-1.6 1.6l-56.6 28.3a3.5 3.5 0 0 1-4.7-4.7l28.3-56.6a3.6 3.6 0 0 1 1.6-1.6l56.6-28.3a3.5 3.5 0 0 1 4.7 4.7Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Rumo route mark">
+  <rect width="256" height="256" rx="48" fill="#14251f"/>
+  <circle cx="58" cy="190" r="20" fill="#e4a33b"/>
+  <circle cx="198" cy="56" r="20" fill="#e4a33b"/>
+  <path d="M58 170C63 111 102 151 120 107C138 63 158 104 188 66" fill="none" stroke="#fffdf8" stroke-width="18" stroke-linecap="round"/>
 </svg>
